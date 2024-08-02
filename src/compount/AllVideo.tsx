@@ -1,7 +1,7 @@
 
 import axios from "axios"
 import { useState, useEffect } from "react"
-import AllVideoSkeleton from "./skeleton/AllVideoSkeleton.jsx"
+import AllVideoSkeleton from "./skeleton/AllVideoSkeleton.tsx"
 import Avatar from "./Avatar.js"
 import useAllvideo from "../hook/useAllvideo.js"
 import { useNavigate } from "react-router-dom"

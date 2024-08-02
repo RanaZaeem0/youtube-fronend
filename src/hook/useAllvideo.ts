@@ -22,9 +22,9 @@ export default function useAllvideo() {
  const [videos, setVideos] = useState<allVideoData | null>(null)
       const [isLoading, setIsLoading] = useState(true)
       useEffect(() => {
-                 const limit = 12
+                 const limit = 3
             try {            
-                const getAllVideo  =  axios.get(`${import.meta.env.VITE_BACKEND_URI}video/allvideo/${limit}`)
+                const getAllVideo  =  axios.get(`${import.meta.env.VITE_BACKEND_URL}video/allvideo/${limit}`)
                .then(res =>{
                 console.log(res.data);
                 setVideos(res.data.data)

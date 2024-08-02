@@ -38,7 +38,7 @@ export default function useAllvideo() {
      const    {videoId}    = useParams()
       useEffect(() => {
             try {            
-                const getAllVideo  =  axios.get(`${import.meta.env.VITE_BACKEND_URI}video/${videoId}`)
+                const getAllVideo  =  axios.get(`${import.meta.env.VITE_BACKEND_URL}video/${videoId}`)
                .then(res =>{
                 console.log(res.data.data[0]);
                 setVideo(res.data.data[0])
