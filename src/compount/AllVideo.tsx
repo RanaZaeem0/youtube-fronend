@@ -2,9 +2,10 @@
 import axios from "axios"
 import { useState, useEffect } from "react"
 import AllVideoSkeleton from "./skeleton/AllVideoSkeleton.tsx"
-import Avatar from "./Avatar.js"
+import Avatar from "./helperCompount/Avatar.js"
 import useAllvideo from "../hook/useAllvideo.js"
 import { useNavigate } from "react-router-dom"
+import AllVideoWrapper from "./AllVideoWrapper.tsx"
 
 export default function Component() {
   
@@ -32,27 +33,25 @@ export default function Component() {
       {isLoading ? (
         <AllVideoSkeleton/>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <AllVideoWrapper className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos &&  videos.map((video,index) => (
             <div
               key={index}
               className="bg-background rounded-lg overflow-hidden group cursor-pointer"
               onClick={() => Navigator(`/watch/${video._id}`)}
             >
-              <div className="relative aspect-video">
-                <img src={video.thumbnail} alt={video.thumbnail}  className="object-cover" />
-                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                  <PlayIcon className="w-10 h-10 text-white" />
-                </div>
+              <div className="h-60 w-96 pb-5">
+                <img className="w-full h-full" src={video.thumbnail} alt={video.thumbnail}   />
               </div>
               <Avatar avatarImage={video.channalDetails[0].avatar} username={video.channalDetails[0].username} channalId={video.channalDetails[0]._id} createdAt={video.createdAt} />
             </div>
           ))}
-        </div>
+        </AllVideoWrapper>
       )}
   
     </div>
     </div>
+   
 
   )
 }

@@ -3,7 +3,7 @@ import React from "react";
 export default function AllVideoSkeleton() {
   return (
     <div className=" w-full">
-      <div className=" grid grid-cols-4 gap-5">
+      <div className=" grid grid-cols-3 gap-5">
         <div role="status" className="w-full animate-pulse p-5 ">
           <div className="h-60 bg-gray-200 rounded-xl dark:bg-gray-700 w-72 max-lg:w-full mb-4 my-3"></div>
 

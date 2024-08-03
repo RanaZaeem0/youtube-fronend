@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom'
 import {format} from "date-fns"
 
-export default function Avatar({username ='A',channalId ='1',createdAt,avatarImage}:{
+export default function Avatar({username ='A',channalId ='1',createdAt='a',avatarImage=""}:{
   username:string
   channalId? : string
   createdAt:string

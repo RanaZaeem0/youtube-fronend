@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import store from './store/store.ts';
 import NavBar from './compount/NavBar.tsx';
 import WatchVideo from './compount/WatchVideo.tsx';
-
+import Signup from "./compount/Signup.tsx"
 
 const router = createBrowserRouter([
   {
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
     {
       path:"/watch/:videoId",
       element:<WatchVideo/>
+    },
+    {
+      path:"/signup",
+      element:<Signup/>
     }
 
    ]
