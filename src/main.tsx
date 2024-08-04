@@ -12,7 +12,9 @@ import store from './store/store.ts';
 import NavBar from './compount/NavBar.tsx';
 import WatchVideo from './compount/WatchVideo.tsx';
 import Signup from "./compount/Signup.tsx"
-
+import PublishVideo from './compount/PublishVideo.tsx';
+import Signin from './compount/Signin.tsx';
+import Profile from "./compount/Profiles.tsx/Profile.tsx"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +31,18 @@ const router = createBrowserRouter([
     {
       path:"/signup",
       element:<Signup/>
+    },
+    {
+      path:"/signin",
+      element:<Signin/>
+    },
+    {
+      path:"/publishvideo",
+      element:<PublishVideo/>
+    },
+    {
+      path:"/profile",
+      element:<Profile/>
     }
 
    ]

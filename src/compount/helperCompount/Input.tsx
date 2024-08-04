@@ -3,13 +3,13 @@ import React, { useId, ForwardedRef, InputHTMLAttributes } from 'react';
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   placeholder: string;
-  type?: 'submit' | 'text' | 'button' | 'password' | 'email'|'search';
+  type?: 'submit' | 'text' | 'button' | 'password' | 'email'|'search'|"file";
 }
 
 const Input = React.forwardRef(function Input(
   {
     label,
-    placeholder,
+    placeholder= '',
     type = 'text',
     ...props
   }: InputProps,

@@ -30,7 +30,7 @@ const loginUser = async (data:userSignin)=>{
       setError('')
             try {
                 const userDetails:userSignin  = data                
-                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/login`,
+                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}users/login`,
                   userDetails,
                   {  
                     headers:{
@@ -40,15 +40,17 @@ const loginUser = async (data:userSignin)=>{
                 if (response.status >= 200 && response.status < 300) {
               console.log(response);
               
-                    localStorage.setItem('token',response.data.jwt)
+                    localStorage.setItem('acesstoken',response.data.accessToken)
                     localStorage.setItem('username',response.data.username)
-                    localStorage.setItem('username',response.data.id)
+                    localStorage.setItem('username',response.data._id)
+                    localStorage.setItem('refreshToken',response.data.refreshToken)
+
 
 
                     console.log(response.data);
                     
 
-                naigavte('/allblog')
+                naigavte('/')
                 }
             } catch (error:any) {
               if (error.response) {

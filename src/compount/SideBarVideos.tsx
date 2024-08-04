@@ -26,7 +26,7 @@ export default function SideBarVideos() {
     <div className="">
       <div className="container mx-auto px-4 py-8">
         {isLoading ? (
-          <AllVideoSkeleton />
+          <AllVideoSkeleton className="gird-cols-1" />
         ) : (
           <AllVideoWrapper className="grid grid-cols-1 items-center justify-center  ">
             {videos &&

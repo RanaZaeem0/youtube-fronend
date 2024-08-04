@@ -15,11 +15,13 @@ export default function PublishVideo() {
   const [error, setError] = useState("");
   const Naviagte = useNavigate();
   const Dispatch = useDispatch();
+  const [createBtn ,setCreateBtn ] = useState(false)
 
    interface CreateuserSchema{
-    username:string,
-    password:string,
-    email:string
+    title:string,
+    description:string,
+    videoFile:File
+    ,thumbnail:File
    }
 
   const { register, handleSubmit } = useForm<CreateuserSchema>();
@@ -44,9 +46,7 @@ export default function PublishVideo() {
       console.log(response);
       
       if (response.status >= 200 && response.status < 300) {
-          localStorage.setItem('token', response.data.jwt);
-       localStorage.setItem("username", data.username);
-        localStorage.setItem('userId' , response.data.userId)
+   
        
          console.log(localStorage.getItem('token'));
          
@@ -77,8 +77,16 @@ export default function PublishVideo() {
   };
 
   return (
-    <div className="bg-slate-900 h-screen flex justify-center">
-      <div className="flex w-full justify-center">
+    <div className="bg-slate-700 h-screen flex justify-center">
+      {
+        !createBtn && <button 
+        onClick={()=>setCreateBtn(true)}
+        className="rounded-md bg-black h-9 text-white px-4 py-2 text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+            Create
+          </button>
+      }
+      {
+        createBtn && <div className="flex w-full justify-center">
         <div className=" bg-white h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
           <h2 className="!text-black font-semibold text-2xl pb-3">Create an account</h2>
           
@@ -90,42 +98,77 @@ export default function PublishVideo() {
             <Input
               {...register("title", { required: true, minLength: 2 })}
               type={"text"}
-              placeholder={"Your Name"}
-              label={" Name"}
+              placeholder={"title..."}
+              label={"Title"}
             />
             <Input
               {...register("description", { required: true, })}
-              type={"file"}
-              placeholder={"Avatar image"}
-              label={" Name"}
+              type={"text"}
+              placeholder={"description"}
+              label={"Description"}
             />
             
             <Input
               {...register("thumbnail", { required: true})}
-              
+              placeholder="Thumnail Image"
               type="file"
               label={"thumnail"}
             />
             <Input
               {...register("videoFile", { required: true})}
-              
-              type="file"
+              placeholder="Video"
+              type='file'
               label={"videoFile"}
             />
             </div>
           <Button label={'Publish Video'} type="submit" className={'bg-gray-800'} />
           </form>
           <h2 className="text-red-500 font-normal">{error}</h2>
-          <ButtonWarning
-            label={"Already Have an account ?"}
-            buttonText={"Sign in"}
-            to={"/signin"}
-          />
+          
           
           
         </div>
         
       </div>
+      }
     </div>
   );
 }
+
+// return (
+//   <div className="flex h-screen w-full flex-col items-center justify-center bg-background">
+//     <Dialog>
+//       <DialogTrigger asChild>
+//         <Button className="rounded-md bg-primary px-4 py-2 text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+//           Create
+//         </Button>
+//       </DialogTrigger>
+//       <DialogContent className="sm:max-w-[425px]">
+//         <DialogHeader>
+//           <DialogTitle>Create New Item</DialogTitle>
+//           <DialogDescription>Fill out the form to create a new item.</DialogDescription>
+//         </DialogHeader>
+//         <div className="grid gap-4 py-4">
+//           <div className="grid items-center grid-cols-4 gap-4">
+//             <Label htmlFor="file" className="text-right">
+//               File
+//             </Label>
+//             <Input id="file" type="file" className="col-span-3" />
+//           </div>
+//           <div className="grid items-center grid-cols-4 gap-4">
+//             <Label htmlFor="title" className="text-right">
+//               Title
+//             </Label>
+//             <Input id="title" placeholder="Enter a title" className="col-span-3" />
+//           </div>
+//         </div>
+//         <DialogFooter>
+//           <Button variant="outline" className="mr-auto">
+//             Cancel
+//           </Button>
+//           <Button type="submit">Next</Button>
+//         </DialogFooter>
+//       </DialogContent>
+//     </Dialog>
+//   </div>
+// )

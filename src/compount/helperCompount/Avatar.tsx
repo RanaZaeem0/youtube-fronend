@@ -20,7 +20,7 @@ export default function Avatar({username ='A',channalId ='1',createdAt='a',avata
     
 </div>
       <h2 className='font-normal text-gray-600 hover:underline text-1xl text-center pl-2 pr-4'>{username}</h2>
-<h3>
+<h3 className='text-neutral-500'>
   {}
   {format(new Date(createdAt), 'MMM dd, yyyy')
 

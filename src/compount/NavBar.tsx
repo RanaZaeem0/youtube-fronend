@@ -15,7 +15,7 @@ export default function NavBar() {
             <div className="flex items-center justify-center "
             onClick={()=>Navigator('/')}>
               <img className='h-10 w-12 mr-2' src={IconYoutube} alt="" />
-              <h2 className='font-bold '>Youtube</h2>
+              <h2 className='font-bold text-white '>Youtube</h2>
             </div>
             <div className="flex items-center w-full max-w-md rounded-full bg-muted px-4 py-2">
     <SearchIcon className="w-5 h-5 text-muted-foreground" />
@@ -24,16 +24,15 @@ export default function NavBar() {
       placeholder="Search YouTube"
       className="flex-1 bg-transparent px-4 py-2 text-base outline-none"
     />
-    <Button type="submit" variant="ghost" size="icon" className="rounded-full">
+    <Button type="submit" className="rounded-full">
       <ArrowRightIcon className="w-5 h-5 text-muted-foreground" />
       <span className="sr-only">Search</span>
     </Button>
   </div>
-            <div className="">
-                icon
-                <button
-                 onClick={()=>Navigator('/signup')}
-                >Sign up</button>
+            <div className="p-2">
+                
+              <button onClick={()=>Navigator('/signup')} className='w-full text-blue-700
+       bg-gray-800 mt-2 p-2 font-medium rounded-xl '> Sign Up</button>
             </div>
 
         </div>
