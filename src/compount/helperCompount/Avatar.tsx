@@ -1,6 +1,6 @@
 
 import { NavLink } from 'react-router-dom'
-import {format} from "date-fns"
+import {format, formatDistanceToNow} from "date-fns"
 
 export default function Avatar({username ='A',channalId ='1',createdAt='a',avatarImage=""}:{
   username:string
@@ -11,7 +11,13 @@ export default function Avatar({username ='A',channalId ='1',createdAt='a',avata
 
 
 
+
+
 {
+  function formatDateRelative(date:string) {
+    const createdAt = new Date(date);
+    return formatDistanceToNow(createdAt, { addSuffix: true });
+  }
 
     return (
     <NavLink to={`/profile?channal=${channalId}`}>
@@ -22,7 +28,7 @@ export default function Avatar({username ='A',channalId ='1',createdAt='a',avata
       <h2 className='font-normal text-gray-600 hover:underline text-1xl text-center pl-2 pr-4'>{username}</h2>
 <h3 className='text-neutral-500'>
   {}
-  {format(new Date(createdAt), 'MMM dd, yyyy')
+  {formatDateRelative(createdAt)
 
 }</h3>
 </div>

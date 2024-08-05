@@ -39,15 +39,16 @@ const loginUser = async (data:userSignin)=>{
                 })
                 if (response.status >= 200 && response.status < 300) {
               console.log(response);
-              
-                    localStorage.setItem('acesstoken',response.data.accessToken)
-                    localStorage.setItem('username',response.data.username)
-                    localStorage.setItem('username',response.data._id)
-                    localStorage.setItem('refreshToken',response.data.refreshToken)
+               const accessToken    =  localStorage.setItem('accessToken',response.data.accessToken)
+                    console.log(accessToken);
 
+                    
+                    localStorage.setItem('refreshToken',response.data.data.refreshToken)
+                    localStorage.setItem('accessToken',response.data.data.accessToken)
 
+ 
 
-                    console.log(response.data);
+                    console.log(response.data.data);
                     
 
                 naigavte('/')

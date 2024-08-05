@@ -50,17 +50,17 @@ export default function Signup() {
       console.log(response);
 
       if (response.status >= 200 && response.status < 300) {
-        localStorage.setItem("token", response.data.jwt);
-        localStorage.setItem("username", data.username);
+        localStorage.setItem("refreshToken", response.data.refreshToken);
+        localStorage.setItem("username", response.data.username);
         localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("accessToken", response.data.accessToken);
 
-        console.log(localStorage.getItem("token"));
+       
 
         Dispatch(login(response.data));
         Naviagte("/");
       }
 
-      return userDetails;
     } catch (error: any) {
       if (error.response) {
         // Server responded with a status other than 200 range

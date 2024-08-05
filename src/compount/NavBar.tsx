@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import youtubeIcon  from "./img/youtube.webp"
 import IconYoutube from "./img/icon.webp"
 import Button from './helperCompount/Button'
 import Input from './helperCompount/Input'
-
+import img1 from "./img/icon.webp"
+import NavAvatars from './helperCompount/NavAvatar'
 export default function NavBar() {
+  
+  const [LoginState ,setLoginState] = useState(false)
+  const refreshToken = localStorage.getItem('refreshToken')
 
+  //  if(refreshToken !== "undefined" && refreshToken !== "" ){
+  //     setLoginState(true)
+  //  }
   const Navigator = useNavigate()
 
   return (
@@ -17,22 +24,30 @@ export default function NavBar() {
               <img className='h-10 w-12 mr-2' src={IconYoutube} alt="" />
               <h2 className='font-bold text-white '>Youtube</h2>
             </div>
-            <div className="flex items-center w-full max-w-md rounded-full bg-muted px-4 py-2">
-    <SearchIcon className="w-5 h-5 text-muted-foreground" />
+            <div className="flex items-center justify-center w-full max-w-md rounded-full bg-muted px-4 py-2">
+    
     <Input
-      type="search"
+      type="text"
       placeholder="Search YouTube"
-      className="flex-1 bg-transparent px-4 py-2 text-base outline-none"
+      className="w-full bg-black text-neutral-300 rounded-full py-1  pl-4 pr-12 shadow-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
     />
-    <Button type="submit" className="rounded-full">
-      <ArrowRightIcon className="w-5 h-5 text-muted-foreground" />
-      <span className="sr-only">Search</span>
-    </Button>
+      <SearchIcon className="w-5 h-5 text-muted-foreground" />
+  
   </div>
             <div className="p-2">
                 
-              <button onClick={()=>Navigator('/signup')} className='w-full text-blue-700
+              {(!refreshToken || refreshToken === 'undefined' || refreshToken.length < 10)  ?                <button onClick={()=>Navigator('/signup')} className='w-full text-blue-700
        bg-gray-800 mt-2 p-2 font-medium rounded-xl '> Sign Up</button>
+       :  
+       <div className=" bottom-4 left-4 flex items-center gap-4 text-white">
+        <div className="" onClick={()=>Navigator('/publishvideo')}>
+          Publish Video
+        </div>
+       <div className="">
+        <NavAvatars/>
+       </div>
+     </div>
+      }
             </div>
 
         </div>

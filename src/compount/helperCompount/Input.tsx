@@ -1,16 +1,19 @@
+import { ClassNames } from '@emotion/react';
 import React, { useId, ForwardedRef, InputHTMLAttributes } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   placeholder: string;
+  className?:string;
   type?: 'submit' | 'text' | 'button' | 'password' | 'email'|'search'|"file";
 }
 
 const Input = React.forwardRef(function Input(
   {
-    label,
+    label='',
     placeholder= '',
     type = 'text',
+    className='',
     ...props
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>
@@ -26,7 +29,7 @@ const Input = React.forwardRef(function Input(
         type={type}
         placeholder={placeholder}
         {...props}
-        className="border text-black rounded-xl p-2 mt-1 mb-2"
+        className={`border ${className} text-black rounded-xl p-2 mt-1 mb-2`}
         ref={ref}
         id={id}
       />

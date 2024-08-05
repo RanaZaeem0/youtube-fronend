@@ -26,7 +26,7 @@ export default function useAllvideo() {
             try {            
                 const getAllVideo  =  axios.get(`${import.meta.env.VITE_BACKEND_URL}video/allvideo/${limit}`)
                .then(res =>{
-                console.log(res.data);
+                console.log(res.data.data);
                 setVideos(res.data.data)
                 setIsLoading(false)
                })

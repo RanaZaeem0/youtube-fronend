@@ -36,7 +36,7 @@ export default function SideBarVideos() {
                   className="bg-background rounded-lg overflow-hidden group cursor-pointer flex"
                   onClick={() => Navigator(`/watch/${video._id}`)}
                 >
-                  <div className="h-28 w-72 pb-5">
+                  <div className="h-28  w-48 pb-5">
                     <img
                       className="w-full h-full"
                       src={video.thumbnail}
@@ -56,10 +56,12 @@ export default function SideBarVideos() {
                           <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
                             {video.channalDetails[0].username}
                           </h2>
+                          <div className="flex">
                           <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
-                            views {video.views}
+                            viewss {video.views}
                           </h2>
                           <h3 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">{formatDateRelative(video.createdAt)}</h3>
+                          </div>
                         </div>
                       </NavLink>
                     </div>
@@ -72,6 +74,25 @@ export default function SideBarVideos() {
     </div>
   );
 }
+
+
+{/* <div className="flex items-start gap-4 relative">
+          <Link href="#" className="absolute inset-0" prefetch={false}>
+            <span className="sr-only">View</span>
+          </Link>
+          <img
+            src="/placeholder.svg"
+            alt="Thumbnail"
+            width={168}
+            height={94}
+            className="aspect-video rounded-lg object-cover"
+          />
+          <div className="text-sm">
+            <div className="font-medium line-clamp-2">Introducing the frontend cloud</div>
+            <div className="text-xs text-muted-foreground line-clamp-1">Vercel</div>
+            <div className="text-xs text-muted-foreground line-clamp-1">1.2M views · 2 months ago</div>
+          </div>
+        </div> */}
 
 function DoorClosedIcon(props: any) {
   return (

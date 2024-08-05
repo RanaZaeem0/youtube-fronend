@@ -6,6 +6,7 @@ import Avatar from "./helperCompount/Avatar.js"
 import useAllvideo from "../hook/useAllvideo.js"
 import { useNavigate } from "react-router-dom"
 import AllVideoWrapper from "./AllVideoWrapper.tsx"
+import { formatDistanceToNow } from "date-fns"
 
 export default function Component() {
   
@@ -19,8 +20,9 @@ export default function Component() {
   
 
 
- 
 
+  
+  
 
 
 
@@ -35,7 +37,7 @@ export default function Component() {
       ) : (
         <AllVideoWrapper className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos &&  videos.map((video,index) => (
-            <div
+           video.isPublished && <div
               key={index}
               className="bg-background rounded-lg overflow-hidden group cursor-pointer"
               onClick={() => Navigator(`/watch/${video._id}`)}
@@ -43,6 +45,7 @@ export default function Component() {
               <div className="h-60 w-96 pb-5">
                 <img className="w-full h-full" src={video.thumbnail} alt={video.thumbnail}   />
               </div>
+              <h2 className="">{video.title}</h2>
               <Avatar avatarImage={video.channalDetails[0].avatar} username={video.channalDetails[0].username} channalId={video.channalDetails[0]._id} createdAt={video.createdAt} />
             </div>
           ))}

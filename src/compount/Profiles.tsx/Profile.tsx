@@ -33,7 +33,7 @@ export default function Component() {
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
       <div className="container mx-auto px-4 py-8">
         {isLoading ? (
-          <AllVideoSkeleton className="gird-cols-1" />
+          <AllVideoSkeleton className=" grid-cols-3" />
         ) : (
           <AllVideoWrapper className="grid grid-cols-1 items-center justify-center  ">
             {video &&
