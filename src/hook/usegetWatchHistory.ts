@@ -1,6 +1,8 @@
+
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import getRefreshToken  from "../../src/config"
+import getRefreshToken from "../config"
+
 interface UserData {
     _id: string;
     username: string;
@@ -26,14 +28,15 @@ interface UserData {
     videoLikes: number; // Adjust type based on how you handle likes
    
   }
+  type emptyArray = VideoData[]
   
-  
-export default function useAllvideo() {
- const [video, setVideo] = useState<VideoData | null>(null)
+export default function useGetWatchHistory() {
+     const [watchHistory, setWatchHistory] = useState<emptyArray>([])
       const [isLoading, setIsLoading] = useState(true)
+      
       useEffect(() => {
             try {            
-                const getAllVideo  =  axios.get(`${import.meta.env.VITE_BACKEND_URL}video/`,
+           axios.get(`${import.meta.env.VITE_BACKEND_URL}users/getWatchHistory`,
                     {
                         headers:{
                             "Authorization":`Bearer ${getRefreshToken}`,
@@ -43,8 +46,7 @@ export default function useAllvideo() {
                     }
                 )
                .then(res =>{
-                console.log(res.data.data);
-                setVideo(res.data.data)
+                setWatchHistory(res.data.data)
                 setIsLoading(false)
                })
               
@@ -53,6 +55,8 @@ export default function useAllvideo() {
     
             } catch (error) {
                 console.log(error);
+                console.log('Failed to fetch watch history. Please try again later.');
+                setIsLoading(false);
                 
             }
     
@@ -60,6 +64,6 @@ export default function useAllvideo() {
  
     return {
         isLoading,
-        video
+        watchHistory
     }
 }

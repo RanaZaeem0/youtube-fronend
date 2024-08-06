@@ -46,7 +46,7 @@ export default function Component() {
                 <img className="w-full h-full" src={video.thumbnail} alt={video.thumbnail}   />
               </div>
               <h2 className="">{video.title}</h2>
-              <Avatar avatarImage={video.channalDetails[0].avatar} username={video.channalDetails[0].username} channalId={video.channalDetails[0]._id} createdAt={video.createdAt} />
+              <Avatar avatarImage={video.channalDetails[0].avatar} videoViews={video.views} username={video.channalDetails[0].username} channalId={video.channalDetails[0]._id} createdAt={video.createdAt} />
             </div>
           ))}
         </AllVideoWrapper>

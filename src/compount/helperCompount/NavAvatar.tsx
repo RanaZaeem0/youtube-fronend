@@ -86,13 +86,20 @@ const NavAvatars = () => {
           <Divider />
           <ListItem disablePadding>
             <ListItemButton>
-              <button onClick={() => navigate(`/profile?userId=${userId}`)}>Your Profile</button>
+              <button onClick={() => navigate(`/profile/${username}`)}>Your Profile</button>
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem disablePadding>
             <ListItemButton>
               <button onClick={handleSetting}>Settings</button>
+            </ListItemButton>
+          </ListItem>
+          <Divider />
+
+          <ListItem disablePadding>
+            <ListItemButton>
+              <button onClick={()=> navigate('/watchhistory')}>Watch History</button>
             </ListItemButton>
           </ListItem>
           <Divider />

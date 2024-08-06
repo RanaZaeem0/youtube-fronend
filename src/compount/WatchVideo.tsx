@@ -6,23 +6,19 @@ import axios from "axios";
 import { log } from "console";
 import CreateComments from "./comments/CreateComment";
 import GetAllComment from "./comments/GetAllComment";
-
 export default function WatchVideo() {
   const [videoPLay, setVideoPlay] = useState(true);
   const { isLoading, video } = usegetVideobyId();
   const handleLike = async () => {
     const token = localStorage.getItem("token");
 
-    try {
-      const togglike = await axios.patch(``, video._id, {
-        headers: {
-          "Content-Type": "",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
+
+
+
+
+
+
+
   };
   return (
     <div className="">
@@ -32,7 +28,7 @@ export default function WatchVideo() {
         ) : (
           <div className="flex ">
             <div className="flex items-start justify-start flex-col ml-16 w-3/5">
-              <div className="w-full bg-background rounded-lg overflow-hidden group cursor-pointer">
+              <div className="w-full bg-background pb-8 rounded-lg overflow-hidden group cursor-pointer">
                 <div className=" aspect-video">
                   {!videoPLay && (
                     <img
@@ -70,12 +66,12 @@ export default function WatchVideo() {
                       >
                         <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z" />
                       </svg>
-                      <span class="sr-only">Icon description</span>
+                      <span className="sr-only">Icon description</span>
                     </button>
                   </button>
                 </div>
               </div>
-             <CreateComments videoId={video?._id} comments={video?.comments} />
+             <CreateComments  />
               
             </div>
             <div className="">
