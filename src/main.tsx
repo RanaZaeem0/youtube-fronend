@@ -16,6 +16,7 @@ import PublishVideo from './compount/PublishVideo.tsx';
 import Signin from './compount/Signin.tsx';
 import Profile from "./compount/Profiles.tsx/Profile.tsx"
 import WatchHistory from './compount/Profiles.tsx/WatchHistory.tsx';
+import AuthLayout from './compount/AuthLayout.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,16 +40,22 @@ const router = createBrowserRouter([
     },
     {
       path:"/publishvideo",
-      element:<PublishVideo/>
+      element:<AuthLayout>
+        <PublishVideo/>
+      </AuthLayout>       
     },
     {
       path:"/profile/:username",
-      element:<Profile/>
+      element:<AuthLayout>
+        <Profile/>
+      </AuthLayout>
     },
     
       {
         path:"/watchhistory",
-        element:<WatchHistory/>
+        element:<AuthLayout>
+          <WatchHistory/>
+        </AuthLayout>
       }
 
    ]

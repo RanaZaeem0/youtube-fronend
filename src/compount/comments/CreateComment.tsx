@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useGetCommentById from "../../hook/useGetVideoCommentById.ts";
 import { formatDistanceToNow } from "date-fns";
+import getRefreshToken from "../../config.ts"
 export default function CreateComments() {
   const { videoId } = useParams();
   interface commentData {
@@ -22,7 +23,6 @@ export default function CreateComments() {
   const CreateComments = async (data: commentData) => {
     setError("");
     try {
-      const refreshToken = localStorage.getItem("refreshToken");
       const userDetails: commentData = data;
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}comment/${videoId}`,
@@ -30,7 +30,7 @@ export default function CreateComments() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${refreshToken}`,
+            Authorization: `Bearer ${getRefreshToken}`,
           },
         }
       );
@@ -74,7 +74,7 @@ export default function CreateComments() {
               placeholder={"Write Your comment"}
             />
          <div className="w-full items-end justify-end">
-         <Button label={"Post"} type="submit" className={"bg-gray-800"} />
+     {getRefreshToken &&    <Button label={"Post"} type="submit" className={"bg-gray-800"} />}
          </div>
           </div>
 

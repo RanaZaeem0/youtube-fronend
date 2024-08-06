@@ -6,6 +6,8 @@ import axios from "axios";
 import { log } from "console";
 import CreateComments from "./comments/CreateComment";
 import GetAllComment from "./comments/GetAllComment";
+import { NavLink } from "react-router-dom";
+import { formatDistanceToNow } from "date-fns";
 export default function WatchVideo() {
   const [videoPLay, setVideoPlay] = useState(true);
   const { isLoading, video } = usegetVideobyId();
@@ -13,21 +15,21 @@ export default function WatchVideo() {
     const token = localStorage.getItem("token");
 
 
-
-
-
-
-
-
   };
+
+
+  function formatDateRelative(date: string) {
+    const createdAt = new Date(date);
+    return formatDistanceToNow(createdAt, { addSuffix: true });
+  }
   return (
     <div className="">
       <div className="container mx-auto px-4 py-8">
         {isLoading ? (
           <h2>loadind</h2>
         ) : (
-          <div className="flex ">
-            <div className="flex items-start justify-start flex-col ml-16 w-3/5">
+          <div className="flex max-lg:flex-col ">
+            <div className="flex items-start justify-start flex-col ml-16 w-3/5 max-lg:w-full">
               <div className="w-full bg-background pb-8 rounded-lg overflow-hidden group cursor-pointer">
                 <div className=" aspect-video">
                   {!videoPLay && (
@@ -40,7 +42,7 @@ export default function WatchVideo() {
                   {videoPLay && (
                     <div className=" h-72">
                       <video
-                        className="w-full"
+                        className="w-full "
                         src={video?.videoFile}
                         autoPlay
                         controls
@@ -49,16 +51,34 @@ export default function WatchVideo() {
                   )}
                 </div>
                 <h2 className="font-medium text-2xl py-4">{video?.title}</h2>
-
+                <NavLink to={`/channal`}>
+                  <div className="flex flex-col items-start ">
+                    <div className="flex p-1">
+                      <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
+                        <span className="font-medium text-white dark:text-gray-300">
+                          <img src="" alt="" />
+                        </span>
+                      </div>
+                      <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
+                        {video.channalDetails.username}
+                      </h2>
+                    </div>
+                    <div className="flex p-1 ">
+                      <h3 className="text-neutral-500 mr-1">
+                        {video.channalDetails.views}K views{" "}
+                      </h3>
+                      <h3 className="text-neutral-500">{formatDateRelative(video?.createdAt)}</h3>
+                    </div>
+                  </div>
+                </NavLink>
                 <div className="flex">
-                  
                   <button onClick={handleLike}>
                     <button
                       type="button"
-                      class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
+                      className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
                     >
                       <svg
-                        class="w-4 h-4"
+                        className="w-4 h-4"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor"
@@ -71,8 +91,7 @@ export default function WatchVideo() {
                   </button>
                 </div>
               </div>
-             <CreateComments  />
-              
+              <CreateComments />
             </div>
             <div className="">
               <SideBarVideos />

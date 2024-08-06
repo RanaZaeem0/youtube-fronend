@@ -35,8 +35,10 @@ const NavAvatars = () => {
   const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem("username");
-    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("userId");
+
     location.reload();
   };
 

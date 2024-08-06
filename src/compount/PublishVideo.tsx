@@ -24,22 +24,30 @@ export default function PublishVideo() {
     ,thumbnail:File
    }
 
-  const { register, handleSubmit } = useForm<CreateuserSchema>();
+  const { register, handleSubmit,watch } = useForm<CreateuserSchema>();
 
+  const thumbnail = watch('thumbnail')
+  const videoFile  = watch('videoFile') 
   
   const createUser = async (data:CreateuserSchema) => {
-    console.log(data);
      
+    const formData = new FormData()
+    formData.append("thumbnail", data.thumbnail[0]);
+    formData.append("videoFile", data.videoFile[0]);
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+
+
     try {
-     const token = localStorage.getItem('token')
+     const token = localStorage.getItem('refreshToken')
         const userDetails = data;
       console.log(userDetails ,"sa");
 
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/register`,
-          userDetails,
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}video/publish`,
+        formData,
         {  headers: {
             "Content-Type": "application/json",
-            "Authorization":`Bearer  ${token}`
+            "Authorization":`Bearer ${token}`
           },
         }
       );
@@ -48,13 +56,11 @@ export default function PublishVideo() {
       if (response.status >= 200 && response.status < 300) {
    
        
-         console.log(localStorage.getItem('token'));
+         console.log(response.data);
          
 
          
        
-        Dispatch(login(response.data));
-        Naviagte("/allblog");
       }
 
       return userDetails;

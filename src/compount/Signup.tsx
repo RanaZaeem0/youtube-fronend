@@ -50,10 +50,10 @@ export default function Signup() {
       console.log(response);
 
       if (response.status >= 200 && response.status < 300) {
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        localStorage.setItem("username", response.data.username);
-        localStorage.setItem("userId", response.data.userId);
-        localStorage.setItem("accessToken", response.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.data.refreshToken);
+        localStorage.setItem("username", response.data.data.username);
+        localStorage.setItem("userId", response.data.data.userId);
+        localStorage.setItem("accessToken", response.data.data.accessToken);
 
        
 
@@ -81,7 +81,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="bg-neutral-900 h-screen flex justify-center">
+    <div className="bg-neutral-900 p-2 flex justify-center">
       <div className="flex w-full justify-center">
         <div className=" bg-white rounded-2xl h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
           <h2 className="!text-black font-semibold text-2xl pb-3">
@@ -124,7 +124,7 @@ export default function Signup() {
                 {...register("avatar", { required: true })}
                 type={"file"}
                 placeholder={"Avatar image"}
-                label={" Name"}
+                label={"Avatar"}
               />
               <Input
                 {...register("coverImage", { required: true })}

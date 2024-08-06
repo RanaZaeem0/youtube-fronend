@@ -21,8 +21,6 @@ useEffect(()=>{
   
 },[])
 const loginUser = async (data:userSignin)=>{
-  setValue('email' ,"exaomple@gmail.com")
-  setValue('password' ,"exaomple@gmail.com")
 
     
 
@@ -44,6 +42,10 @@ const loginUser = async (data:userSignin)=>{
 
                     
                     localStorage.setItem('refreshToken',response.data.data.refreshToken)
+                    localStorage.setItem('userId',response.data.data._id)
+                    localStorage.setItem('username',response.data.data.username)
+
+
                     localStorage.setItem('accessToken',response.data.data.accessToken)
 
  
