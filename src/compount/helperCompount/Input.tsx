@@ -1,5 +1,5 @@
 import { ClassNames } from '@emotion/react';
-import React, { useId, ForwardedRef, InputHTMLAttributes } from 'react';
+import React, { useId, ForwardedRef, InputHTMLAttributes, useState } from 'react';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -19,6 +19,7 @@ const Input = React.forwardRef(function Input(
   ref: ForwardedRef<HTMLInputElement>
 ) {
   const id = useId();
+  const [preview, setPreview] = useState(null);
 
   return (
     <div className="flex flex-col w-full">
@@ -33,6 +34,11 @@ const Input = React.forwardRef(function Input(
         ref={ref}
         id={id}
       />
+       {type === 'file' && preview && (
+        <div>
+          <img src={preview} alt="Preview" style={{ maxWidth: '300px', maxHeight: '300px' }} />
+        </div>
+      )}
     </div>
   );
 });

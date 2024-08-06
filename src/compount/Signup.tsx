@@ -51,8 +51,8 @@ export default function Signup() {
 
       if (response.status >= 200 && response.status < 300) {
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
-        localStorage.setItem("username", response.data.data.username);
-        localStorage.setItem("userId", response.data.data.userId);
+        localStorage.setItem("username", response.data.data.user.username);
+        localStorage.setItem("userId", response.data.data.user._id);
         localStorage.setItem("accessToken", response.data.data.accessToken);
 
        
