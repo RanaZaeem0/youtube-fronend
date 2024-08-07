@@ -5,14 +5,24 @@ import IconYoutube from "./img/icon.webp";
 import Button from "./helperCompount/Button";
 import Input from "./helperCompount/Input";
 import img1 from "./img/icon.webp";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import NavAvatars from "./helperCompount/NavAvatar";
-import {faBars, faBarsProgress, faBell, faClockRotateLeft, faHouse, faThumbsUp, faUser, faVideo} from '@fortawesome/free-solid-svg-icons'
+import {
+  faBars,
+  faBarsProgress,
+  faBell,
+  faClockRotateLeft,
+  faHouse,
+  faThumbsUp,
+  faUser,
+  faVideo,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function NavBar() {
   const [LoginState, setLoginState] = useState(false);
-  const [sidebarOpen,setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const refreshToken = localStorage.getItem("refreshToken");
 
   //  if(refreshToken !== "undefined" && refreshToken !== "" ){
@@ -20,44 +30,101 @@ export default function NavBar() {
   //  }
   const Navigator = useNavigate();
 
-   const handleSidebar = ()=>{
-    setSidebarOpen(!sidebarOpen)
-   }
+  const handleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
+  const username = localStorage.getItem("username");
   return (
     <div>
       <div className="flex w-full items-center justify-between">
-    <div className="flex gap-2 pl-2">
-    <button onClick={handleSidebar}> <FontAwesomeIcon icon={faBars} /></button>
-    {
-      sidebarOpen && <div className="w-96 bg-neutral-900 h-full absolute ">
-   <div className="flex justify-between  pl-5 pr-4">
-   <ul>
- <h2 className="px-2 py-3 mr-2"><FontAwesomeIcon icon={faHouse} />  Home</h2>
-<h2 className="px-2 py-3 mr-2"><FontAwesomeIcon icon={faUser} />Your channel</h2>
-<h2 className="px-2 py-3 mr-2"><FontAwesomeIcon icon={faClockRotateLeft} />History</h2>
-<h2 className="px-2 py-3 mr-2"><FontAwesomeIcon icon={faBarsProgress} />Playlists</h2>
-<h2 className="px-2 py-3 mr-2"><FontAwesomeIcon icon={faVideo} />Your videos</h2>
-<h2 className="px-2 py-3 mr-2"><FontAwesomeIcon icon={faThumbsUp} />Liked videos</h2>
-
-
-        </ul>
-        <button onClick={handleSidebar}>X</button>
-   </div>
-      </div>
-    }
-        <div
-          className="flex items-center justify-center pl-3 "
-          onClick={() => Navigator("/")}
-        >
-          <img className="h-10 w-12 mr-2" src={IconYoutube} alt="" />
-          <h2 className="font-bold text-white ">Youtube</h2>
+        <div className="flex gap-2 pl-2">
+          <button onClick={handleSidebar}>
+            {" "}
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+          {sidebarOpen && (
+            <div className="w-96 bg-neutral-900 h-full absolute ">
+              <div className="flex justify-between  pl-5 pr-4">
+                <ul>
+                  <div
+                    className="flex items-center justify-center pl-3 "
+                    onClick={() => Navigator("/")}
+                  >
+                    <button onClick={handleSidebar}>
+                      {" "}
+                      <FontAwesomeIcon icon={faBars} />
+                    </button>
+                    <img
+                      className="h-10 w-12 mr-2 ml-2"
+                      src={IconYoutube}
+                      alt=""
+                    />
+                    <h2 className="font-bold text-white ">Youtube</h2>
+                  </div>
+                  <h2 onClick={() => Navigator("/")} className="px-2 py-3 mr-2">
+                    <FontAwesomeIcon className="pr-2" icon={faHouse} /> Home
+                  </h2>
+                  <h2
+                    onClick={() => Navigator(`/profile/${username}`)}
+                    className="px-2 py-3 mr-2"
+                  >
+                    <FontAwesomeIcon className="pr-2" icon={faUser} />
+                    Your channel
+                  </h2>
+                  <h2
+                    onClick={() => Navigator(`/watchhistory/`)}
+                    className="px-2 py-3 mr-2"
+                  >
+                    <FontAwesomeIcon
+                      className="pr-2"
+                      icon={faClockRotateLeft}
+                    />
+                    History
+                  </h2>
+                  <h2
+                    onClick={() => Navigator(`/PlayList/`)}
+                    className="px-2 py-3 mr-2"
+                  >
+                    <FontAwesomeIcon className="pr-2" icon={faBarsProgress} />
+                    Playlists
+                  </h2>
+                  <h2
+                    onClick={() => Navigator(`/profile/${username}`)}
+                    className="px-2 py-3 mr-2"
+                  >
+                    <FontAwesomeIcon className="pr-2" icon={faVideo} />
+                    Your videos
+                  </h2>
+                  <h2
+                    onClick={() => Navigator(`/likeVidoes/`)}
+                    className="px-2 py-3 mr-2"
+                  >
+                    <FontAwesomeIcon className="pr-2" icon={faThumbsUp} />
+                    Liked videos
+                  </h2>
+                </ul>
+                <button onClick={handleSidebar}>
+                  <FontAwesomeIcon icon={faXmark} />
+                </button>
+              </div>
+            </div>
+          
+          )}
+          <div
+            className="flex items-center justify-center pl-3 "
+            onClick={() => Navigator("/")}
+          >
+            <img className="h-10 w-12 mr-2" src={IconYoutube} alt="" />
+            <h2 className="font-bold text-white ">Youtube</h2>
+          </div>
         </div>
-    </div>
         <div className="flex  border-neutral-400 border items-center justify-center w-full max-w-md rounded-full bg-muted ">
-          <input type="text" 
-          placeholder="Seach .. "
-          className="w-full h-full m-2 bg-black text-neutral-300 rounded-full  shadow-sm focus:outline-none  " />
+          <input
+            type="text"
+            placeholder="Seach .. "
+            className="w-full h-full m-2 bg-black text-neutral-300 rounded-full  shadow-sm focus:outline-none  "
+          />
           <SearchIcon className="w-10 rounded-r-xl h-full bg-slate-800   mr-1  text-muted-foreground" />
         </div>
         <div className="p-2">
@@ -114,8 +181,6 @@ function SearchIcon(props) {
     <svg
       {...props}
       xmlns="http://www.w3.org/2000/svg"
-     
-     
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

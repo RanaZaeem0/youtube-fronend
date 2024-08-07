@@ -23,7 +23,7 @@ import { useParams } from 'react-router-dom';
   }
   
   
-export default function useAllvideo() {
+export default function useGetChannalProflie() {
  const [channalProfile, setChannalProfile] = useState<channalDetails | null>(null)
       const [isLoading, setIsLoading] = useState(true)
       const {username} = useParams()

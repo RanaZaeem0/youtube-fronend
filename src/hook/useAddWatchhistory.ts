@@ -3,20 +3,33 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import getRefreshToken from "../config"
 import { useParams } from 'react-router-dom';
+import { log } from 'console';
 
-
+interface WatchHistorydata {
+    "_id": string,
+        "watchHistory": [
+            string,
+        ]
+}
   
 export default function useAddWatchhistory() {
-     const [addWatchHistory, setAddWatchHistory] = useState([])
+
+  
+     const [addWatchHistory, setAddWatchHistory] = useState<WatchHistorydata| null >(null)
      const [addWatchHistoryLoading,setaddWatchHistoryLoading] = useState(true)
       const {videoId} = useParams()
+      
       useEffect(() => {
-            try {            
+            try {        
+                if(!getRefreshToken){
+                    return console.log("no login");
+                    
+                }    
            axios.post(`${import.meta.env.VITE_BACKEND_URL}users/addWatchHistory/${videoId}`,
-                    {
+                   {}, {
                         headers:{
+                            "Content-Type":"application/json",
                             "Authorization":`Bearer ${getRefreshToken}`,
-                            "Content-Type":"application/json"
                        
                         }
                     }
@@ -24,6 +37,10 @@ export default function useAddWatchhistory() {
                .then(res =>{
                 setAddWatchHistory(res.data.data)
                 setaddWatchHistoryLoading(false)
+                if(res.status >= 200 && res.status <= 300 ){
+                    console.log("addd");
+                    
+                }
                })
               
                 

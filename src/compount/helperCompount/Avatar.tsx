@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { format, formatDistanceToNow } from "date-fns";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Avatar({
   username = "A",
@@ -9,7 +11,7 @@ export default function Avatar({
   videoViews = "1",
 }: {
   username: string;
-  videoViews: string;
+  videoViews:number;
   channalId?: string;
   createdAt: string;
   avatarImage: string;
@@ -20,16 +22,16 @@ export default function Avatar({
   }
 
   return (
-    <NavLink to={`/profile?channal=${channalId}`}>
+    <NavLink to={`/channal/profile/${username}`}>
       <div className="flex flex-col items-start ">
         <div className="flex p-1">
-          <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
+          <div className=" inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
             <span className="font-medium text-white dark:text-gray-300">
               <img src={avatarImage} alt="" />
             </span>
           </div>
-          <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
-            {username}
+          <h2 className="font-normal text-gray-400 hover:underline text-1xl text-center pl-2 pr-2 ">
+            {username}<FontAwesomeIcon className="pl-1" icon={faCircleCheck} />
           </h2>
         </div>
           <div className="flex p-1 ">

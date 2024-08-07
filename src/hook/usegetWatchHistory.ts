@@ -21,13 +21,11 @@ interface UserData {
     duration: number; // Adjust type based on how you handle duration
     views: number; // Adjust type based on how you handle views
     isPublished: boolean;
-    owner: string;
+    owner: UserData;
     createdAt: string; // You may use Date if parsing this as a Date object
     updatedAt: string; // You may use Date if parsing this as a Date object
-    userDetails: UserData[];
-    videoLikes: number; // Adjust type based on how you handle likes
-   
   }
+  
   type emptyArray = VideoData[]
   
 export default function useGetWatchHistory() {

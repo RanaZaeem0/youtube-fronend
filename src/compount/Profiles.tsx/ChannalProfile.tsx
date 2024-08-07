@@ -37,7 +37,8 @@ export default function ChannalProfile() {
                 <img src={userProfile.avatar} className="h-12 w-12" alt="" />
                 <div className="space-y-1 text-white">
                   <h2 className="text-2xl font-bold">{userProfile.username}</h2>
-                  <p className="text-sm">{userProfile.email}</p>
+                  <p className="text-sm">Subscriber {userProfile.subscribersCount}</p>
+
                 </div>
               </div>
             </header>

@@ -8,14 +8,14 @@ export default function WatchHistory() {
   const Navigator = useNavigate()
     const {watchHistory,isLoading} = useGetWatchHistory()
   
-
+  
+  console.log(watchHistory.map(item => item.owner));
+  
     if (watchHistory.length === 0) {
       return <div className="flex items-center justify-center h-screen bg-neutral-600 text-white">
         <h1>You haven't watched any videos yet.</h1>
       </div>;
-  }
-  console.log(watchHistory);
-  
+  }  
   return (
     <div>
         {
@@ -32,7 +32,9 @@ export default function WatchHistory() {
                 <img className="w-full h-full" src={video.thumbnail} alt={video.thumbnail}   />
               </div>
               <h2 className="">{video.title}</h2>
-              {/* <Avatar avatarImage={video.channalDetails[0].avatar} username={video.channalDetails[0].username} channalId={video.channalDetails[0]._id} createdAt={video.createdAt} /> */}
+     { video.owner && <Avatar avatarImage={video.owner?.avatar} videoViews={video.views} username={video.owner.username} channalId={video.owner._id} createdAt={video.createdAt} />
+      
+     }
             </div>
             
           ))

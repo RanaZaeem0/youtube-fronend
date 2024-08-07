@@ -40,12 +40,12 @@ export default function Component() {
            video.isPublished && <div
               key={index}
               className="bg-background rounded-lg overflow-hidden group cursor-pointer"
-              onClick={() => Navigator(`/watch/${video._id}`)}
+             
             >
-              <div className="h-60 w-96 pb-5">
+              <div className="h-60 w-96 pb-5"  onClick={() => Navigator(`/watch/${video._id}`)}>
                 <img className="w-full h-full" src={video.thumbnail} alt={video.thumbnail}   />
               </div>
-              <h2 className="">{video.title}</h2>
+              <h2 className="text-1xl h-12">{video.title}</h2>
               <Avatar avatarImage={video.channalDetails[0].avatar} videoViews={video.views} username={video.channalDetails[0].username} channalId={video.channalDetails[0]._id} createdAt={video.createdAt} />
             </div>
           ))}
