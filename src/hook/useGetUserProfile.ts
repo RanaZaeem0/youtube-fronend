@@ -21,7 +21,11 @@ export default function useGetUserProfile() {
       const [isProfileLoading, setIsProfileLoading] = useState(true)
       const {username} = useParams()
       useEffect(() => {
-            try {            
+            try {           
+                console.log(username);
+                console.log(getRefreshToken);
+                
+                 
            axios.get(`${import.meta.env.VITE_BACKEND_URL}users/channal/${username}`,
                     {
                         headers:{

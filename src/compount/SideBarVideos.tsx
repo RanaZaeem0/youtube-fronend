@@ -34,7 +34,13 @@ export default function SideBarVideos() {
                 <div
                   key={index}
                   className="bg-background rounded-lg overflow-hidden group cursor-pointer flex"
-                  onClick={() => Navigator(`/watch/${video._id}`)}
+                  onClick={() => {
+                    Navigator(`/watch/${video._id}`)
+                    location.reload()
+                  }
+                  
+                  
+                  }
                 >
                   <div className="h-28  w-48 pb-5">
                     <img

@@ -6,11 +6,18 @@ import AllVideoWrapper from "../AllVideoWrapper";
 import useGetUserVideo from "../../hook/useGetUserVideo.ts";
 import useGetUserProfile from "../../hook/useGetUserProfile.ts";
 import { log } from "console";
-export default function Component() {
+import usegetChannalVideotByusername from "../../hook/useGetChannalVideo.ts";
+import { formatDistanceToNow } from "date-fns";
+export default function ChannalProfile() {
   const { userProfile, isProfileLoading } = useGetUserProfile();
-  const { video, isLoading } = useGetUserVideo();
+  const { getChannalVideo, isLoading } = usegetChannalVideotByusername();
   const Navigator = useNavigate();
-console.log(userProfile);
+  console.log(getChannalVideo);
+
+  function formatDateRelative(date: Date) {
+    const createdAt = new Date(date);
+    return formatDistanceToNow(createdAt, { addSuffix: true });
+  }
 
   return (
     <div className="flex flex-col min-h-dvh">
@@ -41,12 +48,12 @@ console.log(userProfile);
           {isLoading ? (
             <AllVideoSkeleton className=" grid-cols-3" />
           ) : (
-            <AllVideoWrapper className="grid grid-cols-1 items-center justify-center  ">
-              {video && video.length > 0 ? (
-                video.map((video, index) => (
+            <AllVideoWrapper className="grid grid-cols-3 items-center justify-center  ">
+              {getChannalVideo && getChannalVideo.length > 0 ? (
+                getChannalVideo.map((video, index) => (
                   <div
                     key={index}
-                    className="bg-background rounded-lg overflow-hidden group cursor-pointer flex"
+                    className="bg-background rounded-lg overflow-hidden group cursor-pointer flex flex-col"
                     onClick={() => Navigator(`/watch/${video._id}`)}
                   >
                     <div className="h-28 w-72 pb-5">
@@ -58,37 +65,35 @@ console.log(userProfile);
                     </div>
                     <div className="mb-4">
                       <div className="">
-                        <NavLink
-                          to={`/profile?channal=${video.UserDetails[0]._id}`}
-                        >
+                       
                           <div className="flex flex-col items-start ">
-                            <h2
-                              className="font-normal
-                         text-white text-start hover:underline text-1xl pl-2 pr-4"
-                            >
-                              {video.title}
-                            </h2>
-                            <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
-                              {video.UserDetails[0].username}
-                            </h2>
-                            <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
-                              views {video.views}
-                            </h2>
+                            <div className="flex p-1">
+                              <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
+                                <span className="font-medium text-white dark:text-gray-300">
+                                  <img src={userProfile?.avatar} alt="" />
+                                </span>
+                              </div>
+                              <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
+                                {userProfile?.username}
+                              </h2>
+                            </div>
+                            <div className="flex p-1 ">
+                              <h3 className="text-neutral-500 mr-1">
+                                {video.views}K views{" "}
+                              </h3>
+                              <h3 className="text-neutral-500">
+                                {formatDateRelative(video.createdAt)}
+                              </h3>
+                            </div>
                           </div>
-                        </NavLink>
+                  
                       </div>
                     </div>
                   </div>
                 ))
               ) : (
                 <h2 className="text-white p-4">
-                  You does not uploaded any video
-                  <button
-                    className="px-4 py-2 rounded font-medium bg-blue-500"
-                    onClick={() => Navigator("/publishvideo")}
-                  >
-                    Upload Video
-                  </button>
+                  <h2>Not Video Avalibale</h2>
                 </h2>
               )}
             </AllVideoWrapper>

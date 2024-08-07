@@ -13,7 +13,8 @@ import { useForm } from "react-hook-form";
 export default function PublishVideo() {
   const [uploadLoading,setUploadLoading] = useState(false)
   const [error, setError] = useState("");
-  const Naviagte = useNavigate();
+  const Navigator = useNavigate();
+
   const Dispatch = useDispatch();
   const [createBtn ,setCreateBtn ] = useState(false)
    interface CreateuserSchema{
@@ -56,7 +57,7 @@ export default function PublishVideo() {
    
         setUploadLoading(false)
          console.log(response.data);
-         
+         Navigator(`/profile/${localStorage.getItem('username')}`)
 
          
        

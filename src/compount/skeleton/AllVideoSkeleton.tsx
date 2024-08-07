@@ -1,7 +1,9 @@
 import React from "react";
 
-export default function AllVideoSkeleton({className= "grid-cols-3"}:
-{  className: string}
+export default function AllVideoSkeleton({className = "grid-cols-3"}:
+{  className: string
+  
+}
 ) {
   return (
     <div className=" w-full">

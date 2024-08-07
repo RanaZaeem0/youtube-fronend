@@ -1,20 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import getRefreshToken  from "../../src/config"
 import { useParams } from 'react-router-dom';
 
-interface channalDetails {
-    _id: string;
-    username: string;
-    email: string;
-    avatar: string;
-  }
+
   
-  interface Comment {
-    _id: string;
-    content: string;
-  }
-  
-  interface VideoData {
+  interface channalDetails {
     _id: string;
     videoFile: string;
     thumbnail: string;
@@ -26,22 +17,30 @@ interface channalDetails {
     owner: string;
     createdAt: string; // You may use Date if parsing this as a Date object
     updatedAt: string; // You may use Date if parsing this as a Date object
-    channalDetails: channalDetails[];
+    userDetails: UserData[];
     videoLikes: number; // Adjust type based on how you handle likes
-    comments: Comment[];
+   
   }
   
   
-export default function useGetVideobyId() {
- const [video, setVideo] = useState<VideoData | null>(null)
+export default function useAllvideo() {
+ const [channalProfile, setChannalProfile] = useState<channalDetails | null>(null)
       const [isLoading, setIsLoading] = useState(true)
-     const    {videoId}    = useParams()
+      const {username} = useParams()
       useEffect(() => {
             try {            
-                const getAllVideo  =  axios.get(`${import.meta.env.VITE_BACKEND_URL}video/${videoId}`)
+                const getChannalProflie  =  axios.get(`${import.meta.env.VITE_BACKEND_URL}channal/${username}`,
+                    {
+                        headers:{
+                            "Authorization":`Bearer ${getRefreshToken}`,
+                            "Content-Type":"application/json"
+                       
+                        }
+                    }
+                )
                .then(res =>{
-                console.log(res.data.data[0]);
-                setVideo(res.data.data[0])
+                console.log(res.data.data);
+                setChannalProfile(res.data.data)
                 setIsLoading(false)
                })
               
@@ -57,6 +56,6 @@ export default function useGetVideobyId() {
  
     return {
         isLoading,
-        video
+        channalProfile
     }
 }

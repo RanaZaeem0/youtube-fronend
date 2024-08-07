@@ -17,6 +17,7 @@ import Signin from './compount/Signin.tsx';
 import Profile from "./compount/Profiles.tsx/Profile.tsx"
 import WatchHistory from './compount/Profiles.tsx/WatchHistory.tsx';
 import AuthLayout from './compount/AuthLayout.tsx';
+import ChannalProfile from './compount/Profiles.tsx/ChannalProfile.tsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
     {
       path:"/signin",
       element:<Signin/>
+    },
+    {
+      path:"/channal/profile/:username",
+      element:<ChannalProfile/>
     },
     {
       path:"/publishvideo",

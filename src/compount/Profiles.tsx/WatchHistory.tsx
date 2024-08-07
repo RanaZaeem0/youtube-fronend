@@ -40,7 +40,7 @@ export default function WatchHistory() {
        
         }
         </AllVideoWrapper> :
-        <AllVideoSkeleton/>
+        <AllVideoSkeleton className=''/>
         
         }
 
