@@ -9,7 +9,9 @@ import { format } from "path";
 import { formatDate, formatDistanceToNow } from "date-fns";
 
 export default function SideBarVideos() {
-  const { isLoading, videos } = useAllvideo();
+  const limit =9
+  const page= 0
+  const { isLoading, videos } = useAllvideo({limit,page});
   const Navigator = useNavigate();
 
   const [selectedVideo, setSelectedVideo] = useState(null);

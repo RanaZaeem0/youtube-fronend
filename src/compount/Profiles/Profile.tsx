@@ -5,6 +5,7 @@ import AllVideoSkeleton from "../skeleton/AllVideoSkeleton.tsx";
 import AllVideoWrapper from "../AllVideoWrapper.tsx";
 import useGetUserVideo from "../../hook/useGetUserVideo.ts";
 import useGetUserProfile from "../../hook/useGetUserProfile.ts";
+import  ProfileAvatar from "./ProfileAvatar.tsx"
 import { log } from "console";
 export default function Component() {
   const { userProfile, isProfileLoading } = useGetUserProfile();
@@ -14,7 +15,7 @@ export default function Component() {
 
   return (
     <div className="flex flex-col min-h-dvh">
-      <ProfileAvatar />
+      <ProfileAvatar userProfile={userProfile} isProfileLoading={isProfileLoading} />
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           <h2>

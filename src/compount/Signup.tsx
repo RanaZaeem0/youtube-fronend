@@ -22,7 +22,7 @@ export default function Signup() {
     coverImage: string;
     fullName: string;
   }
-  const { register, handleSubmit, watch } = useForm();
+  const { register, handleSubmit, watch ,formState: { errors }} = useForm();
 
   const avatar = watch("avatar");
   const coverImage = watch("coverImage");
@@ -92,11 +92,20 @@ export default function Signup() {
           <form onSubmit={handleSubmit(createUser)}>
             <div className="flex flex-col w-96 max-lg:w-full justify-center items-center">
               <Input
-                {...register("username", { required: true, minLength: 2 })}
+              {...register("username", {
+                required: "Username is required",
+                minLength: { value: 2, message: "Username must be at least 2 characters long" },
+                pattern: {
+                  value: /^\S*$/,
+                  message: "Username cannot contain spaces"
+                }
+              })}
                 type={"text"}
                 placeholder={"Your Name"}
                 label={"username"}
+               
               />
+                 {errors.username && <p className="text-red-500 text-sm">Username is required and must be at least 2 characters And No space.</p>}
               <Input
                 {...register("email", {
                   required: true,
@@ -111,28 +120,37 @@ export default function Signup() {
                 placeholder={"example@gmail.com"}
                 label={"email"}
               />
+                   {errors.email && <p className="text-red-500 text-sm">email is required and must be at least 2 characters And No space.</p>}
               <Input
                 {...register("password", { required: true, minLength: 6 })}
                 placeholder={"******"}
                 label={"password"}
               />
+               {errors.password && <p className="text-red-500 text-sm">password is required and must be at least 6 characters And No space.</p>}
               <Input
                 {...register("fullName", { required: true, minLength: 2 })}
                 placeholder={"******"}
                 label={"FullName"}
               />
+                {errors.fullName && <p className="text-red-500 text-sm">full Name is required.</p>}
               <Input
                 {...register("avatar", { required: true })}
                 type={"file"}
                 placeholder={"Avatar image"}
                 label={"Avatar"}
+                accept="image/*" 
               />
+                {errors.avatar && <p className="text-red-500 text-sm">avatar Image  is required plz .</p>}
+
               <Input
                 {...register("coverImage", { required: true })}
                 placeholder={"Cover Image .."}
                 label={"Cover Image"}
                 type="file"
+                accept="image/*" 
               />
+                {errors.coverImage && <p className="text-red-500 text-sm"> coverImage  is required plz .</p>}
+
             </div>
             {loadingBtn ? (
               <button

@@ -24,7 +24,7 @@ export default function PublishVideo() {
     ,thumbnail:File
    }
 
-  const { register, handleSubmit,watch } = useForm<CreateuserSchema>();
+  const { register, handleSubmit,watch,formState:{errors} } = useForm<CreateuserSchema>();
 
   const thumbnail = watch('thumbnail')
   const videoFile  = watch('videoFile') 
@@ -109,25 +109,38 @@ export default function PublishVideo() {
               placeholder={"title..."}
               label={"Title"}
             />
+             {errors.title && <p className="text-red-500 text-sm"> Title  is required plz  atlest 3 characters.</p>}
+
             <Input
               {...register("description", { required: true, })}
               type={"text"}
               placeholder={"description"}
               label={"Description"}
             />
+             {errors.description && <p className="text-red-500 text-sm"> Title  is required plz atlest 3 characters .</p>}
+
             
             <Input
               {...register("thumbnail", { required: true})}
               placeholder="Thumnail Image"
               type="file"
               label={"thumnail"}
+              accept="image/*" 
             />
+             {errors.thumbnail && <p className="text-red-500 text-sm"> Thumnail image  is required plz  .</p>}
+
             <Input
-              {...register("videoFile", { required: true})}
-              placeholder="Video"
+              {...register("videoFile", 
+                { required: true},
+              )
+            }
+            placeholder="Video"
+            accept="video/*" 
               type='file'
               label={"videoFile"}
             />
+             {errors.videoFile && <p className="text-red-500 text-sm"> video    is required plz  .</p>}
+
             </div>
           {
             !uploadLoading ? <Button label={'Publish Video'} type="submit" className={'bg-gray-800'} /> : 

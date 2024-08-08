@@ -1,9 +1,10 @@
 import React from 'react'
 import useGetUserProfile from "../../hook/useGetUserProfile"
+import { log } from 'console';
 
-export default function ProfileAvatar() {
-    const { userProfile, isProfileLoading } = useGetUserProfile();
-    log
+export default function ProfileAvatar({userProfile,isProfileLoading}) {
+    console.log(userProfile,"com[pount");
+    
     return (
     <div>
         {!isProfileLoading

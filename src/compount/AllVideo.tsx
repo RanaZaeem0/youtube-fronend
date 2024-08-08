@@ -8,13 +8,20 @@ import AllVideoWrapper from "./AllVideoWrapper.tsx";
 import { formatDistanceToNow } from "date-fns";
 
 export default function Component() {
-  const { isLoading, videos } = useAllvideo();
+
+ const [limit,setLimit] = useState(4)
+const [page,setPage] = useState(0)
+  const { isLoading, videos } = useAllvideo({limit,page});
   const Navigator = useNavigate();
 
   const [selectedVideo, setSelectedVideo] = useState(null);
   const handleVideoClick = (video) => {
     setSelectedVideo(video);
   };
+  const hanldeShowMore= ()=>{
+  setLimit(4)
+  setPage(2)
+  }
 
   return (
     <div className="">
@@ -92,6 +99,9 @@ export default function Component() {
                     )
                 )}
             </AllVideoWrapper>
+            <div className="flex items-center justify-center">
+              <button onClick={hanldeShowMore} className="bg-red-400 p-5  ">Show More</button>
+            </div>
           </div>
         )}
       </div>

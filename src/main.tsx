@@ -41,7 +41,9 @@ const router = createBrowserRouter([
     },
     {
       path:"/channal/profile/:username",
-      element:<ChannalProfile/>
+      element:<AuthLayout>
+        <ChannalProfile/>
+      </AuthLayout>
     },
     {
       path:"/publishvideo",

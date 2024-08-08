@@ -11,6 +11,8 @@ import usegetChannalVideotByusername from "../../hook/useGetChannalVideo.ts";
 import { formatDistanceToNow } from "date-fns";
 export default function ChannalProfile() {
   const { getChannalVideo, isLoading } = usegetChannalVideotByusername();
+  const { userProfile, isProfileLoading } = useGetUserProfile()
+
   const Navigator = useNavigate();
   console.log(getChannalVideo);
 
@@ -21,7 +23,7 @@ export default function ChannalProfile() {
 
   return (
     <div className="flex flex-col min-h-dvh">
-      <ProfileAvatar />
+      <ProfileAvatar userProfile={userProfile} isProfileLoading={isProfileLoading} />
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           {isLoading ? (

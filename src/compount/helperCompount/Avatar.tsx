@@ -8,7 +8,7 @@ export default function Avatar({
   channalId = "1",
   createdAt = "a",
   avatarImage = "",
-  videoViews = "1",
+  videoViews = 0,
 }: {
   username: string;
   videoViews:number;
