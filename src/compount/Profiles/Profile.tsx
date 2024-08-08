@@ -1,8 +1,8 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import img1 from "../../compount/img/icon.webp";
 import img2 from "../../compount/img/youtube.webp";
-import AllVideoSkeleton from "../skeleton/AllVideoSkeleton";
-import AllVideoWrapper from "../AllVideoWrapper";
+import AllVideoSkeleton from "../skeleton/AllVideoSkeleton.tsx";
+import AllVideoWrapper from "../AllVideoWrapper.tsx";
 import useGetUserVideo from "../../hook/useGetUserVideo.ts";
 import useGetUserProfile from "../../hook/useGetUserProfile.ts";
 import { log } from "console";
@@ -10,36 +10,17 @@ export default function Component() {
   const { userProfile, isProfileLoading } = useGetUserProfile();
   const { video, isLoading } = useGetUserVideo();
   const Navigator = useNavigate();
-console.log(userProfile);
+  console.log(userProfile);
 
   return (
     <div className="flex flex-col min-h-dvh">
-      {!isProfileLoading
-        ? userProfile && (
-            <header className="relative h-52 overflow-hidden">
-              <img
-                src={userProfile.coverImage}
-                alt="Cover image"
-                width={1920}
-                height={480}
-                className="absolute inset-0 h-full w-full object-cover bg-no-repeat"
-                style={{ aspectRatio: "1920/480", objectFit: "cover" }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-              <div className="absolute bottom-4 left-4 flex items-center gap-4">
-                <img  src={userProfile.avatar} className="h-12 w-12 rounded-lg" alt="" />
-                <div className="space-y-1 text-white">
-                  <h2 className="text-2xl font-bold">{userProfile.username}</h2>
-                  <h2>Subscriber {userProfile.subscribersCount}</h2>
-                </div>
-              </div>
-            </header>
-          )
-        : null}
+      <ProfileAvatar />
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           <h2>
-            <button  className="px-4 py-2 rounded font-medium bg-blue-500">Create tweet</button>
+            <button className="px-4 py-2 rounded font-medium bg-blue-500">
+              Create tweet
+            </button>
           </h2>
           {isLoading ? (
             <AllVideoSkeleton className=" grid-cols-3" />
@@ -84,7 +65,6 @@ console.log(userProfile);
                   </div>
                 ))
               ) : (
-
                 <h2 className="text-white p-4">
                   You does not uploaded any video
                   <button

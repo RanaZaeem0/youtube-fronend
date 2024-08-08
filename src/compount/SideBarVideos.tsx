@@ -24,7 +24,7 @@ export default function SideBarVideos() {
 
   return (
     <div className="">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container w-full px-4 py-8">
         {isLoading ? (
           <AllVideoSkeleton className="gird-cols-1" />
         ) : (
@@ -33,7 +33,7 @@ export default function SideBarVideos() {
               videos.map((video, index) => (
                 <div
                   key={index}
-                  className="bg-background rounded-lg overflow-hidden group cursor-pointer flex"
+                  className="bg-background w-full rounded-lg overflow-hidden group cursor-pointer flex"
                   onClick={() => {
                     Navigator(`/watch/${video._id}`)
                     location.reload()
@@ -56,7 +56,7 @@ export default function SideBarVideos() {
                       >
                         <div className="flex flex-col items-start ">
                         <h2 className="font-normal
-                         text-white text-start hover:underline text-1xl pl-2 pr-4">
+                         text-white text-start hover:underline text-sm  pl-2 pr-4">
                             {video.title}
                           </h2>
                           <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">

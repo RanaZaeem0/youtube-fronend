@@ -1,8 +1,6 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import getRefreshToken from "../config"
-import { BlobOptions } from 'buffer';
 import { useParams } from 'react-router-dom';
 
 interface UserProfile{
@@ -23,13 +21,12 @@ export default function useGetUserProfile() {
       useEffect(() => {
             try {           
                 console.log(username);
-                console.log(getRefreshToken);
+       
                 
                  
            axios.get(`${import.meta.env.VITE_BACKEND_URL}users/channal/${username}`,
                     {
                         headers:{
-                            "Authorization":`Bearer ${getRefreshToken}`,
                             "Content-Type":"application/json"
                        
                         }

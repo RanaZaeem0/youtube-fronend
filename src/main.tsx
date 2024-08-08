@@ -14,10 +14,10 @@ import WatchVideo from './compount/WatchVideo.tsx';
 import Signup from "./compount/Signup.tsx"
 import PublishVideo from './compount/PublishVideo.tsx';
 import Signin from './compount/Signin.tsx';
-import Profile from "./compount/Profiles.tsx/Profile.tsx"
-import WatchHistory from './compount/Profiles.tsx/WatchHistory.tsx';
+import Profile from "./compount/Profiles/Profile.tsx"
+import WatchHistory from './compount/Profiles/WatchHistory.tsx';
 import AuthLayout from './compount/AuthLayout.tsx';
-import ChannalProfile from './compount/Profiles.tsx/ChannalProfile.tsx';
+import ChannalProfile from './compount/Profiles/ChannalProfile.tsx';
 const router = createBrowserRouter([
   {
     path: "/",

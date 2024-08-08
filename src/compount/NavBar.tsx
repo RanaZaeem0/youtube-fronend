@@ -38,15 +38,15 @@ export default function NavBar() {
   return (
     <div>
       <div className="flex w-full items-center justify-between">
-        <div className="flex gap-2 pl-2">
+        <div className="flex gap-2 ">
           <button onClick={handleSidebar}>
             {" "}
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon className="pl-4" icon={faBars} />
           </button>
           {sidebarOpen && (
-            <div className="w-96 bg-neutral-900 h-full absolute ">
-              <div className="flex justify-between  pl-5 pr-4">
-                <ul>
+            <div className="w-72 bg-neutral-900 h-full absolute z-10">
+              <div className="flex justify-between items-start pt-5  pl-5 pr-4">
+                <ul className="w-full items-start flex flex-col">
                   <div
                     className="flex items-center justify-center pl-3 "
                     onClick={() => Navigator("/")}
@@ -56,25 +56,37 @@ export default function NavBar() {
                       <FontAwesomeIcon icon={faBars} />
                     </button>
                     <img
-                      className="h-10 w-12 mr-2 ml-2"
+                      className="h-8 w-10 mr-2 ml-2"
                       src={IconYoutube}
                       alt=""
                     />
-                    <h2 className="font-bold text-white ">Youtube</h2>
+                    <h2 className="font-medium text-white ">Youtube</h2>
                   </div>
-                  <h2 onClick={() => Navigator("/")} className="px-2 py-3 mr-2">
+                  <h2
+                    onClick={() => {
+                      Navigator("/");
+                      handleSidebar();
+                    }}
+                    className="px-2 py-3 mr-2  hover:bg-slate-800 cursor-pointer rounded-lg w-full"
+                  >
                     <FontAwesomeIcon className="pr-2" icon={faHouse} /> Home
                   </h2>
                   <h2
-                    onClick={() => Navigator(`/profile/${username}`)}
-                    className="px-2 py-3 mr-2"
+                    onClick={() => {
+                      Navigator(`/profile/${username}`);
+                      handleSidebar();
+                    }}
+                    className="px-2 py-3 mr-2 hover:bg-slate-800 cursor-pointer rounded-lg w-full"
                   >
                     <FontAwesomeIcon className="pr-2" icon={faUser} />
                     Your channel
                   </h2>
                   <h2
-                    onClick={() => Navigator(`/watchhistory/`)}
-                    className="px-2 py-3 mr-2"
+                    onClick={() => {
+                      Navigator(`/watchhistory/`);
+                      handleSidebar();
+                    }}
+                    className="px-2 py-3 mr-2 hover:bg-slate-800 cursor-pointer rounded-lg w-full"
                   >
                     <FontAwesomeIcon
                       className="pr-2"
@@ -83,49 +95,57 @@ export default function NavBar() {
                     History
                   </h2>
                   <h2
-                    onClick={() => Navigator(`/PlayList/`)}
-                    className="px-2 py-3 mr-2"
+                    onClick={() => {
+                      Navigator(`/PlayList/`);
+                      handleSidebar();
+                    }}
+                    className="px-2 py-3 mr-2 hover:bg-slate-800 cursor-pointer rounded-lg w-full"
                   >
                     <FontAwesomeIcon className="pr-2" icon={faBarsProgress} />
                     Playlists
                   </h2>
                   <h2
-                    onClick={() => Navigator(`/profile/${username}`)}
-                    className="px-2 py-3 mr-2"
+                    onClick={() => {
+                      Navigator(`/profile/${username}`);
+                      handleSidebar();
+                    }}
+                    className="px-2 py-3 mr-2 hover:bg-slate-800 cursor-pointer rounded-lg w-full"
                   >
                     <FontAwesomeIcon className="pr-2" icon={faVideo} />
                     Your videos
                   </h2>
                   <h2
-                    onClick={() => Navigator(`/likeVidoes/`)}
-                    className="px-2 py-3 mr-2"
+                    onClick={() => {
+                      Navigator(`/likeVidoes/`);
+                      handleSidebar();
+                    }}
+                    className="px-2 py-3 mr-2 hover:bg-slate-800 cursor-pointer rounded-lg w-full"
                   >
                     <FontAwesomeIcon className="pr-2" icon={faThumbsUp} />
                     Liked videos
                   </h2>
                 </ul>
                 <button onClick={handleSidebar}>
-                  <FontAwesomeIcon icon={faXmark} />
+                  <FontAwesomeIcon className="" icon={faXmark} />
                 </button>
               </div>
             </div>
-          
           )}
           <div
             className="flex items-center justify-center pl-3 "
             onClick={() => Navigator("/")}
           >
-            <img className="h-10 w-12 mr-2" src={IconYoutube} alt="" />
-            <h2 className="font-bold text-white ">Youtube</h2>
+            <img className="h-8 w-10 mr-2" src={IconYoutube} alt="" />
+            <h2 className="font-bold text-sm text-white ">Youtube</h2>
           </div>
         </div>
-        <div className="flex  border-neutral-400 border items-center justify-center w-full max-w-md rounded-full bg-muted ">
+        <div className="flex max-lg:w-20 border-neutral-400 border items-center justify-center w-full max-w-md rounded-full bg-muted ">
           <input
             type="text"
             placeholder="Seach .. "
-            className="w-full h-full m-2 bg-black text-neutral-300 rounded-full  shadow-sm focus:outline-none  "
+            className="w-full  h-full m-2 ml-5 bg-black text-neutral-300 rounded-full  shadow-sm focus:outline-none  "
           />
-          <SearchIcon className="w-10 rounded-r-xl h-full bg-slate-800   mr-1  text-muted-foreground" />
+          <SearchIcon className="w-10  h-full    border-l p-2  mr-3   text-muted-foreground" />
         </div>
         <div className="p-2">
           {!refreshToken ||
@@ -133,8 +153,8 @@ export default function NavBar() {
           refreshToken.length < 10 ? (
             <button
               onClick={() => Navigator("/signup")}
-              className="w-full text-blue-700
-       bg-gray-800 mt-2 p-2 font-medium rounded-xl "
+              className="w-full text-blue-700 max-lg:text-sm
+       bg-gray-900 mt-2 p-2 font-medium rounded-xl "
             >
               {" "}
               Sign Up
