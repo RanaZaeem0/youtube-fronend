@@ -62,7 +62,7 @@ export default function SideBarVideos() {
                             {video.title}
                           </h2>
                           <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
-                            {video.channalDetails[0].username}
+                            {video?.channalDetails[0].username}
                           </h2>
                           <div className="flex">
                           <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">

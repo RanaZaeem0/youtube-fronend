@@ -4,7 +4,7 @@ import { login } from '../store/authSlice'
 import { useNavigate } from 'react-router-dom'
 export default function AuthLayout(
     {children}:{
-        children:ReactNode
+        children:React.ReactElement
     }
 ) {
 
@@ -13,9 +13,12 @@ export default function AuthLayout(
     const refreshToken:any = localStorage.getItem('refreshToken')
 
     useEffect(()=>{
-        if(refreshToken == "undefined" && refreshToken == null && refreshToken?.length > 10){
+      if(refreshToken == "undefined" && refreshToken == null && refreshToken?.length > 10){
+        console.log(refreshToken)
+        
+        }else{
           Navigator('/')
-          }
+        }
       },[])
 
 

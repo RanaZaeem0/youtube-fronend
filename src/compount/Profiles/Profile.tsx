@@ -6,23 +6,34 @@ import AllVideoWrapper from "../AllVideoWrapper.tsx";
 import useGetUserVideo from "../../hook/useGetUserVideo.ts";
 import useGetUserProfile from "../../hook/useGetUserProfile.ts";
 import  ProfileAvatar from "./ProfileAvatar.tsx"
+import CreateTweet from "../tweet/CreateTweet.tsx"
 import { log } from "console";
-export default function Component() {
+import { useState } from "react";
+import PublishVideoCompount from "../PublishVideo.tsx";
+export default function ProfileComponent() {
   const { userProfile, isProfileLoading } = useGetUserProfile();
   const { video, isLoading } = useGetUserVideo();
+  const [openTweet,setOpenTweet] = useState(false)
   const Navigator = useNavigate();
   console.log(userProfile);
+
+const handleTweet = ()=>{
+  setOpenTweet(!openTweet)
+}
 
   return (
     <div className="flex flex-col min-h-dvh">
       <ProfileAvatar userProfile={userProfile} isProfileLoading={isProfileLoading} />
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
-          <h2>
-            <button className="px-4 py-2 rounded font-medium bg-blue-500">
-              Create tweet
-            </button>
-          </h2>
+     <div className="">
+     <h2 className="w-full underline border-b-2 py-4 m-5 items-end justify-center bg-transparent ">
+            
+           <button className="rounded-lg text-zinc-400 hover:bg-zinc-100 p-4" onClick={()=>Navigator('/publishvideo')}>Publish Video</button>
+            <CreateTweet/>
+                       
+                     </h2>
+     </div>
           {isLoading ? (
             <AllVideoSkeleton className=" grid-cols-3" />
           ) : (
@@ -68,12 +79,8 @@ export default function Component() {
               ) : (
                 <h2 className="text-white p-4">
                   You does not uploaded any video
-                  <button
-                    className="px-4 py-2 rounded font-medium bg-blue-500"
-                    onClick={() => Navigator("/publishvideo")}
-                  >
-                    Upload Video
-                  </button>
+                  
+                  <PublishVideoCompount/>
                 </h2>
               )}
             </AllVideoWrapper>

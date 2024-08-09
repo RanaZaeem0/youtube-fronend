@@ -1,6 +1,7 @@
 import React from 'react'
 import useGetUserProfile from "../../hook/useGetUserProfile"
 import { log } from 'console';
+import SubcriberBtn from '../helperCompount/SubcriberBtn';
 
 export default function ProfileAvatar({userProfile,isProfileLoading}) {
     console.log(userProfile,"com[pount");
@@ -17,8 +18,9 @@ export default function ProfileAvatar({userProfile,isProfileLoading}) {
                 style={{ aspectRatio: "1920/480", objectFit: "cover" }}
               />
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-              <div className="absolute bottom-4 left-4 flex items-center gap-4">
-                <img
+              <div className="absolute bottom-4 left-4 flex items-center gap-4 justify-between w-full pr-22 mr-5">
+              <div className="">
+              <img
                   src={userProfile.avatar}
                   className="h-12 w-12 rounded-lg"
                   alt=""
@@ -27,6 +29,8 @@ export default function ProfileAvatar({userProfile,isProfileLoading}) {
                   <h2 className="text-2xl font-bold">{userProfile.username}</h2>
                   <h2>Subscriber {userProfile.subscribersCount}</h2>
                 </div>
+              </div>
+                  <SubcriberBtn  channalId={userProfile._id} />
               </div>
             </header>
           )

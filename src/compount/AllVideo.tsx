@@ -6,22 +6,24 @@ import useAllvideo from "../hook/useAllvideo.js";
 import { useNavigate } from "react-router-dom";
 import AllVideoWrapper from "./AllVideoWrapper.tsx";
 import { formatDistanceToNow } from "date-fns";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faEllipsis} from "@fortawesome/free-solid-svg-icons"
+import VideoDropdown from "./helperCompount/VideoDropdown.tsx"
 
 export default function Component() {
-
- const [limit,setLimit] = useState(4)
-const [page,setPage] = useState(0)
-  const { isLoading, videos } = useAllvideo({limit,page});
+  const [limit, setLimit] = useState(4);
+  const [page, setPage] = useState(0);
+  const { isLoading, videos } = useAllvideo({ limit, page });
   const Navigator = useNavigate();
 
   const [selectedVideo, setSelectedVideo] = useState(null);
   const handleVideoClick = (video) => {
     setSelectedVideo(video);
   };
-  const hanldeShowMore= ()=>{
-  setLimit(4)
-  setPage(2)
-  }
+  const hanldeShowMore = () => {
+    setLimit(4);
+    setPage(2);
+  };
 
   return (
     <div className="">
@@ -31,40 +33,40 @@ const [page,setPage] = useState(0)
         ) : (
           <div className="w-auto overflow-hidden ">
             <div className="mb-5 ml-4 flex items-center ">
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 All
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Podcasts
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Music
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Mixes
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Source code
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 AI
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Software framwork
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800  hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Google
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Algouthme
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Comedy clube{" "}
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800 hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Live
               </button>
-              <button className="bg-neutral-800 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
+              <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Drama
               </button>
             </div>
@@ -88,19 +90,28 @@ const [page,setPage] = useState(0)
                           />
                         </div>
                         <h2 className="text-1xl h-12">{video.title}</h2>
-                        <Avatar
+                       <div className="flex justify-between w-full">
+                       <Avatar
                           avatarImage={video.channalDetails[0].avatar}
                           videoViews={video.views}
                           username={video.channalDetails[0].username}
                           channalId={video.channalDetails[0]._id}
                           createdAt={video.createdAt}
                         />
+                     <div className="relative">
+                     <VideoDropdown/>
+                     </div>
+                       </div>
+
+                       
                       </div>
                     )
                 )}
             </AllVideoWrapper>
-            <div className="flex items-center justify-center">
-              <button onClick={hanldeShowMore} className="bg-red-400 p-5  ">Show More</button>
+            <div className="flex items-center justify-center mt-5">
+              <button onClick={hanldeShowMore} className="bg-red-400 p-2  rounded-xl ">
+                Show More
+              </button>
             </div>
           </div>
         )}

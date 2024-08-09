@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 
 
   
-interface GetCommentsData {
+interface GetComments{
     content: string;
     owner:string;
      _id:string
   }
+  type GetCommentsData = GetComments[]
   
-export default function useGetCommentById() {
+export default function useGetCommentById(c) {
      const [getComments, setGetComments] = useState<GetCommentsData | null>(null)
       const [isLoading, setIsLoading] = useState(true)
       const {videoId} = useParams()

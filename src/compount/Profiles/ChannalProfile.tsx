@@ -16,7 +16,7 @@ export default function ChannalProfile() {
   const Navigator = useNavigate();
   console.log(getChannalVideo);
 
-  function formatDateRelative(date: Date) {
+  function formatDateRelative(date: string) {
     const createdAt = new Date(date);
     return formatDistanceToNow(createdAt, { addSuffix: true });
   }

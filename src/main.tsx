@@ -6,18 +6,22 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Trigger from "./compount/popup/ShowPop.tsx"
 import AllVideo from "./compount/AllVideo.tsx"
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
 import NavBar from './compount/NavBar.tsx';
 import WatchVideo from './compount/WatchVideo.tsx';
-import Signup from "./compount/Signup.tsx"
-import PublishVideo from './compount/PublishVideo.tsx';
-import Signin from './compount/Signin.tsx';
-import Profile from "./compount/Profiles/Profile.tsx"
+import Signup from "./page/Signup.tsx"
+import PublishVideo from './page/PublishVideo.tsx';
+import Signin from './page/Signin.tsx';
+import Profile from "./page/Profile.tsx"
 import WatchHistory from './compount/Profiles/WatchHistory.tsx';
 import AuthLayout from './compount/AuthLayout.tsx';
+import Playlist from "./compount/playlist/CreatePlaylist.tsx"
 import ChannalProfile from './compount/Profiles/ChannalProfile.tsx';
+import ShowTweet from "./compount/tweet/ShowTweet.tsx"
+import Home from "./page/Home.tsx"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,7 +29,7 @@ const router = createBrowserRouter([
    children:[
     {
       path:"/",
-      element:<AllVideo/>
+      element:<Home/>
     },
     {
       path:"/watch/:videoId",
@@ -63,7 +67,28 @@ const router = createBrowserRouter([
         element:<AuthLayout>
           <WatchHistory/>
         </AuthLayout>
+      },
+    
+      {
+        path:"/playlist",
+        element:<AuthLayout>
+          <Playlist/>
+        </AuthLayout>
       }
+      ,
+    
+      {
+        path:"/showtweet/:username",
+        element:<AuthLayout>
+          <ShowTweet/>
+        </AuthLayout>
+      }
+      ,
+    
+      {
+        path:"/pop",
+        element:<Trigger/>      }
+
 
    ]
   }

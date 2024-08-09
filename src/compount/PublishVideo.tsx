@@ -9,12 +9,13 @@ import ButtonWarning from "./helperCompount/ButtonWarning";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import { useForm } from "react-hook-form";
-
-export default function PublishVideo() {
+import {FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {faUpload}  from "@fortawesome/free-solid-svg-icons"
+import getRefreshToken from "../config"
+export default function PublishVideoCompount() {
   const [uploadLoading,setUploadLoading] = useState(false)
   const [error, setError] = useState("");
-  const Navigator = useNavigate();
-
+  // if (!isVisible) return null; 
   const Dispatch = useDispatch();
   const [createBtn ,setCreateBtn ] = useState(false)
    interface CreateuserSchema{
@@ -23,6 +24,12 @@ export default function PublishVideo() {
     videoFile:File
     ,thumbnail:File
    }
+   const Navigator = useNavigate()
+   if(getRefreshToken){
+       Navigator('/signup')
+       return console.log("logout ")
+     }
+
 
   const { register, handleSubmit,watch,formState:{errors} } = useForm<CreateuserSchema>();
 
@@ -39,7 +46,7 @@ export default function PublishVideo() {
 
 
     try {
-     const token = localStorage.getItem('refreshToken')
+    
         const userDetails = data;
       console.log(userDetails ,"sa");
       setUploadLoading(true)
@@ -47,7 +54,7 @@ export default function PublishVideo() {
         formData,
         {  headers: {
             "Content-Type": "multipart/form-data",
-            "Authorization":`Bearer ${token}`
+            "Authorization":`Bearer ${getRefreshToken}`
           },
         }
       );
@@ -85,19 +92,14 @@ export default function PublishVideo() {
   };
 
   return (
-    <div className="bg-slate-700 h-screen flex justify-center">
+   
+   <div className="bg-black">
+      
       {
-        !createBtn && <button 
-        onClick={()=>setCreateBtn(true)}
-        className="rounded-md bg-black h-9 text-white px-4 py-2 text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-            Create
-          </button>
-      }
-      {
-        createBtn && <div className="flex w-full justify-center">
+         <div className="flex w-full justify-center">
         <div className=" bg-white h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
-          <h2 className="!text-black font-semibold text-2xl pb-3">Publish Video</h2>
-          
+          <h2 className="!text-black font-semibold text-2xl pb-3">Publish Video </h2>
+         
           <form onSubmit={handleSubmit(createUser)}>
             <div className="flex flex-col w-96 max-lg:w-full justify-center items-center" >
 
@@ -143,7 +145,7 @@ export default function PublishVideo() {
 
             </div>
           {
-            !uploadLoading ? <Button label={'Publish Video'} type="submit" className={'bg-gray-800'} /> : 
+            !uploadLoading ? <div className=""><Button label={'Publish Video'} type="submit" className={'bg-gray-800'} /><FontAwesomeIcon icon={faUpload} /></div> : 
             <div role="status">
                 <svg aria-hidden="true" className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>

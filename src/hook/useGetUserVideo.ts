@@ -27,9 +27,9 @@ interface UserData {
    
   }
   
-  
+  type allVideoData = VideoData 
 export default function useAllvideo() {
- const [video, setVideo] = useState<VideoData | null>(null)
+ const [video, setVideo] = useState<allVideoData | null>(null)
       const [isLoading, setIsLoading] = useState(true)
       useEffect(() => {
             try {            

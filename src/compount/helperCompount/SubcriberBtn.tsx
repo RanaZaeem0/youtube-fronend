@@ -3,7 +3,7 @@ import getRefreshToken from "../../config"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export default function SubcriberBtn({channalId}:{
-    channalId:string
+    channalId?:string
 }) {
     const Navigator = useNavigate()
   const handleSubcribeChannel = async (channelId: string) => {

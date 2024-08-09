@@ -2,7 +2,7 @@ import axios from 'axios';
 import { log } from 'console';
 import { useEffect, useState } from 'react';
 
-interface UserDetails {
+interface channalDetails {
   username: string;
   avatar: string;
   email: string;
@@ -10,7 +10,7 @@ interface UserDetails {
 }
 
 interface AllVideoData {
-  UserDetails: UserDetails;
+  channalDetails: channalDetails;
   id: string;
   title: string;
   description: string;

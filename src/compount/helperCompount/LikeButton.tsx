@@ -1,12 +1,13 @@
 import React from "react";
 import getRefreshToken from "../../config";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
 export default function LikeButton({
   videoId,
   videoLike,
 }: {
-  videoId: string;
-  videoLike: number;
+  videoId: string | undefined;
+  videoLike: number | undefined;
 }) {
   const Navigator = useNavigate();
   const handleLike = async (videoId: string) => {

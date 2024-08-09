@@ -11,11 +11,19 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
 import { useNavigate } from "react-router";
 import { ListItemText } from "@mui/material";
-
-const NavAvatars = () => {
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faEllipsis } from "@fortawesome/free-solid-svg-icons"
+import CreatePlaylist from "../playlist/CreatePlaylist"
+const VideoDropdown = () => {
   const [avatarEl, setAvatarEl] = useState<HTMLElement | null>(null);
   const [invisible, setInvisible] = useState(false);
   const [notifyEl, setNotifyEl] = useState<HTMLElement | null>(null);
+
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+
+  const showPopup = () => setIsPopupVisible(true);
+  const hidePopup = () => setIsPopupVisible(false);
+
 
   const handleAvatarClick = (e: MouseEvent<HTMLElement>) => {
     setAvatarEl(e.currentTarget);
@@ -33,17 +41,14 @@ const NavAvatars = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem("username");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("userId");
 
-    location.reload();
   };
+ const [playlistBtn,setPlaylistBtn] = useState(false)
+  const handlePlaylist = () => {
+ setPlaylistBtn(!playlistBtn)
 
-  const handleShowTweet = () => {
-    navigate("/show");
+
+
   };
 
   const open = Boolean(avatarEl);
@@ -54,19 +59,16 @@ const NavAvatars = () => {
   const userId: string | null = localStorage.getItem('userId');
 
   return (
-    <div>
-      <Stack className="max-md:!w-12" direction="row">
-        <button aria-describedby={id} onClick={handleAvatarClick}>
+    <div className="">
+          {
+             
+              }
+      <Stack className="max-md:!w-12" direction="row" spacing={1}>
+        <Button aria-describedby={id} onClick={handleAvatarClick}>
           <div className="text-[1.2rem] text-black">
-            <div className='flex items-center'>
-              <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
-                <span className="font-medium text-white dark:text-gray-300">
-                  {username && username.charAt(0).toUpperCase()}
-                </span>
-              </div>
-            </div>
+          <FontAwesomeIcon className="text-white" icon={faEllipsis} />
           </div>
-        </button>
+        </Button>
       </Stack>
 
       <Popover
@@ -79,7 +81,7 @@ const NavAvatars = () => {
           horizontal: "left"
         }}
       >
-        <List disablePadding>
+        <List disablePadding className="bg-slate-800 text-neutral-400">
           <ListItem disablePadding>
             <ListItemButton>
               <h1>{username}</h1>
@@ -88,26 +90,33 @@ const NavAvatars = () => {
           <Divider />
           <ListItem disablePadding>
             <ListItemButton>
-              <button onClick={() => navigate(`/profile/${username}`)}>Your Profile</button>
+              <button onClick={() => navigate(`/profile/${username}`)}>Save to WatchLater</button>
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem disablePadding>
             <ListItemButton>
-              <button onClick={()=>navigate(`/showtweet/${username}`)}>Show Tweet</button>
+              <button onClick={showPopup}>Add playlist</button>
+              {
+                 <div className="">
+                  <CreatePlaylist isVisible={isPopupVisible} onClose={hidePopup}/>
+                  
+                </div>
+              }
+             {/* <CreatePlaylist/> */}
             </ListItemButton>
           </ListItem>
           <Divider />
 
           <ListItem disablePadding>
             <ListItemButton>
-              <button onClick={()=> navigate('/watchhistory')}>Watch History</button>
+              <button onClick={()=> navigate('/watchhistory')}>share</button>
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem disablePadding>
             <ListItemButton>
-              <button onClick={handleLogout}>Logout</button>
+              <button onClick={handleLogout}>Report</button>
             </ListItemButton>
           </ListItem>
         </List>
@@ -140,4 +149,4 @@ const NavAvatars = () => {
   );
 };
 
-export default NavAvatars;
+export default VideoDropdown;

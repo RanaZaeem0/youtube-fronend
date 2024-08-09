@@ -5,13 +5,12 @@ import SideBarVideos from "./SideBarVideos";
 import axios from "axios";
 import { log } from "console";
 import CreateComments from "./comments/CreateComment";
-import GetAllComment from "./comments/GetAllComment";
 import { NavLink } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import AllVideoSkeleton from "./skeleton/AllVideoSkeleton";
 import getRefreshToken from "../config"
 import { channel } from "diagnostics_channel";
-import useGetChannalProflie from "../hook/useGetChannalDetails";
+import useGetChannalProfile from "../hook/useGetChannalDetails";
 import useAddWatchhistory from "../hook/useAddWatchhistory";
 import { useNavigate } from "react-router-dom";
 import LikeButton from "./helperCompount/LikeButton";
@@ -20,7 +19,9 @@ export default function WatchVideo() {
 
   const [videoPLay, setVideoPlay] = useState(true);
   const { isLoading, video } = usegetVideobyId();
-   const {channalProfile} = useGetChannalProflie()
+  const username   =  video?.channalDetails[0]?.username
+  const { isLoading: isLoadingChannel, channelProfile } = useGetChannalProfile(username);  
+   console.log(channelProfile)
     const {addWatchHistory} = useAddWatchhistory()
     const  Navigator = useNavigate()
 
@@ -52,7 +53,7 @@ export default function WatchVideo() {
                   {videoPLay && (
                     <div className=" h-72">
                       <video
-                        className="w-full "
+                        className="w-full shadow-zinc-400 shadow-[0px , 0px , 10px ,10px] "
                         src={video?.videoFile}
                         autoPlay
                         controls
@@ -68,6 +69,7 @@ export default function WatchVideo() {
                     <NavLink 
                     to={`/channal/profile/${video?.channalDetails[0].username}`}>
                     <div className="flex flex-col p-1">
+                      <div className="flex">
                       <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
                         <span className="font-medium text-white dark:text-gray-300">
                           <img src={video?.channalDetails[0].avatar} alt="" />
@@ -75,6 +77,10 @@ export default function WatchVideo() {
                       </div>
                       <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
                         {video?.channalDetails[0]?.username}
+                      </h2>
+                      </div>
+                      <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
+                        Subcriber { video?.channalDetails[0]?.subscribersCount}
                       </h2>
                     </div>
                     </NavLink>
