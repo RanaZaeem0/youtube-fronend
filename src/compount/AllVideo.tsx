@@ -11,7 +11,7 @@ import {faEllipsis} from "@fortawesome/free-solid-svg-icons"
 import VideoDropdown from "./helperCompount/VideoDropdown.tsx"
 
 export default function Component() {
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(9);
   const [page, setPage] = useState(0);
   const { isLoading, videos } = useAllvideo({ limit, page });
   const Navigator = useNavigate();
