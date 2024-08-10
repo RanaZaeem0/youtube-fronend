@@ -30,10 +30,14 @@ export default function WatchVideo() {
 
 
   
-  function formatDateRelative(date: string | undefined) {
-    const createdAt = new Date(date);
-    return formatDistanceToNow(createdAt, { addSuffix: true });
-  }
+    function formatDateRelative(date: string | undefined): string {
+      if (!date) {
+        return 'Date not available';
+      }
+      
+      const createdAt = new Date(date);
+      return formatDistanceToNow(createdAt, { addSuffix: true });
+    }
   return (
     <div className="">
       <div className="container mx-auto px-4 py-8">

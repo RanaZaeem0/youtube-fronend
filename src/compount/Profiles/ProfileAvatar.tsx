@@ -3,7 +3,24 @@ import useGetUserProfile from "../../hook/useGetUserProfile"
 import { log } from 'console';
 import SubcriberBtn from '../helperCompount/SubcriberBtn';
 
-export default function ProfileAvatar({userProfile,isProfileLoading}) {
+
+interface UserProfile {
+  _id: string;
+  username: string;
+  email: string;
+  avatar: string;
+  fullName: string;
+  coverImage: string;
+  subscribersCount: number;
+  isSubscribed: boolean;
+}
+
+interface ProfileAvatarProps {
+  userProfile: UserProfile | null; // The profile might be null when loading
+  isProfileLoading: boolean;
+}
+
+export default function ProfileAvatar({userProfile,isProfileLoading}:ProfileAvatarProps) {
     console.log(userProfile,"com[pount");
     
     return (

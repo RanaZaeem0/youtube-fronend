@@ -14,10 +14,10 @@ export default function AuthLayout(
 
     useEffect(()=>{
       if(refreshToken == "undefined" && refreshToken == null && refreshToken?.length > 10){
-        console.log(refreshToken)
         
-        }else{
-          Navigator('/')
+        Navigator('/')
+      }else{
+          console.log(refreshToken)
         }
       },[])
 

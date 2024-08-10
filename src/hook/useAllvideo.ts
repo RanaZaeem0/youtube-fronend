@@ -1,27 +1,26 @@
 import axios from 'axios';
-import { log } from 'console';
 import { useEffect, useState } from 'react';
 
 interface channalDetails {
   username: string;
   avatar: string;
   email: string;
-  id: string;
+  _id: string;
 }
 
 interface AllVideoData {
-  channalDetails: channalDetails;
-  id: string;
+  channalDetails: channalDetails[]; // Change to an array of channalDetails
+  _id: string;
   title: string;
   description: string;
-  published: boolean;
+  isPublished: boolean;
   thumbnail: string;
   createdAt: string; // Use Date if you plan to parse this to a Date object
   duration: string;
   owner: string;
   updatedAt: string;
   videoFile: string;
-  views: string;
+  views: number;
 }
 
 type DataVideos = AllVideoData[];
@@ -30,6 +29,7 @@ interface UseAllVideoProps {
   limit?: number;
   page?: number;
 }
+
 
 export default function useAllvideo({ limit = 4, page = 0 }: UseAllVideoProps) {
   const [videos, setVideos] = useState<DataVideos>([]);
@@ -41,14 +41,13 @@ export default function useAllvideo({ limit = 4, page = 0 }: UseAllVideoProps) {
       setIsLoading(true);
       try {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}video/allvideo/${limit}?page=${page}`);
-        const { data } = response.data.data;
-        const videos = response.data.data[0]
-        const hasMore = response.data.data[1]
+        const responseData = response.data.data as [DataVideos, { hasMore: boolean }];
 
-        console.log(response)
+        const videos = responseData[0];
+        const hasMoreFlag = responseData[1].hasMore;
 
         setVideos(prevVideos => [...prevVideos, ...videos]); // Append new videos to the existing list
-        setHasMore(hasMore); // Update hasMore flag based on response
+        setHasMore(hasMoreFlag); // Update hasMore flag based on response
       } catch (error) {
         console.error('Failed to fetch videos:', error);
       } finally {

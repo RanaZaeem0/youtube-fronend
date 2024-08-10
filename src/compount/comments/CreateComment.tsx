@@ -68,8 +68,12 @@ export default function CreateComments() {
       }
     }
   };
-
-  function formatDateRelative(date: string) {
+  function formatDateRelative(date: string | undefined): string {
+    if (!date) {
+      // Handle case where date is undefined
+      return 'Date not available';
+    }
+    
     const createdAt = new Date(date);
     return formatDistanceToNow(createdAt, { addSuffix: true });
   }
@@ -116,7 +120,7 @@ export default function CreateComments() {
                       {comment?.commentUser.username}
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      {formatDateRelative(comment.createdAt)}
+                      {formatDateRelative(comment?.createdAt)}
                     </div>
                   </div>
                   <div className="text-muted-foreground">{comment.content}</div>

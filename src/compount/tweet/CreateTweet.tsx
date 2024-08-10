@@ -74,8 +74,8 @@ export default function DialogWithForm() {
       </button>
       {open ? (
         <div className="bg-transparent flex items-center justify-center text-black shadow-none">
-          <Card className="mx-auto h-80 w-full max-w-[24rem]">
-            <CardBody className="flex flex-col gap-4">
+          <div className="mx-auto h-80 w-full max-w-[24rem]">
+            <div className="flex flex-col gap-4">
               <h2 className="text-center" color="blue-gray">
                 Create Tweet
               </h2>
@@ -121,13 +121,13 @@ export default function DialogWithForm() {
                 )}
 
                 {error && (
-                  <Typography variant="small" color="red" className="mt-2">
+                  <h2  className="mt-2 text-red-500">
                     {error}
-                  </Typography>
+                  </h2>
                 )}
               </form>
-            </CardBody>
-          </Card>
+            </div>
+          </div>
         </div>
       ) : null}
     </>

@@ -10,7 +10,7 @@ interface Tweetdata {
   updatedAt: string;
 }
 
-type emptyArray = Playlistdata[];
+type emptyArray = Tweetdata[];
 
 export default function useGetPlaylist() {
   const [getTweet, setgetTweet] = useState<emptyArray>([]);

@@ -17,9 +17,7 @@ export default function Component() {
   const Navigator = useNavigate();
 
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const handleVideoClick = (video) => {
-    setSelectedVideo(video);
-  };
+
   const hanldeShowMore = () => {
     setLimit(4);
     setPage(2);
@@ -29,7 +27,7 @@ export default function Component() {
     <div className="">
       <div className="container mx-auto px-4 py-8">
         {isLoading ? (
-          <AllVideoSkeleton />
+          <AllVideoSkeleton className="" />
         ) : (
           <div className="w-auto overflow-hidden ">
             <div className="mb-5 ml-4 flex items-center ">

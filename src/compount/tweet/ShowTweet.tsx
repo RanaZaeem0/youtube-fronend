@@ -14,7 +14,7 @@ export default function ShowTweet(){
     
    const [error,setError] = useState('')
    const [LoadingBtn,setLoadingBtn]  = useState(false)
-  const {getTweet,isLoading} = useGetTweet()
+  const {getTweet,isTweetLoading} = useGetTweet()
   const {userProfile,isProfileLoading} = useGetUserProfile()
 
 console.log(getTweet)
@@ -39,7 +39,7 @@ function formatDateRelative(date: string) {
             }
              
             {
-                !isLoading ? <div className="">
+                !isTweetLoading ? <div className="">
                    {getTweet.map((tweet)=>{
 
                     return (

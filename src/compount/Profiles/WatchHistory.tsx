@@ -12,7 +12,7 @@ import {formatDistanceToNow} from "date-fns"
 
   console.log(watchHistory.map((item) => item.owner));
 
-  function formatDateRelative(date: Date) {
+  function formatDateRelative(date: string) {
     const createdAt = new Date(date);
     return formatDistanceToNow(createdAt, { addSuffix: true });
   }
@@ -61,7 +61,7 @@ import {formatDistanceToNow} from "date-fns"
                           <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
                             viewss {video.views}
                           </h2>
-                          <h3 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">{formatDateRelative(video.createdAt)}</h3>
+                          <h3 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">{formatDateRelative(video?.createdAt)}</h3>
                           </div>
                         </div>
                       </NavLink>

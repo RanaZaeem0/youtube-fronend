@@ -48,7 +48,13 @@ export default function SubcriberBtn({channalId}:{
       <div className="mr-2">
         <button
           type="button"
-          onClick={() => handleSubcribeChannel(channalId)}
+          onClick={() => {
+            if (channalId) {
+              handleSubcribeChannel(channalId);
+            } else {
+              console.error("Channel ID is not defined");
+            }
+          }}
           className="text-white bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-900 shadow-lg  dark:shadow-lg  font-normal rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
           Subscribe

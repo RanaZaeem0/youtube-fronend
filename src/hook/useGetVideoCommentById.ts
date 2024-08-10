@@ -7,11 +7,17 @@ import { useParams } from 'react-router-dom';
 interface GetComments{
     content: string;
     owner:string;
-     _id:string
+     _id:string;
+     createdAt:string
+     commentUser:{
+      _id:string,
+      avatar:string,
+      username:string
+     }
   }
   type GetCommentsData = GetComments[]
   
-export default function useGetCommentById(c) {
+export default function useGetCommentById() {
      const [getComments, setGetComments] = useState<GetCommentsData | null>(null)
       const [isLoading, setIsLoading] = useState(true)
       const {videoId} = useParams()

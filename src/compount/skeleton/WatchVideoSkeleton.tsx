@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function WatchVideoSkeleton({className = "grid-cols-3"}:
-{  className: string
+{  className?: string
   
 }
 ) {

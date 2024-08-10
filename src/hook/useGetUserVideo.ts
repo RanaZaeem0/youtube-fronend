@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../../src/config";
+
 interface UserData {
   _id: string;
   username: string;
@@ -24,15 +25,18 @@ interface VideoData {
   videoLikes: number; // Adjust type based on how you handle likes
 }
 
-type allVideoData = VideoData;
-export default function useAllvideo() {
-  const [video, setVideo] = useState<allVideoData | null>(null);
+type AllVideoData = VideoData[];
+
+export default function useGetUserVideo() {
+  const [video, setVideo] = useState<AllVideoData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null); // Added error state
   const Token = getRefreshToken();
+
   useEffect(() => {
-    const fetchuserVideos = async () => {
+    const fetchUserVideos = async () => {
       try {
-        const getAllVideo = await axios.get(
+        const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}video/`,
           {
             headers: {
@@ -42,20 +46,25 @@ export default function useAllvideo() {
           }
         );
 
-        if (getAllVideo.status >= 200 && getAllVideo.status <= 300) {
-          console.log(getAllVideo.data.data);
-          setVideo(getAllVideo.data.data);
-          setIsLoading(false);
+        if (response.status >= 200 && response.status <= 299) {
+          setVideo(response.data.data as AllVideoData); // Type assertion
+        } else {
+          setError("Failed to fetch videos");
         }
       } catch (error) {
-        console.log(error);
+        setError("An error occurred while fetching videos");
+        console.error(error); // Log the error for debugging
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchuserVideos();
-  }, []);
+
+    fetchUserVideos();
+  }, [Token]); // Added Token as a dependency (ensure it doesn't change frequently)
 
   return {
     isLoading,
     video,
+    error, // Return error state
   };
 }

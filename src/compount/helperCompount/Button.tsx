@@ -1,9 +1,9 @@
 
 
-export default function Button({label,type= 'button',className}:{
+export default function Button({label,type= 'button',className =""}:{
     label:string,
    type: "button" | "submit" | "reset" | undefined,
-    className:string,
+    className?:string,
   }) {
     return (
       <button type={type}  className={`w-full text-white
