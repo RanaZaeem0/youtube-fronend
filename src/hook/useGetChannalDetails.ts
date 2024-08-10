@@ -22,11 +22,11 @@ export default function useGetChannalProfile(username: string | undefined) {
   const [channelProfile, setChannelProfile] = useState<ChannelDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); // Add error state if needed
-
+    const token = getRefreshToken()
   useEffect(() => {
     const fetchChannelProfile = async () => {
       try {
-        if (!getRefreshToken) {
+        if (!token) {
           console.log('No token found, user might be logged out');
           return;
         }
@@ -35,7 +35,7 @@ export default function useGetChannalProfile(username: string | undefined) {
           `${import.meta.env.VITE_BACKEND_URL}channel/${username}`, // Corrected spelling from 'channal' to 'channel'
           {
             headers: {
-              Authorization: `Bearer ${getRefreshToken}`,
+              Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             },
           }

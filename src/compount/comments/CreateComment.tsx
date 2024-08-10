@@ -22,12 +22,12 @@ export default function CreateComments() {
   if (!isLoading) {
     console.log(getComments);
   }
-
+  const Token =getRefreshToken()
   const CreateComments = async (data: commentData) => {
     setError("");
     try {
-      if(!getRefreshToken){
-        return null
+      if(!Token){
+        return setError('Plz Login To Comment')
       }
       
       setIsCreateLoading(true)
@@ -38,7 +38,7 @@ export default function CreateComments() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getRefreshToken}`,
+            Authorization: `Bearer ${Token}`,
           },
         }
       );

@@ -32,6 +32,8 @@ export default function NavBar() {
   //     setLoginState(true)
   //  }
 
+
+
   const Navigator = useNavigate();
 
   const handleSidebar = () => {

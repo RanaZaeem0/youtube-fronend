@@ -9,10 +9,11 @@ export default function LikeButton({
   videoId: string | undefined;
   videoLike: number | undefined;
 }) {
+  const Token = getRefreshToken()
   const Navigator = useNavigate();
   const handleLike = async (videoId: string) => {
     try {
-      if (!getRefreshToken) {
+      if (!Token) {
         Navigator("/signup");
         return console.log("not login");
       }
@@ -22,7 +23,7 @@ export default function LikeButton({
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getRefreshToken}`,
+            Authorization: `Bearer ${Token}`,
           },
         }
       );

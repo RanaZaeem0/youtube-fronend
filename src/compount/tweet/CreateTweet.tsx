@@ -20,10 +20,11 @@ export default function DialogWithForm() {
   const { register, handleSubmit } = useForm<UserTweet>();
 
   const loginUser = async (data: UserTweet) => {
+    const Token =getRefreshToken()
     setError("");
     try {
       setLoadingBtn(true);
-      if(!getRefreshToken){
+      if(!Token){
         Navigator('/signup')
         return console.log("logout ")
       }
@@ -34,7 +35,7 @@ export default function DialogWithForm() {
         {
           headers: { 
             "Content-Type": "application/json",
-             "Authorization":`Bearer ${getRefreshToken}`
+             "Authorization":`Bearer ${Token}`
           },
         }
       );

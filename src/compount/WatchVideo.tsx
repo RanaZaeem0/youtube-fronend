@@ -15,6 +15,7 @@ import useAddWatchhistory from "../hook/useAddWatchhistory";
 import { useNavigate } from "react-router-dom";
 import LikeButton from "./helperCompount/LikeButton";
 import SubcriberBtn from "./helperCompount/SubcriberBtn";
+import WatchVideoSkeleton from "./skeleton/WatchVideoSkeleton"
 export default function WatchVideo() {
 
   const [videoPLay, setVideoPlay] = useState(true);
@@ -29,7 +30,7 @@ export default function WatchVideo() {
 
 
   
-  function formatDateRelative(date: string) {
+  function formatDateRelative(date: string | undefined) {
     const createdAt = new Date(date);
     return formatDistanceToNow(createdAt, { addSuffix: true });
   }
@@ -37,7 +38,7 @@ export default function WatchVideo() {
     <div className="">
       <div className="container mx-auto px-4 py-8">
         {isLoading ? (
-          <AllVideoSkeleton />
+          <WatchVideoSkeleton />
         ) : (
           <div className="flex max-lg:flex-col ">
             <div className="flex items-start justify-start flex-col max-lg:ml-0 ml-16 w-3/5 max-lg:w-full">

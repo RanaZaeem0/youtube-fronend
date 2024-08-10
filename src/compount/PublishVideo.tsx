@@ -18,6 +18,7 @@ export default function PublishVideoCompount() {
   // if (!isVisible) return null; 
   const Dispatch = useDispatch();
   const [createBtn ,setCreateBtn ] = useState(false)
+  const Token = getRefreshToken()
    interface CreateuserSchema{
     title:string,
     description:string,
@@ -25,7 +26,7 @@ export default function PublishVideoCompount() {
     ,thumbnail:File
    }
    const Navigator = useNavigate()
-   if(getRefreshToken){
+   if(!Token){
        Navigator('/signup')
        return console.log("logout ")
      }
@@ -54,7 +55,7 @@ export default function PublishVideoCompount() {
         formData,
         {  headers: {
             "Content-Type": "multipart/form-data",
-            "Authorization":`Bearer ${getRefreshToken}`
+            "Authorization":`Bearer ${Token}`
           },
         }
       );

@@ -18,10 +18,10 @@ export default function useAddWatchhistory() {
      const [addWatchHistory, setAddWatchHistory] = useState<WatchHistorydata| null >(null)
      const [addWatchHistoryLoading,setaddWatchHistoryLoading] = useState(true)
       const {videoId} = useParams()
-      
+      const Token = getRefreshToken()
       useEffect(() => {
             try {        
-                if(!getRefreshToken){
+                if(!Token){
                     return console.log("no login");
                     
                 }    
@@ -29,7 +29,7 @@ export default function useAddWatchhistory() {
                    {}, {
                         headers:{
                             "Content-Type":"application/json",
-                            "Authorization":`Bearer ${getRefreshToken}`,
+                            "Authorization":`Bearer ${Token}`,
                        
                         }
                     }

@@ -1,5 +1,4 @@
 import { useState, MouseEvent } from "react";
-
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Popover from "@mui/material/Popover";
@@ -11,44 +10,28 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
 import { useNavigate } from "react-router";
 import { ListItemText } from "@mui/material";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faEllipsis } from "@fortawesome/free-solid-svg-icons"
-import CreatePlaylist from "../playlist/CreatePlaylist"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import CreatePlaylist from "../playlist/CreatePlaylist";
+
 const VideoDropdown = () => {
   const [avatarEl, setAvatarEl] = useState<HTMLElement | null>(null);
-  const [invisible, setInvisible] = useState(false);
   const [notifyEl, setNotifyEl] = useState<HTMLElement | null>(null);
-
   const [isPopupVisible, setIsPopupVisible] = useState(false);
 
   const showPopup = () => setIsPopupVisible(true);
   const hidePopup = () => setIsPopupVisible(false);
 
-
-  const handleAvatarClick = (e: MouseEvent<HTMLElement>) => {
-    setAvatarEl(e.currentTarget);
-  };
-
-  const handleAvatarClose = () => {
-    setAvatarEl(null);
-  };
-
-  const handleNotifyClose = () => {
-    setNotifyEl(null);
-  };
+  const handleAvatarClick = (e: MouseEvent<HTMLElement>) => setAvatarEl(e.currentTarget);
+  const handleAvatarClose = () => setAvatarEl(null);
+  const handleNotifyClose = () => setNotifyEl(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-
-  };
- const [playlistBtn,setPlaylistBtn] = useState(false)
-  const handlePlaylist = () => {
- setPlaylistBtn(!playlistBtn)
-
-
-
+    dispatch(logout());
+    navigate('/login'); // Adjust the navigation as needed
   };
 
   const open = Boolean(avatarEl);
@@ -56,30 +39,23 @@ const VideoDropdown = () => {
   const notifyOpen = Boolean(notifyEl);
   const notifyId = notifyOpen ? "simple-notify" : undefined;
   const username: string | null = localStorage.getItem('username');
-  const userId: string | null = localStorage.getItem('userId');
 
   return (
-    <div className="">
-          {
-             
-              }
+    <div>
       <Stack className="max-md:!w-12" direction="row" spacing={1}>
         <Button aria-describedby={id} onClick={handleAvatarClick}>
           <div className="text-[1.2rem] text-black">
-          <FontAwesomeIcon className="text-white" icon={faEllipsis} />
+            <FontAwesomeIcon className="text-white" icon={faEllipsis} />
           </div>
         </Button>
       </Stack>
 
       <Popover
         id={id}
-        open={open}
+        open={Boolean(avatarEl)}
         anchorEl={avatarEl}
         onClose={handleAvatarClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left"
-        }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
         <List disablePadding className="bg-slate-800 text-neutral-400">
           <ListItem disablePadding>
@@ -97,50 +73,19 @@ const VideoDropdown = () => {
           <ListItem disablePadding>
             <ListItemButton>
               <button onClick={showPopup}>Add playlist</button>
-              {
-                 <div className="">
-                  <CreatePlaylist isVisible={isPopupVisible} onClose={hidePopup}/>
-                  
-                </div>
-              }
-             {/* <CreatePlaylist/> */}
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-
-          <ListItem disablePadding>
-            <ListItemButton>
-              <button onClick={()=> navigate('/watchhistory')}>share</button>
+              <CreatePlaylist isVisible={isPopupVisible} onClose={hidePopup} />
             </ListItemButton>
           </ListItem>
           <Divider />
           <ListItem disablePadding>
             <ListItemButton>
-              <button onClick={handleLogout}>Report</button>
+              <button onClick={() => navigate('/watchhistory')}>Share</button>
             </ListItemButton>
           </ListItem>
-        </List>
-      </Popover>
-
-      <Popover
-        id={notifyId}
-        open={notifyOpen}
-        anchorEl={notifyEl}
-        onClose={handleNotifyClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left"
-        }}
-      >
-        <List disablePadding>
+          <Divider />
           <ListItem disablePadding>
             <ListItemButton>
-              <ListItemText primary="Avatar" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemText primary="Favorites" />
+              <button onClick={handleLogout}>Logout</button>
             </ListItemButton>
           </ListItem>
         </List>

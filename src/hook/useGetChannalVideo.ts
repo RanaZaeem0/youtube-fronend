@@ -34,13 +34,14 @@ interface UserData {
 export default function useGetChannelVideo() {
      const [getChannalVideo, setgetChannalVideo] = useState<emptyArray>([])
       const [isLoading, setIsLoading] = useState(true)
+     
   const {username} = useParams()
       useEffect(() => {
             try {            
            axios.get(`${import.meta.env.VITE_BACKEND_URL}video/channalvideo/${username}`,
                     {
                         headers:{
-                            "Authorization":`Bearer ${getRefreshToken}`,
+                            
                             "Content-Type":"application/json"
                        
                         }

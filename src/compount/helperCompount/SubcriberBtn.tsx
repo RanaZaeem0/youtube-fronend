@@ -6,9 +6,10 @@ export default function SubcriberBtn({channalId}:{
     channalId?:string
 }) {
     const Navigator = useNavigate()
+    const Token = getRefreshToken()
   const handleSubcribeChannel = async (channelId: string) => {
     try {
-      if (!getRefreshToken) {
+      if (!Token) {
         Navigator("/signup");
         return console.log("not login");
       }
@@ -18,7 +19,7 @@ export default function SubcriberBtn({channalId}:{
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${getRefreshToken}`,
+            Authorization: `Bearer ${Token}`,
           },
         }
       );
