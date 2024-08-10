@@ -79,6 +79,7 @@ export default function CreatePlaylist({
 
         <form onSubmit={handleSubmit(createPlaylist)}>
           <div className="flex flex-col items-center justify-center w-96 max-lg:w-64">
+            
             <Input
               {...register("title", {
                 required: true,
