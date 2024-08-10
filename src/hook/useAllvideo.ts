@@ -31,7 +31,7 @@ interface UseAllVideoProps {
 }
 
 
-export default function useAllvideo({ limit = 4, page = 0 }: UseAllVideoProps) {
+export default function useAllvideo({ limit = 9, page = 0 }: UseAllVideoProps) {
   const [videos, setVideos] = useState<DataVideos>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
