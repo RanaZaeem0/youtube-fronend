@@ -81,6 +81,13 @@ const router = createBrowserRouter([
         </AuthLayout>
       }
       ,
+      {
+        path:"/playlist",
+        element:<AuthLayout>
+          <LikeVideos/>
+        </AuthLayout>
+      }
+      ,
   
    ]
   }

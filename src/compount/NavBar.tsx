@@ -41,7 +41,7 @@ export default function NavBar() {
   const username = localStorage.getItem("username");
   return (
     <div>
-      <div className="flex w-full items-center justify-between py-2 fixed z-20 px-2 bg-black">
+      <div className="flex w-full items-center justify-between top-0  py-2 fixed z-20 px-2 bg-black">
         <div className="flex gap-2 items-center ">
           <NavSideBar />
 
@@ -64,11 +64,11 @@ export default function NavBar() {
           refreshToken.length < 10 ? (
             <button
               onClick={() => Navigator("/signup")}
-              className="w-full text-blue-700 max-lg:text-sm
-       bg-gray-900 mt-2 p-2 font-medium rounded-xl "
+              className="w-full text-blue-600 border border-zinc-600 max-lg:text-sm
+       bg-gray-900 mt-2 px-2 py-1 font-medium shadow-xl rounded-xl "
             >
-              {" "}
-              Sign Up
+              <FontAwesomeIcon className="pr-2" icon={faUser} />
+              Sign in
             </button>
           ) : (
             <div className=" bottom-4 left-4 \ flex items-center gap-4 text-white">

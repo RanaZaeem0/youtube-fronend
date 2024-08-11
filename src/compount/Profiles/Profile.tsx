@@ -29,13 +29,14 @@ interface VideoData {
   owner: string;
   createdAt: string;
   updatedAt: string;
-  userDetails: UserData[];
+  UserDetails: UserData[];
   videoLikes: number;
 }
 
 type AllVideoData = VideoData[];
 
 export default function ProfileComponent() {
+  const [showVideos,setShowVideos] = useState(true)
   const { userProfile, isProfileLoading } = useGetUserProfile();
   const { video, isLoading } = useGetUserVideo(); // Use the correct type for video
   const [openTweet, setOpenTweet] = useState(false);
@@ -58,10 +59,19 @@ console.log(video)
               >
                 Publish Video
               </button>
-              <CreateTweet />
+       { showVideos&&      <button
+                className="rounded-lg text-zinc-400 hover:bg-zinc-100 p-4"
+                onClick={() => setShowVideos(!showVideos)}
+              >
+                Create Tweet
+              </button>}
+           {!showVideos &&
+              <CreateTweet />}
             </h2>
           </div>
-          {isLoading ? (
+         
+       {showVideos ? <div className="">
+        {isLoading ? (
             <AllVideoSkeleton className="grid-cols-3" />
           ) : (
             <AllVideoWrapper className="grid grid-cols-1 items-center justify-center">
@@ -81,13 +91,13 @@ console.log(video)
                     </div>
                     <div className="mb-4">
                       { (
-                        <NavLink to={`/profile?channel=${videoItem.userDetails[0]._id}`}>
+                        <NavLink to={`/profile?channel=${videoItem.UserDetails[0]._id}`}>
                           <div className="flex flex-col items-start">
                             <h2 className="font-normal text-white text-start hover:underline text-1xl pl-2 pr-4">
                               {videoItem.title}
                             </h2>
                             <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
-                              {videoItem.userDetails[0].username}
+                              {videoItem.UserDetails[0].username}
                             </h2>
                             <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
                               views {videoItem.views}
@@ -105,7 +115,9 @@ console.log(video)
                 </h2>
               )}
             </AllVideoWrapper>
-          )}
+          )} 
+       </div>  
+      : null}
         </div>
       </main>
     </div>

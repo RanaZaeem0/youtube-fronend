@@ -21,7 +21,6 @@ export default function SignupCompount() {
     email: string;
     avatar: string;
     coverImage: string;
-    fullName: string;
   }
   const { register, handleSubmit, watch ,formState: { errors }} = useForm<CreateuserSchema>();
 
@@ -36,7 +35,6 @@ export default function SignupCompount() {
       formData.append("username", data.username);
       formData.append("email", data.email);
       formData.append("password", data.password);
-      formData.append("fullName", data.password);
 
       console.log(formData);
 
@@ -83,16 +81,18 @@ export default function SignupCompount() {
   };
 
   return (
-    <div className="bg-neutral-900 p-2 flex justify-center">
+    <div className="bg-neutral-900 pt-12 p-2 flex justify-center">
       <div className="flex w-full justify-center">
-        <div className=" bg-gray-600 rounded-2xl h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
+        <div className=" bg-zinc-100 rounded-2xl h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
           <h2 className="!text-black font-semibold text-2xl pb-3">
             Create an account
           </h2>
 
           <form onSubmit={handleSubmit(createUser)}>
             <div className="flex flex-col w-96 max-lg:w-full justify-center items-center">
-              <Input
+             <div className="flex gap-5">
+        <div className="">
+        <Input
               {...register("username", {
                 required: "Username is required",
                 minLength: { value: 2, message: "Username must be at least 2 characters long" },
@@ -107,7 +107,9 @@ export default function SignupCompount() {
                
               />
                  {errors.username && <p className="text-red-500 text-sm">Username is required and must be at least 2 characters And No space.</p>}
-              <Input
+        </div>
+           <div className="">
+           <Input
                 {...register("email", {
                   required: true,
                   validate: {
@@ -122,18 +124,15 @@ export default function SignupCompount() {
                 label={"email"}
               />
                    {errors.email && <p className="text-red-500 text-sm">email is required and must be at least 2 characters And No space.</p>}
+           </div>
+             </div>
               <Input
                 {...register("password", { required: true, minLength: 6 })}
                 placeholder={"******"}
                 label={"password"}
               />
                {errors.password && <p className="text-red-500 text-sm">password is required and must be at least 6 characters And No space.</p>}
-              <Input
-                {...register("fullName", { required: true, minLength: 2 })}
-                placeholder={"******"}
-                label={"FullName"}
-              />
-                {errors.fullName && <p className="text-red-500 text-sm">full Name is required.</p>}
+             
               <Input
                 {...register("avatar", { required: true })}
                 type={"file"}

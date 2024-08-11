@@ -21,7 +21,7 @@ interface VideoData {
   owner: string;
   createdAt: string; // You may use Date if parsing this as a Date object
   updatedAt: string; // You may use Date if parsing this as a Date object
-  userDetails: UserData[];
+  UserDetails: UserData[];
   videoLikes: number; // Adjust type based on how you handle likes
 }
 

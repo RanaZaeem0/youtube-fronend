@@ -9,9 +9,8 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="">
+    <div className="pt-12">
       <NavBar/>
-      <h2 className='pt-10'></h2>
       <Outlet />
     </div>
   )

@@ -50,7 +50,7 @@ export default function useGetVideobyId() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [videoId]);
 
   return {
     isLoading,

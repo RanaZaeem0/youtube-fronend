@@ -19,8 +19,8 @@ export default function Component() {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const hanldeShowMore = () => {
-    setLimit(4);
-    setPage(2);
+    setLimit(limit+ 6);
+    setPage(page + 1);
   };
 
   return (
@@ -29,7 +29,7 @@ export default function Component() {
         {isLoading ? (
           <AllVideoSkeleton className="grid-cols-3" />
         ) : (
-          <div className="w-auto overflow-hidden pt-10 ">
+          <div className="w-auto overflow-hidden pt-4 ">
             <div className="mb-5 ml-4 flex items-center ">
               <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 All
