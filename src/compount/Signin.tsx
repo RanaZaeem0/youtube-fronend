@@ -42,8 +42,8 @@ const loginUser = async (data:userSignin)=>{
 
                     
                     localStorage.setItem('refreshToken',response.data.data.refreshToken)
-                    localStorage.setItem('userId',response.data.data._id)
-                    localStorage.setItem('username',response.data.data.username)
+                    localStorage.setItem('userId',response.data.data.user._id)
+                    localStorage.setItem('username',response.data.data.user.username)
 
 
                     localStorage.setItem('accessToken',response.data.data.accessToken)

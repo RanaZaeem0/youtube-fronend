@@ -13,6 +13,7 @@ export default function LikeButton({
   const Navigator = useNavigate();
   const handleLike = async (videoId: string) => {
     try {
+      console.log(Token)
       if (!Token) {
         Navigator("/signup");
         return console.log("not login");
