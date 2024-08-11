@@ -27,9 +27,9 @@ export default function Component() {
     <div className="">
       <div className="container mx-auto px-4 py-8">
         {isLoading ? (
-          <AllVideoSkeleton className="" />
+          <AllVideoSkeleton className="grid-cols-3" />
         ) : (
-          <div className="w-auto overflow-hidden ">
+          <div className="w-auto overflow-hidden pt-10 ">
             <div className="mb-5 ml-4 flex items-center ">
               <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 All
