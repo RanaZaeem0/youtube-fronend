@@ -70,10 +70,10 @@ export default function PublishVideoCompount() {
   };
 
   return (
-    <div className="bg-black">
+    <div className="bg-black h-screen">
       <div className="flex w-full justify-center">
-        <div className="bg-black h-full w-1/2 max-lg:w-full text-center flex items-center justify-center flex-col">
-          <h2 className="!text-white font-semibold text-2xl pb-3">Publish Video</h2>
+        <div className="bg-zinc-200 h-1/2 p-4 max-lg:w-full text-center flex items-center justify-center flex-col">
+          <h2 className="!text-black pt-10 font-semibold text-2xl pb-3">Publish Video</h2>
           <form onSubmit={handleSubmit(createUser)}>
             <div className="flex flex-col w-96 max-lg:w-full justify-center items-center">
               <Input

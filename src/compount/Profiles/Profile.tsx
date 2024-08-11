@@ -101,7 +101,7 @@ console.log(video)
               ) : (
                 <h2 className="text-white p-4">
                   You have not uploaded any videos
-                  <PublishVideoCompount />
+                  
                 </h2>
               )}
             </AllVideoWrapper>

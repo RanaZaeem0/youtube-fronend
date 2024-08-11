@@ -11,7 +11,8 @@ function App() {
   return (
     <div className="">
       <NavBar/>
-      <Outlet/>
+      <h2 className='pt-10'></h2>
+      <Outlet />
     </div>
   )
 }

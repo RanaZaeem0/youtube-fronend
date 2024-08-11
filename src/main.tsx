@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import LikeVideos from "./page/LikeVideos.tsx"
 import AllVideo from "./compount/AllVideo.tsx"
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
@@ -70,6 +71,13 @@ const router = createBrowserRouter([
         path:"/showtweet/:username",
         element:<AuthLayout>
           <ShowTweet/>
+        </AuthLayout>
+      }
+      ,
+      {
+        path:"/likeVidoes",
+        element:<AuthLayout>
+          <LikeVideos/>
         </AuthLayout>
       }
       ,
