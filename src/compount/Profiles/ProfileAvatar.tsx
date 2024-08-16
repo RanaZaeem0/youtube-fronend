@@ -47,7 +47,7 @@ export default function ProfileAvatar({userProfile,isProfileLoading}:ProfileAvat
              {(userProfile.username == usernameLocal) &&<> <button onClick={showCoverImage} className='flex cursor-pointer  items-center justify-end z-20 w-full p-5 absolute '>Change Image </button>
               <CoverImagePopUp isVisible={isCoverImagePopupVisible} onClose={hideCoverImagePopup}  /></>}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-              <div className="absolute bottom-4 left-4 flex items-center gap-4 justify-between w-full pr-22 mr-5">
+              <div className="absolute bottom-4 left-4 pr-3 flex items-center gap-4 justify-between w-full pr-22 mr-5">
               <div className="">
               <img
                   src={userProfile.avatar}
