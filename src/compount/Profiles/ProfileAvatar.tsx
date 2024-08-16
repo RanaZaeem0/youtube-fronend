@@ -44,7 +44,7 @@ export default function ProfileAvatar({userProfile,isProfileLoading}:ProfileAvat
                 className="absolute inset-0 h-52 w-full object-cover bg-no-repeat"
                 style={{ aspectRatio: "1920/480", objectFit: "cover" }}
               />
-             {!(userProfile.username == usernameLocal) &&<> <button onClick={showCoverImage} className='flex cursor-pointer  items-center justify-end z-20 w-full p-5 absolute '>Change Image </button>
+             {(userProfile.username == usernameLocal) &&<> <button onClick={showCoverImage} className='flex cursor-pointer  items-center justify-end z-20 w-full p-5 absolute '>Change Image </button>
               <CoverImagePopUp isVisible={isCoverImagePopupVisible} onClose={hideCoverImagePopup}  /></>}
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
               <div className="absolute bottom-4 left-4 flex items-center gap-4 justify-between w-full pr-22 mr-5">
@@ -54,7 +54,7 @@ export default function ProfileAvatar({userProfile,isProfileLoading}:ProfileAvat
                   className="h-12 w-12 rounded-lg"
                   alt=""
                 />
-               {!(userProfile.username == usernameLocal) &&<> <button onClick={showAvatarImage} className='flex cursor-pointer  items-center justify-start z-20 w-full p-5 absolute '>Change avatar </button>
+               {(userProfile.username == usernameLocal) &&<> <button onClick={showAvatarImage} className='flex cursor-pointer  items-center justify-start z-20 w-full p-5 absolute '>Change avatar </button>
                 <ChangeAvatarImage  isVisible={isPopupVisible} onClose={hideAvatarImagePopup}/></>}
                 <div className="space-y-1 text-white">
                   <h2 className="text-2xl font-bold">{userProfile.username}</h2>
