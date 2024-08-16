@@ -2,8 +2,11 @@ import React from "react";
 import getRefreshToken from "../../config"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-export default function SubcriberBtn({channalId}:{
-    channalId?:string
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faBell} from "@fortawesome/free-solid-svg-icons"
+export default function SubcriberBtn({channalId,isSubscribed}:{
+    channalId?:string,
+    isSubscribed?:boolean
 }) {
     const Navigator = useNavigate()
     const Token = getRefreshToken()
@@ -46,6 +49,20 @@ export default function SubcriberBtn({channalId}:{
   return (
     <div>
       <div className="mr-2">
+   {   !isSubscribed ? <button
+          type="button"
+          onClick={() => {
+            if (channalId) {
+              handleSubcribeChannel(channalId);
+            } else {
+              console.error("Channel ID is not defined");
+            }
+          }}
+          className="text-black bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-100 shadow-lg  dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+        >
+          Subscribe
+        </button>
+        :
         <button
           type="button"
           onClick={() => {
@@ -55,10 +72,14 @@ export default function SubcriberBtn({channalId}:{
               console.error("Channel ID is not defined");
             }
           }}
-          className="text-white bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-900 shadow-lg  dark:shadow-lg  font-normal rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="text-black bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-100 shadow-lg  dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
         >
-          Subscribe
+         <FontAwesomeIcon icon={faBell} />  Subscribed
         </button>
+        
+        }
+        
+        
       </div>
     </div>
   );

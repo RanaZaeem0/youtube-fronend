@@ -45,11 +45,7 @@ export default function useGetUserProfile() {
     }
   }, []);
 
-  useEffect(() => {
-    if (userProfile) {
-      console.log("Updated userProfile:", userProfile);
-    }
-  }, [userProfile]);
+
 
   return {
     isProfileLoading,

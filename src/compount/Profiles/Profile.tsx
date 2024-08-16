@@ -9,7 +9,7 @@ import ProfileAvatar from "./ProfileAvatar.tsx";
 import CreateTweet from "../tweet/CreateTweet.tsx";
 import PublishVideoCompount from "../PublishVideo.tsx";
 import { useState } from "react";
-
+import {useSelector} from "react-redux"
 interface UserData {
   _id: string;
   username: string;
@@ -41,6 +41,8 @@ export default function ProfileComponent() {
   const { video, isLoading } = useGetUserVideo(); // Use the correct type for video
   const [openTweet, setOpenTweet] = useState(false);
   const Navigator = useNavigate();
+
+
 console.log(video)
   const handleTweet = () => {
     setOpenTweet(!openTweet);
@@ -54,13 +56,13 @@ console.log(video)
           <div>
             <h2 className="w-full underline border-b-2 py-4 m-5 items-end justify-center bg-transparent">
               <button
-                className="rounded-lg text-zinc-400 hover:bg-zinc-100 p-4"
+                className="rounded-lg text-zinc-400 bg-zinc-800 mr-2 hover:bg-zinc-100 p-4"
                 onClick={() => Navigator('/publishvideo')}
               >
                 Publish Video
               </button>
        { showVideos&&      <button
-                className="rounded-lg text-zinc-400 hover:bg-zinc-100 p-4"
+                className="rounded-lg text-zinc-400 bg-zinc-800 hover:bg-zinc-100 p-4"
                 onClick={() => setShowVideos(!showVideos)}
               >
                 Create Tweet

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import getRefreshToken from "../config";
 interface channalDetails {
   _id: string;
   username: string;
@@ -38,18 +38,44 @@ export default function useGetVideobyId() {
   const [video, setVideo] = useState<VideoData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { videoId } = useParams();
+  const localuserId  = localStorage.getItem('userId')
+  const Token = getRefreshToken();
   useEffect(() => {
-    try {
-      const getAllVideo = axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}video/${videoId}`)
-        .then((res) => {
-          console.log(res.data.data[0]);
-          setVideo(res.data.data[0]);
-          setIsLoading(false);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    const featchVideo = async () => {
+      try {
+        if (localuserId) {
+          console.log(localuserId)
+          const getAllVideo = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}video/${videoId}`,
+            {
+              headers: {
+                userId: localuserId
+              },
+            }
+          );
+          if (getAllVideo.status >= 200 && getAllVideo.status <= 300) {
+            console.log(getAllVideo.data.data[0]);
+
+            setVideo(getAllVideo.data.data[0]);
+            setIsLoading(false);
+          }
+        } else {
+          const getAllVideo = await axios.get(
+            `${import.meta.env.VITE_BACKEND_URL}video/${videoId}`
+          );
+
+          if (getAllVideo.status >= 200 && getAllVideo.status <= 300) {
+            console.log(getAllVideo.data.data[0]);
+
+            setVideo(getAllVideo.data.data[0]);
+            setIsLoading(false);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    featchVideo();
   }, [videoId]);
 
   return {

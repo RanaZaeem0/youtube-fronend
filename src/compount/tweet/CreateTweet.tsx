@@ -6,7 +6,6 @@ import Button from "../helperCompount/Button";
 import { useForm } from "react-hook-form";
 import { Dialog, Card, CardBody, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
-
 interface UserTweet {
   content: string;
 }
@@ -66,13 +65,9 @@ export default function DialogWithForm() {
 
   return (
     <>
-      <button
-        className="text-white p-4 bg-blue-600 rounded-lg"
-        onClick={handleOpen}
-      >
-        Create Tweet
-      </button>
-      {open ? (
+      
+  
+         <h1 className="font-bold text-2xl">Create Tweet</h1>
         <div className="bg-transparent flex items-center justify-center text-black shadow-none">
           <div className="mx-auto h-80 w-full max-w-[24rem]">
             <div className="flex flex-col gap-4">
@@ -129,7 +124,7 @@ export default function DialogWithForm() {
             </div>
           </div>
         </div>
-      ) : null}
+    
     </>
   );
 }

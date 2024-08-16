@@ -1,35 +1,30 @@
+import React, { useState } from "react";
+import { Button, Input } from "../helperCompount/index";
+import getRefeshToken from "../../config";
 import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import Input from "../helperCompount/Input";
-import Button from "../helperCompount/Button";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareXmark } from "@fortawesome/free-solid-svg-icons";
-import useGetPlaylist from "../../hook/useGetUserPlaylist.ts"
-import ButtonWarning from "../helperCompount/ButtonWarning";
 import { useForm } from "react-hook-form";
-import getRefreshToken from "../../config";
 
-interface CreatePlaylistProps {
-  isVisible: boolean;
-  onClose: () => void;
-}
 
-interface CreatePlaylistData {
-  title: string;
-}
-
-export default function CreatePlaylist({
-  isVisible,
-  onClose,
-}: CreatePlaylistProps) {
-  const navigate = useNavigate();
+interface changeCoverImage {
+    isVisible: boolean;
+    onClose: () => void;
+  }
+  interface CoverImage {
+    coverImage : string
+  }
+export default function CoverImagePopUp({ isVisible, onClose }:changeCoverImage) {
   const [error, setError] = useState("");
-  const { register, handleSubmit } = useForm<CreatePlaylistData>();
-  const {isPlaylistLoading,getPlaylist} = useGetPlaylist()
-  const Token = getRefreshToken();
-  // Ensure that hooks are always called in the same order.
-  const createPlaylist = async (data: CreatePlaylistData) => {
+  const Token = getRefeshToken();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CoverImage>();
+  const ChangeCoverImage = async (data:CoverImage) => {
     setError("");
     if (!Token) {
       return null;
@@ -59,58 +54,37 @@ export default function CreatePlaylist({
       }
     }
   };
-
   if (!isVisible) return null;
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="bg-zinc-800 text-center p-4 max-w-lg mx-auto">
         <button onClick={onClose} className="mb-2 text-end w-full">
-          <FontAwesomeIcon
-            className="text-white h-5 w-5"
-            icon={faSquareXmark}
-          />
+          X
         </button>
-        <div className="">
-{
-  isPlaylistLoading ? 
-  <div className="">
-    {getPlaylist.length == 0 ? <h1>There is no playlist</h1> :
-     
-     getPlaylist.map(item  =>{
-      return <div className="">
-        <h1>{item.content}</h1>
-        <button >Add</button>
-      </div>
-     })
-    
-    }
-  </div>
-  :null
-}
-        </div>
-        <div className="">
-          <h2 className="text-white font-semibold">New Song</h2>
-        </div>
 
-        <h2 className="text-white font-semibold">Create Playlist</h2>
+        <h2 className="text-white font-semibold">Change CoverIamge </h2>
 
-        <form onSubmit={handleSubmit(createPlaylist)}>
+        <form onSubmit={handleSubmit(ChangeCoverImage)}>
           <div className="flex flex-col items-center justify-center w-96 max-lg:w-64">
-            
             <Input
-              {...register("title", {
+              {...register("coverImage", {
                 required: true,
                 pattern: {
                   value: /^\S*$/,
                   message: "Title cannot contain spaces",
                 },
               })}
-              type="text"
-              placeholder="Title"
-              label="Title"
+              type="file"
+              placeholder="Cover Image"
+              label="Cover Image"
               className="text-zinc-200"
             />
+            {errors.coverImage && (
+              <p className="text-red-500 text-sm">
+                {" "}
+                coverImage is required plz .
+              </p>
+            )}
             <Button
               label="Create Playlist"
               type="submit"

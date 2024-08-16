@@ -36,6 +36,9 @@ export default function useGetUserVideo() {
   useEffect(() => {
     const fetchUserVideos = async () => {
       try {
+        if(!Token){
+          return null
+        }
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_URL}video/`,
           {

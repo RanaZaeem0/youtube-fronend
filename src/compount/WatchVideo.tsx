@@ -90,7 +90,7 @@ export default function WatchVideo() {
                     </div>
                     </NavLink>
                     <div className="flex pr-4">
-                      <SubcriberBtn channalId={video?.channalDetails[0]._id} />
+                      <SubcriberBtn channalId={video?.channalDetails[0]._id} isSubscribed={video?.channalDetails[0]?.isSubscribed} />
                       <div className="flex mr-2">
                         <LikeButton videoId={video?._id} videoLike={video?.videoLikes} />
                       </div>
