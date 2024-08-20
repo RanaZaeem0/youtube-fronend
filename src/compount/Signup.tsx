@@ -19,8 +19,9 @@ export default function SignupCompount() {
     username: string;
     password: string;
     email: string;
-    avatar: string;
-    coverImage: string;
+    avatar?:FileList;
+    coverImage?:FileList
+
   }
   const { register, handleSubmit, watch ,formState: { errors }} = useForm<CreateuserSchema>();
 
@@ -30,8 +31,13 @@ export default function SignupCompount() {
     setLoadingBtn(true);
     try {
       const formData = new FormData();
-      formData.append("avatar", data.avatar[0]);
-      formData.append("coverImage", data.coverImage[0]);
+      if (data?.avatar && data.avatar.length > 0) {
+        formData.append("avatar", data.avatar[0]);
+      }
+      
+      if (data?.coverImage && data.coverImage.length > 0) {
+        formData.append("coverImage", data.coverImage[0]);
+      }
       formData.append("username", data.username);
       formData.append("email", data.email);
       formData.append("password", data.password);
@@ -134,7 +140,7 @@ export default function SignupCompount() {
                {errors.password && <p className="text-red-500 text-sm">password is required and must be at least 6 characters And No space.</p>}
              
               <Input
-                {...register("avatar", { required: true })}
+                {...register("avatar")}
                 type={"file"}
                 placeholder={"Avatar image"}
                 label={"Avatar"}
@@ -143,7 +149,7 @@ export default function SignupCompount() {
                 {errors.avatar && <p className="text-red-500 text-sm">avatar Image  is required plz .</p>}
 
               <Input
-                {...register("coverImage", { required: true })}
+                {...register("coverImage")}
                 placeholder={"Cover Image .."}
                 label={"Cover Image"}
                 type="file"

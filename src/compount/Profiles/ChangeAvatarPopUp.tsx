@@ -59,8 +59,8 @@ export default function ChangeAvatarImage({ isVisible, onClose }:{
   if (!isVisible) return null;
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-zinc-800 text-center p-4 max-w-lg mx-auto">
-        <button onClick={onClose} className="mb-2 text-end w-full">
+      <div className="bg-zinc-900 border border-zinc-500 rounded-3xl shadow-xl text-center p-4 max-w-lg mx-auto">
+        <button onClick={onClose} className="mb-2 text-xl text-end w-full">
           X
         </button>
 

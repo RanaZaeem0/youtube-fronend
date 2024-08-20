@@ -12,7 +12,7 @@ interface Tweetdata {
 
 type emptyArray = Tweetdata[];
 
-export default function useGetPlaylist() {
+export default function useGetTweet() {
   const [getTweet, setgetTweet] = useState<emptyArray>([]);
   const [isTweetLoading, setIsTweetLoading] = useState(true);
   const Token  = getRefreshToken()

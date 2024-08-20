@@ -10,16 +10,17 @@ export default function Avatar({
   avatarImage = "",
   videoViews = 0,
 }: {
-  username: string;
+  username: string | undefined;
   videoViews:number;
   channalId?: string;
   createdAt: string;
-  avatarImage: string;
+  avatarImage: string | undefined;
 }) {
   function formatDateRelative(date: string) {
     const createdAt = new Date(date);
     return formatDistanceToNow(createdAt, { addSuffix: true });
   }
+ 
 
   return (
     <NavLink to={`/channal/profile/${username}`}>

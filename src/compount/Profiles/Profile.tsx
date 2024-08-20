@@ -4,12 +4,13 @@ import img2 from "../../compount/img/youtube.webp";
 import AllVideoSkeleton from "../skeleton/AllVideoSkeleton.tsx";
 import AllVideoWrapper from "../AllVideoWrapper.tsx";
 import useGetUserVideo from "../../hook/useGetUserVideo.ts";
-import useGetUserProfile from "../../hook/useGetUserProfile.ts";
 import ProfileAvatar from "./ProfileAvatar.tsx";
 import CreateTweet from "../tweet/CreateTweet.tsx";
 import PublishVideoCompount from "../PublishVideo.tsx";
 import { useState } from "react";
 import {useSelector} from "react-redux"
+import { RootState } from '../../store/store.ts';
+
 interface UserData {
   _id: string;
   username: string;
@@ -37,20 +38,41 @@ type AllVideoData = VideoData[];
 
 export default function ProfileComponent() {
   const [showVideos,setShowVideos] = useState(true)
-  const { userProfile, isProfileLoading } = useGetUserProfile();
   const { video, isLoading } = useGetUserVideo(); // Use the correct type for video
   const [openTweet, setOpenTweet] = useState(false);
   const Navigator = useNavigate();
-
-
-console.log(video)
+  
+  
+  console.log(video)
   const handleTweet = () => {
     setOpenTweet(!openTweet);
   };
-
+  const {status,userData} = useSelector((state:RootState) => state.auth)
+  console.log(userData)
+  interface UserProfile {
+    username: string;
+    _id:string;
+    email:string;
+    avatar: string;
+    coverImage: string;
+    subscribersCount: number;
+    isSubscribed: boolean;
+  }
+  
+  const userProfile: UserProfile | null = userData
+    ? {
+         _id:userData._id,
+        username: userData.username,
+        email:userData.email,
+        avatar: userData.avatar || '', // Default to empty string if undefined
+        coverImage: userData.coverImage || '',
+        subscribersCount: userData.subscribersCount || 0,
+        isSubscribed: userData.isSubscribed || false,
+      }
+    : null;
   return (
-    <div className="flex flex-col min-h-dvh">
-      <ProfileAvatar userProfile={userProfile} isProfileLoading={isProfileLoading} />
+    <div className="flex flex-col pt-2">
+      <ProfileAvatar userProfile={userProfile} isProfileLoading={status} />
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           <div>
@@ -68,7 +90,7 @@ console.log(video)
                 Create Tweet
               </button>}
            {!showVideos &&
-              <CreateTweet />}
+              <CreateTweet  />}
             </h2>
           </div>
          
@@ -84,6 +106,7 @@ console.log(video)
                     className="bg-background rounded-lg overflow-hidden group cursor-pointer flex"
                     onClick={() => Navigator(`/watch/${videoItem._id}`)}
                   >
+                    
                     <div className="h-28 w-72 pb-5">
                       <img
                         className="w-full h-full"
@@ -92,11 +115,11 @@ console.log(video)
                       />
                     </div>
                     <div className="mb-4">
-                      { (
+                      
                         <NavLink to={`/profile?channel=${videoItem.UserDetails[0]._id}`}>
                           <div className="flex flex-col items-start">
                             <h2 className="font-normal text-white text-start hover:underline text-1xl pl-2 pr-4">
-                              {videoItem.title}
+                              {videoItem.title} zain
                             </h2>
                             <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
                               {videoItem.UserDetails[0].username}
@@ -106,7 +129,7 @@ console.log(video)
                             </h2>
                           </div>
                         </NavLink>
-                      )}
+                      
                     </div>
                   </div>
                 ))

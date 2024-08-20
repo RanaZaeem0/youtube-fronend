@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../config";
+import {useParams} from "react-router-dom"
 
 interface UserData {
   _id: string;
@@ -8,6 +9,8 @@ interface UserData {
   email: string;
   avatar: string;
 }
+
+
 
 interface VideoData {
   _id: string;
@@ -23,53 +26,57 @@ interface VideoData {
   updatedAt: string; // You may use Date if parsing this as a Date object
   channalDetails: UserData[];
   videoLikes: number; // Adjust type based on how you handle likes
+ 
 }
 
-interface Playlistdata {
+
+interface PlaylistIddata {
   _id: string;
   name: string;
   owner: string;
   createdAt: string;
   updatedAt: string;
-  totalVideos:number;
-  firstVideo: VideoData;
+  videos:VideoData[]
 }
 
-type emptyArray = Playlistdata[];
 
-export default function useGetPlaylist() {
-  const [getPlaylist, setgetPlaylist] = useState<emptyArray>([]);
-  const [isPlaylistLoading, setIsPlaylistLoading] = useState(true);
-  const Token = getRefreshToken();
+
+type emptyArray = PlaylistIddata[];
+
+export default function useGetPlaylistId() {
+  const [getPlaylistId, setgetPlaylistId] = useState<emptyArray>([]);
+  const [isPlaylistIdLoading, setIsPlaylistIdLoading] = useState(true);
+  const Token  = getRefreshToken()
+  const { playlistId } = useParams<{ playlistId: string }>();
   useEffect(() => {
-    const fetchPlaylist = async () => {
+    const fetchPlaylistId = async () => {
       try {
         if (!Token) {
           return null;
         }
         const response = await axios
-          .get(`${import.meta.env.VITE_BACKEND_URL}Playlist`, {
+          .get(`${import.meta.env.VITE_BACKEND_URL}playlist/${playlistId}`, {
             headers: {
               Authorization: `Bearer ${Token}`,
               "Content-Type": "application/json",
             },
           })
           .then((res) => {
-            setgetPlaylist(res.data.data);
-            setIsPlaylistLoading(false);
+            setgetPlaylistId(res.data.data);
+            setIsPlaylistIdLoading(false);
           });
       } catch (error) {
         console.log(error);
-        console.log("Failed to fetch Playlist . Please try again later.");
-        setIsPlaylistLoading(false);
+        console.log("Failed to fetch PlaylistId . Please try again later.");
+        setIsPlaylistIdLoading(false);
       }
     };
 
-    fetchPlaylist();
+    fetchPlaylistId();
   }, []);
 
   return {
-    getPlaylist,
-    isPlaylistLoading,
+    getPlaylistId,
+    isPlaylistIdLoading,
   };
 }

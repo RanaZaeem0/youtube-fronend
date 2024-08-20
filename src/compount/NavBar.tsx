@@ -41,15 +41,15 @@ export default function NavBar() {
   const username = localStorage.getItem("username");
   return (
     <div>
-      <div className="flex w-full items-center justify-between top-0  py-2 fixed z-20 px-2 bg-black">
+      <div className="flex w-full items-center justify-between top-0  py-2 fixed z-20 px-2 max-lg:px-0 bg-black">
         <div className="flex gap-2 items-center ">
           <NavSideBar />
 
           <div
-            className="flex items-center justify-center pl-3 "
+            className="flex items-center justify-center pl-3 max-lg:pl-0 "
             onClick={() => Navigator("/")}
           >
-            <img className="h-8 w-10 mr-2" src={IconYoutube} alt="" />
+            <img className="h-8 w-10 max-lg:mr-0 mr-2" src={IconYoutube} alt="" />
             <h2 className="font-bold text-sm text-white ">Youtube</h2>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function NavBar() {
             </button>
           ) : (
             <div className=" bottom-4 left-4 \ flex items-center gap-4 text-white">
-              <div className="">
+              <div className="max-lg:hidden">
                 <button onClick={() => Navigator("/publishvideo")}>
                   PublishVideo
                 </button>

@@ -5,16 +5,18 @@ import AllVideoSkeleton from "../skeleton/AllVideoSkeleton.tsx";
 import AllVideoWrapper from "../AllVideoWrapper.tsx";
 import useGetUserVideo from "../../hook/useGetUserVideo.ts";
 import useGetUserProfile from "../../hook/useGetUserProfile.ts";
+import useGetChannalProfile from "../../hook/useGetChannalprofile.ts"
 import { log } from "console";
 import ProfileAvatar from "../Profiles/ProfileAvatar.tsx"
 import usegetChannalVideotByusername from "../../hook/useGetChannalVideo.ts";
 import { formatDistanceToNow } from "date-fns";
+import {VideoDropdown,Avatar} from "../helperCompount/index.ts"
 export default function ChannalProfile() {
   const { getChannalVideo, isLoading } = usegetChannalVideotByusername();
-  const { userProfile, isProfileLoading } = useGetUserProfile()
+  const { channalProfile,isChannalProfileLoading } = useGetChannalProfile()
 
   const Navigator = useNavigate();
-  console.log(getChannalVideo);
+  console.log(channalProfile);
 
   function formatDateRelative(date: string) {
     const createdAt = new Date(date);
@@ -23,54 +25,45 @@ export default function ChannalProfile() {
 
   return (
     <div className="flex flex-col min-h-dvh">
-      <ProfileAvatar userProfile={userProfile} isProfileLoading={isProfileLoading} />
+      <ProfileAvatar userProfile={channalProfile} isProfileLoading={!isChannalProfileLoading} />
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           {isLoading ? (
             <AllVideoSkeleton className=" grid-cols-3" />
           ) : (
-            <AllVideoWrapper className="grid grid-cols-3 items-center justify-center  ">
+            <AllVideoWrapper className="grid grid-cols-3 max-lg:grid-cols-1 items-center justify-center  ">
               {getChannalVideo && getChannalVideo.length > 0 ? (
                 getChannalVideo.map((video, index) => (
                   <div
-                    key={index}
-                    className="bg-background rounded-lg overflow-hidden group cursor-pointer flex flex-col"
-                    onClick={() => Navigator(`/watch/${video._id}`)}
-                  >
-                    <div className="h-28 w-72 pb-5">
-                      <img
-                        className="w-full h-full"
-                        src={video.thumbnail}
-                        alt={video.thumbnail}
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <div className="">
+                        key={index}
+                        className="bg-background rounded-lg overflow-hidden group cursor-pointer"
+                      >
+                        <div
+                          className="h-60 w-96 max-md:w-full pb-5"
+                          onClick={() => Navigator(`/watch/${video._id}`)}
+                        >
+                          <img
+                            className="w-full h-full"
+                            src={video.thumbnail}
+                            alt={video.thumbnail}
+                          />
+                        </div>
+                        <h2 className="text-1xl h-12">{video.title}</h2>
+                       <div className="flex justify-between w-full">
+                       <Avatar
+                          avatarImage={channalProfile?.avatar}
+                          videoViews={video.views}
+                          username={channalProfile?.username}
+                          channalId={channalProfile?._id}
+                          createdAt={video.createdAt}
+                        />
+                     <div className="relative">
+                     <VideoDropdown videoId={video._id}/>
+                     </div>
+                       </div>
+
                        
-                          <div className="flex flex-col items-start ">
-                            <div className="flex p-1">
-                              <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
-                                <span className="font-medium text-white dark:text-gray-300">
-                                  <img src={userProfile?.avatar} alt="" />
-                                </span>
-                              </div>
-                              <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
-                                {userProfile?.username}
-                              </h2>
-                            </div>
-                            <div className="flex p-1 ">
-                              <h3 className="text-neutral-500 mr-1">
-                                {video.views}K views{" "}
-                              </h3>
-                              <h3 className="text-neutral-500">
-                                {formatDateRelative(video.createdAt)}
-                              </h3>
-                            </div>
-                          </div>
-                  
                       </div>
-                    </div>
-                  </div>
                 ))
               ) : (
                 <h2 className="text-white p-4">

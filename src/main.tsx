@@ -21,6 +21,8 @@ import AuthLayout from './compount/AuthLayout.tsx';
 import ChannalProfile from './compount/Profiles/ChannalProfile.tsx';
 import ShowTweet from "./compount/tweet/ShowTweet.tsx"
 import Home from "./page/Home.tsx"
+import Playlist from "./compount/playlist/PlaylistCompount.tsx"
+import SinglePlaylist from "./compount/playlist/SinglePlaylist.tsx"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -84,7 +86,14 @@ const router = createBrowserRouter([
       {
         path:"/playlist",
         element:<AuthLayout>
-          <LikeVideos/>
+          <Playlist/>
+        </AuthLayout>
+      }
+      ,
+      {
+        path:"/singlePlaylist/:playlistId",
+        element:<AuthLayout>
+          <SinglePlaylist/>
         </AuthLayout>
       }
       ,

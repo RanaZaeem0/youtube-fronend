@@ -43,7 +43,7 @@ export default function AuthLayout({
 
         if (res.status >= 200 && res.status <= 300) {
          setUserProfile(res.data.data)
-         dispatch(login({ userData: res.data.data }));
+         dispatch(login(res.data.data));
          console.log(userProfile,res.data.data)
         }
       } catch (error) {

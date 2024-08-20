@@ -5,6 +5,7 @@ import Avatar from "./helperCompount/Avatar.js";
 import useAllvideo from "../hook/useAllvideo.js";
 import { useNavigate } from "react-router-dom";
 import AllVideoWrapper from "./AllVideoWrapper.tsx";
+import LeftSidebar from "./helperCompount/LeftSidebar.tsx"
 import { formatDistanceToNow } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faEllipsis} from "@fortawesome/free-solid-svg-icons"
@@ -29,8 +30,11 @@ export default function Component() {
         {isLoading ? (
           <AllVideoSkeleton className="grid-cols-3" />
         ) : (
-          <div className="w-auto overflow-hidden pt-4 ">
-            <div className="mb-5 ml-4 flex items-center ">
+          <div className="w-auto   overflow-hidden pt-4 flex ">
+            <LeftSidebar className="w-1/6 max-lg:hidden" />
+            
+         <div className="w-[90%] max-lg:w-full lg:relative left-20 flex flex-col items-end justify-end ">
+         <div className="mb-5 ml-4 flex items-end ">
               <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 All
               </button>
@@ -43,14 +47,15 @@ export default function Component() {
               <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Mixes
               </button>
-              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
-                Source code
+              <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 
+               ml-2 mr-2 rounded-lg font-normal">
+                 code
               </button>
               <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 AI
               </button>
               <button className="bg-neutral-800 hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
-                Software framwork
+                Software 
               </button>
               <button className="bg-neutral-800  hover:bg-neutral-700  border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Google
@@ -59,7 +64,7 @@ export default function Component() {
                 Algouthme
               </button>
               <button className="bg-neutral-800 hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
-                Comedy clube{" "}
+                Comedy 
               </button>
               <button className="bg-neutral-800 hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-normal">
                 Live
@@ -68,7 +73,8 @@ export default function Component() {
                 Drama
               </button>
             </div>
-            <AllVideoWrapper className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+         <AllVideoWrapper className="">
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {videos &&
                 videos.map(
                   (video, index) =>
@@ -77,6 +83,7 @@ export default function Component() {
                         key={index}
                         className="bg-background rounded-lg overflow-hidden group cursor-pointer"
                       >
+                        
                         <div
                           className="h-60 w-96 max-md:w-full pb-5"
                           onClick={() => Navigator(`/watch/${video._id}`)}
@@ -97,7 +104,7 @@ export default function Component() {
                           createdAt={video.createdAt}
                         />
                      <div className="relative">
-                     <VideoDropdown/>
+                     <VideoDropdown videoId={video._id}/>
                      </div>
                        </div>
 
@@ -105,12 +112,15 @@ export default function Component() {
                       </div>
                     )
                 )}
-            </AllVideoWrapper>
-            <div className="flex items-center justify-center mt-5">
+                <div className="flex items-center justify-center mt-5">
               <button onClick={hanldeShowMore} className="bg-red-400 p-2  rounded-xl ">
                 Show More
               </button>
             </div>
+                </div>
+            </AllVideoWrapper>
+         </div>
+         
           </div>
         )}
       </div>

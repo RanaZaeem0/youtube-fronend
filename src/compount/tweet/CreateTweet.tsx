@@ -4,21 +4,41 @@ import getRefreshToken from "../../config"
 import Input from "../helperCompount/Input";
 import Button from "../helperCompount/Button";
 import { useForm } from "react-hook-form";
+import useGetTweet from "../../hook/useGetTweet"
+import {formatDistanceToNow } from "date-fns"
+import {useSelector } from "react-redux"
 import { Dialog, Card, CardBody, Typography } from "@material-tailwind/react";
+import TweetDropdown from "../helperCompount/TweetDropdown"
 import { useNavigate } from "react-router-dom";
+import {RootState} from "../../store/store.ts"
+
 interface UserTweet {
   content: string;
 }
+interface UserProfile {
+  _id: string;
+  username: string;
+  email: string;
+  avatar: string;
+  fullName: string;
+  coverImage: string;
+  subscribersCount: number;
+  isSubscribed: boolean;
+}
+
+
 
 export default function DialogWithForm() {
+
+const {userData} = useSelector((state:RootState) => state.auth)
   const [open, setOpen] = useState(false);
   const [error, setError] = useState("");
   const [loadingBtn, setLoadingBtn] = useState(false);
   const handleOpen = () => setOpen((cur) => !cur);
   const Navigator = useNavigate()
   const { register, handleSubmit } = useForm<UserTweet>();
-
-  const loginUser = async (data: UserTweet) => {
+  const {getTweet,isTweetLoading} = useGetTweet()
+  const CreateTweet = async (data: UserTweet) => {
     const Token =getRefreshToken()
     setError("");
     try {
@@ -63,19 +83,24 @@ export default function DialogWithForm() {
     }
   };
 
+  function formatDateRelative(date: string) {
+    const createdAt = new Date(date);
+    return formatDistanceToNow(createdAt, { addSuffix: true });
+  }
+
   return (
     <>
       
   
          <h1 className="font-bold text-2xl">Create Tweet</h1>
         <div className="bg-transparent flex items-center justify-center text-black shadow-none">
-          <div className="mx-auto h-80 w-full max-w-[24rem]">
-            <div className="flex flex-col gap-4">
+          <div className="mx-auto h-80 w-full  ">
+            <div className="flex flex-col gap-4 ">
               <h2 className="text-center" color="blue-gray">
                 Create Tweet
               </h2>
               <form
-                onSubmit={handleSubmit(loginUser)}
+                onSubmit={handleSubmit(CreateTweet)}
                 className="flex flex-col gap-4 px-5"
               >
                 <Input
@@ -122,6 +147,50 @@ export default function DialogWithForm() {
                 )}
               </form>
             </div>
+            {
+            !(getTweet.length > 0) &&
+             <div className="h-96 w-full  bg-black">
+               <h1 className="text-white">There no tweet</h1>
+               
+             </div>
+             
+            }
+             
+            {
+                !isTweetLoading ? <div className="w-full">
+                   {getTweet.map((tweet)=>{
+
+                    return (
+                    <div className="flex border-t-2 mt-5 mb-5 w-full ">
+                            <div className="flex items-start text-white underline-none gap-4 justify-center p-4 rounded-md bg-background shadow-sm">
+                    <img
+                      src={userData?.avatar}
+                      className="h-4 w-3"
+                      alt=""
+                    />
+                    <div className="flex-1 grid gap-1.5">
+                      <div className="flex items-center gap-2">
+                        <div className="font-medium">
+                        {userData?.username}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                        {formatDateRelative(tweet.createdAt)}
+                        </div>
+                      </div>
+                      <div className="text-muted-foreground">{tweet.content}</div>
+                    </div>
+                  </div>
+                  <div className="">
+                    <TweetDropdown tweetId={tweet?._id}/>
+                  </div>
+                    </div>
+                    )
+                   })
+                   }
+                </div>:
+                <h1>Loading .. </h1>
+            }
+
           </div>
         </div>
     

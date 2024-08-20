@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import CreatePlaylist from "../playlist/CreatePlaylist";
 
-const VideoDropdown = () => {
+const VideoDropdown = ({videoId}:{videoId:string}) => {
   const [avatarEl, setAvatarEl] = useState<HTMLElement | null>(null);
   const [notifyEl, setNotifyEl] = useState<HTMLElement | null>(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -73,7 +73,7 @@ const VideoDropdown = () => {
           <ListItem disablePadding>
             <ListItemButton>
               <button onClick={showPopup}>Add playlist</button>
-              <CreatePlaylist isVisible={isPopupVisible} onClose={hidePopup} />
+              <CreatePlaylist videoId={videoId} isVisible={isPopupVisible} onClose={hidePopup} />
             </ListItemButton>
           </ListItem>
           <Divider />
