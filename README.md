@@ -1,30 +1,65 @@
-# React + TypeScript + Vite
+YouTube Front-End
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a YouTube front-end application where users can log in, sign up, publish videos, subscribe to channels, create playlists, like videos, comment, and more. The project is built with npm, and the languages used are JavaScript and TypeScript.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+Features
+User authentication (login, signup)
+Publish videos
+Subscribe to channels
+Create and manage playlists
+Like and comment on videos
+Video recommendations and more
+Tech Stack
+React: A JavaScript library for building user interfaces.
+Redux: A state management library for JavaScript apps.
+Tailwind CSS: A utility-first CSS framework for building custom designs.
+JavaScript & TypeScript: Used for writing the application's logic and components.
+Installation
+Follow these steps to install and run the project locally.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Clone the repository:
 
-- Configure the top-level `parserOptions` property like this:
+bash
+Copy code
+git clone https://github.com/RanaZaeem0/youtube-fronend.git
+Navigate to the project directory:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+bash
+Copy code
+cd youtube-fronend
+Install dependencies:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+bash
+Copy code
+npm install
+Start the development server:
+
+bash
+Copy code
+npm start
+Usage
+Explain how to use the project, including how to navigate through different parts and any important commands.
+
+Folder Structure
+bash
+Copy code
+├── src/
+│   ├── assets/         # Images, fonts, etc.
+    ├── hook/           # All hook 
+│   ├── components/     # Reusable components
+│   ├── store/          # Redux slices and related files
+│   ├── pages/          # Page components
+│   ├── App.js          # Main application component
+│   ├── index.js        # Entry point of the application
+│   └── index.css       # Global styles
+Contributing
+If you welcome contributions, include guidelines here:
+
+Fork the repository.
+Create a new branch (git checkout -b feature-name).
+Make your changes.
+Commit your changes (git commit -m 'Add feature').
+Push to the branch (git push origin feature-name).
+Open a pull request.
