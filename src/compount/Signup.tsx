@@ -90,7 +90,7 @@ export default function SignupCompount() {
     <div className="bg-neutral-900 pt-12 p-2 flex justify-center">
       <div className="flex w-full justify-center">
         <div className=" bg-zinc-100 rounded-2xl h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
-          <h2 className="!text-black font-semibold text-2xl pb-3">
+          <h2 className="!text-black p-3 font-semibold text-2xl pb-3">
             Create an account
           </h2>
 
