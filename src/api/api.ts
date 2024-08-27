@@ -16,7 +16,7 @@ interface RefreshTokenResponse {
 }
 
 const token: string | null = getRefreshToken();
-const baseURL: string = "http://localhost:8000/api/v1/";
+const baseURL: string = `${import.meta.env.VITE_BACKEND_URL}`;
 
 const api: AxiosInstance = axios.create({
   baseURL,
