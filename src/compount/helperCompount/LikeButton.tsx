@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faThumbsUp,faThumbsDown} from "@fortawesome/free-regular-svg-icons"
+import {authApi} from "../../api/api"
+
 export default function LikeButton({
   videoId,
   videoLike,
@@ -21,15 +23,9 @@ export default function LikeButton({
         Navigator("/signup");
         return console.log("not login");
       }
-      const response = await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}like/${videoId}`,
+      const response = await authApi.patch(
+        `like/${videoId}`,
         {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Token}`,
-          },
-        }
       );
 
       if (response.status >= 200 && response.status < 300) {

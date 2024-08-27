@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import getRefreshToken from "../config"
 import { useParams } from 'react-router-dom';
+import {authApi } from "../api/api"
 
 interface UserData {
     _id: string;
@@ -38,14 +39,7 @@ export default function useGetChannelVideo() {
   const {username} = useParams()
       useEffect(() => {
             try {            
-           axios.get(`${import.meta.env.VITE_BACKEND_URL}video/channalvideo/${username}`,
-                    {
-                        headers:{
-                            
-                            "Content-Type":"application/json"
-                       
-                        }
-                    }
+           authApi.get(`video/channalvideo/${username}`,
                 )
                .then(res =>{
                 setgetChannalVideo(res.data.data[0].ChannalVideo)

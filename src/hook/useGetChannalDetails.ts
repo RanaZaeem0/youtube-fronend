@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import getRefreshToken from '../../src/config';
 import { useParams } from 'react-router-dom';
-
+import {authApi } from "../api/api"
 interface ChannelDetails {
   _id: string;
   videoFile: string;
@@ -31,13 +31,8 @@ export default function useGetChannalProfile(username: string | undefined) {
           return;
         }
         
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}channel/${username}`, // Corrected spelling from 'channal' to 'channel'
+        const response = await authApi.get(`channel/${username}`, // Corrected spelling from 'channal' to 'channel'
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            },
           }
         );
 

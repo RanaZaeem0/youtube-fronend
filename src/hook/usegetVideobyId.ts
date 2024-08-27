@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import getRefreshToken from "../config";
+import {authApi,api } from "../api/api"
+
 interface channalDetails {
   _id: string;
   username: string;
@@ -44,8 +46,8 @@ export default function useGetVideobyId() {
     const featchVideo = async () => {
       try {
         if (localuserId) {
-          const getAllVideo = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}video/${videoId}`,
+          const getAllVideo = await api.get(
+            `video/${videoId}`,
             {
               headers: {
                 userId: localuserId
@@ -59,8 +61,8 @@ export default function useGetVideobyId() {
             setIsLoading(false);
           }
         } else {
-          const getAllVideo = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}video/${videoId}`
+          const getAllVideo = await api.get(
+            `video/${videoId}`
           );
 
           if (getAllVideo.status >= 200 && getAllVideo.status <= 300) {

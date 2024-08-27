@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../../src/config";
 import { useParams } from "react-router-dom";
+import {authApi } from "../api/api"
+
 // Define the structure for ChannelDetails
 interface ChannelDetails {
   _id: string;
@@ -53,14 +55,8 @@ export default function useGetLikeVideo() {
           return;
         }
 
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}like/likeVideo`, // Corrected spelling from 'channal' to 'channel'
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
+        const response = await authApi.get(
+          `like/likeVideo`, 
         );
 
         setLikeVideo(response.data.data);

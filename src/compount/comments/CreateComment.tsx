@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {LoadingButton,Input,Button} from "../helperCompount/index.ts"
 
+import {authApi } from "../../api/api.ts"
 
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -32,15 +33,9 @@ export default function CreateComments() {
       
       setIsCreateLoading(true)
       const userDetails: commentData = data;
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}comment/${videoId}`,
+      const response = await authApi.post(
+        `comment/${videoId}`,
         userDetails,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Token}`,
-          },
-        }
       );
       if (response.status >= 200 && response.status < 300) {
         console.log(response);

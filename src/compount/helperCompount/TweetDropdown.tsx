@@ -16,6 +16,7 @@ import {faEllipsis } from "@fortawesome/free-solid-svg-icons"
 import CreatePlaylist from "../playlist/CreatePlaylist"
 import getRefreshToken from "../../config"
 import axios from "axios"
+import {authApi} from '../../api/api'
 const TweetDropdown = ({tweetId}:{
     tweetId:string
 }) => {
@@ -46,14 +47,8 @@ const TweetDropdown = ({tweetId}:{
           Navigator("/signup");
           return console.log("not login");
         }
-        axios.delete(
-          `${import.meta.env.VITE_BACKEND_URL}tweet/${tweetId}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${getRefreshToken}`,
-            },
-          }
+        authApi.delete(
+          `tweet/${tweetId}`,
         ).then((response)=>{
 
             if (response.status >= 200 && response.status < 300) {
@@ -84,14 +79,9 @@ const TweetDropdown = ({tweetId}:{
           Navigator("/signup");
           return console.log("not login");
         }
-        axios.patch(
-          `${import.meta.env.VITE_BACKEND_URL}tweet/${tweetId}`,
-          {},{
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${getRefreshToken}`,
-            },
-          }
+        authApi.patch(
+          `tweet/${tweetId}`,
+          {}
         ).then((response)=>{
 
             if (response.status >= 200 && response.status < 300) {

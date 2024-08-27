@@ -10,7 +10,7 @@ import ButtonWarning from "../helperCompount/ButtonWarning";
 import { LoadingButton } from "../helperCompount/index.ts";
 import { useForm } from "react-hook-form";
 import getRefreshToken from "../../config";
-
+import {authApi} from '../../api/api'
 interface CreatePlaylistProps {
   isVisible: boolean;
   onClose: () => void;
@@ -43,15 +43,9 @@ export default function CreatePlaylist({
     console.log(data);
     try {
       setAddPlaylistLoading(true);
-      const response = await axios.post(
+      const response = await authApi.post(
         `${import.meta.env.VITE_BACKEND_URL}playlist/createPlaylist`,
         data,
-        {
-          headers: {
-            Authorization: `Bearer ${Token}`, // Make sure this function call is correct
-            "Content-Type": "application/json",
-          },
-        }
       );
 
       if (response.status >= 200 && response.status < 300) {
@@ -81,15 +75,9 @@ export default function CreatePlaylist({
     console.log(PlaylistId, Token);
     try {
       setAddVideoLoading(true);
-      const response = await axios.post(
+      const response = await authApi.post(
         `${import.meta.env.VITE_BACKEND_URL}playlist/${videoId}/${PlaylistId}`,
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${Token}`, // Make sure this function call is correct
-            "Content-Type": "application/json",
-          },
-        }
       );
 
       if (response.status >= 200 && response.status < 300) {

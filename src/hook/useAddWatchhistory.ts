@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import getRefreshToken from "../config"
 import { useParams } from 'react-router-dom';
 import { log } from 'console';
-
+import {authApi} from "../api/api"
 interface WatchHistorydata {
     "_id": string,
         "watchHistory": [
@@ -25,15 +25,8 @@ export default function useAddWatchhistory() {
                     return console.log("no login");
                     
                 }    
-           axios.post(`${import.meta.env.VITE_BACKEND_URL}users/addWatchHistory/${videoId}`,
-                   {}, {
-                        headers:{
-                            "Content-Type":"application/json",
-                            "Authorization":`Bearer ${Token}`,
-                       
-                        }
-                    }
-                )
+           authApi.post(`${import.meta.env.VITE_BACKEND_URL}users/addWatchHistory/${videoId}`,
+                   {}                )
                .then(res =>{
                 setAddWatchHistory(res.data.data)
                 setaddWatchHistoryLoading(false)

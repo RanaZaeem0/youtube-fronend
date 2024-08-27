@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {authApi } from "../api/api"
 
 interface channalProfile {
   _id: string;
@@ -24,11 +25,7 @@ export default function useGetchannalProfile() {
         const localUserId  = localStorage.getItem('userId')
         console.log("Fetching data for username:", username);
 
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}users/channal/${username}`, {
-          headers: {
-            "Content-Type": "application/json",
-              userId:localUserId
-          },
+        const res = await authApi.get(`users/channal/${username}`, {
         });
 
         if (res.status >= 200 && res.status <= 300) {

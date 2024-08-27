@@ -7,7 +7,7 @@ import { Input, Button } from './helperCompount/index'; // Adjust import paths
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import getRefreshToken from '../config'; // Adjust import path
-
+import {authApi} from "../api/api"
 interface CreateUserSchema {
   title: string;
   description: string;
@@ -42,12 +42,7 @@ export default function PublishVideoCompount() {
 
     try {
       setUploadLoading(true);
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}video/publish`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "Authorization": `Bearer ${token}`
-        }
-      });
+      const response = await authApi.post(`video/publish`, formData);
 
       if (response.status >= 200 && response.status < 300) {
         console.log(response.data);

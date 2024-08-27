@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
-
+import {authApi } from "../../api/api"
 
 interface changeCoverImage {
     isVisible: boolean;
@@ -30,15 +30,9 @@ export default function CoverImagePopUp({ isVisible, onClose }:changeCoverImage)
       return null;
     }
     try {
-      const response = await axios.post(
+      const response = await authApi.post(
         `${import.meta.env.VITE_BACKEND_URL}playlist/createPlaylist`,
         data,
-        {
-          headers: {
-            Authorization: `Bearer ${Token}`, // Make sure this function call is correct
-            "Content-Type": "application/json",
-          },
-        }
       );
 
       if (response.status >= 200 && response.status < 300) {

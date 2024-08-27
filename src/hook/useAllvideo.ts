@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
+import {api} from "../api/api"
 interface channalDetails {
   username: string;
   avatar: string;
@@ -40,7 +40,7 @@ export default function useAllvideo({ limit = 9, page = 0 }: UseAllVideoProps) {
     const fetchVideos = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}video/allvideo/${limit}?page=${page}`);
+        const response = await api.get(`video/allvideo/${limit}?page=${page}`);
         const responseData = response.data.data as [DataVideos, { hasMore: boolean }];
 
         const videos = responseData[0];

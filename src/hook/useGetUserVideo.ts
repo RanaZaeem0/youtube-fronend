@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../../src/config";
+import {authApi } from "../api/api"
 
 interface UserData {
   _id: string;
@@ -39,14 +40,8 @@ export default function useGetUserVideo() {
         if(!Token){
           return null
         }
-        const response = await axios.get(
+        const response = await authApi.get(
           `${import.meta.env.VITE_BACKEND_URL}video/`,
-          {
-            headers: {
-              Authorization: `Bearer ${Token}`,
-              "Content-Type": "application/json",
-            },
-          }
         );
 
         if (response.status >= 200 && response.status <= 299) {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../config";
-
+import {authApi} from '../api/api'
 interface UserData {
   _id: string;
   username: string;
@@ -47,12 +47,9 @@ export default function useGetPlaylist() {
         if (!Token) {
           return null;
         }
-        const response = await axios
+        const response = await authApi
           .get(`${import.meta.env.VITE_BACKEND_URL}Playlist`, {
-            headers: {
-              Authorization: `Bearer ${Token}`,
-              "Content-Type": "application/json",
-            },
+         
           })
           .then((res) => {
             setgetPlaylist(res.data.data);

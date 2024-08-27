@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../config";
+import {authApi } from "../api/api"
 
 interface Tweetdata {
   _id: string;
@@ -22,13 +23,8 @@ export default function useGetTweet() {
         if (!Token) {
           return null;
         }
-        const response = await axios
-          .get(`${import.meta.env.VITE_BACKEND_URL}Tweet`, {
-            headers: {
-              Authorization: `Bearer ${Token}`,
-              "Content-Type": "application/json",
-            },
-          })
+        const response = await authApi
+          .get(`Tweet`)
           .then((res) => {
             setgetTweet(res.data.data);
             setIsTweetLoading(false);

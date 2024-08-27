@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
-
+import {authApi} from '../../api/api'
 
 interface ChangeAvatarImage {
     avatar:string
@@ -32,15 +32,9 @@ export default function ChangeAvatarImage({ isVisible, onClose }:{
     formData.append("avatar", data.avatar[0]);
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}users/changeAvatar`,
+      const response = await authApi.post(
+        `users/changeAvatar`,
         formData,
-        {
-          headers: {
-            Authorization: `Bearer ${Token}`, // Make sure this function call is correct
-            "Content-Type": "formData",
-          },
-        }
       );
 
       if (response.status >= 200 && response.status < 300) {

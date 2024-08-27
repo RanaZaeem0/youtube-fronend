@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/authSlice";
 import { useParams } from "react-router-dom";
-
+import {authApi,api } from "../api/api"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -32,13 +32,8 @@ export default function AuthLayout({
       try {
         console.log("Fetching data for username:", username);
 
-        const res = await axios.get(
+        const res = await api.get(
           `${import.meta.env.VITE_BACKEND_URL}users/channal/${username}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
         );
 
         if (res.status >= 200 && res.status <= 300) {

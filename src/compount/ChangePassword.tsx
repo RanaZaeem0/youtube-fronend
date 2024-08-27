@@ -1,7 +1,7 @@
 import axios from 'axios'
 import  { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-
+import {authApi } from "../api/api"
 import Input from './helperCompount/Input'
 import Button from './helperCompount/Button'
 import ButtonWarning from './helperCompount/ButtonWarning'
@@ -30,13 +30,8 @@ const loginUser = async (data:userSignin)=>{
       setError('')
             try {
                 const userDetails:userSignin  = data                
-                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/login`,
-                  userDetails,
-                  {  
-                    headers:{
-                        'Content-Type': 'application/json'
-                    },
-                })
+                const response = await authApi.post(`user/login`,
+                  userDetails)
                 if (response.status >= 200 && response.status < 300) {
               console.log(response);
               

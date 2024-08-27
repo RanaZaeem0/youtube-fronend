@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../config";
 import {useParams} from "react-router-dom"
+import {authApi } from "../api/api"
 
 interface UserData {
   _id: string;
@@ -54,13 +55,8 @@ export default function useGetPlaylistId() {
         if (!Token) {
           return null;
         }
-        const response = await axios
-          .get(`${import.meta.env.VITE_BACKEND_URL}playlist/${playlistId}`, {
-            headers: {
-              Authorization: `Bearer ${Token}`,
-              "Content-Type": "application/json",
-            },
-          })
+        const response = await authApi
+          .get(`playlist/${playlistId}`)
           .then((res) => {
             setgetPlaylistId(res.data.data);
             setIsPlaylistIdLoading(false);

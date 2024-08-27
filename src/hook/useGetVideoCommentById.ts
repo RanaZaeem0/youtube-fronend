@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import {authApi,api } from "../api/api"
 
   
 interface GetComments{
@@ -24,13 +25,9 @@ export default function useGetCommentById() {
       const [error,setError] = useState('')
       useEffect(() => {
         try {
-           axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}comment/all/${videoId}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
+           api.get(
+            `comment/all/${videoId}`,
+
           ).then(
             (response)=>{
               if (response.status >= 200 && response.status < 300) {

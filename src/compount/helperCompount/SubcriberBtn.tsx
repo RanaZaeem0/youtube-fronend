@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faBell} from "@fortawesome/free-solid-svg-icons"
+import {authApi} from '../../api/api'
 export default function SubcriberBtn({channalId,isSubscribed}:{
     channalId?:string,
     isSubscribed?:boolean
@@ -17,15 +18,9 @@ export default function SubcriberBtn({channalId,isSubscribed}:{
         Navigator("/signup");
         return console.log("not login");
       }
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}subscription/${channelId}`,
+      const response = await authApi.post(
+        `subscription/${channelId}`,
         {},
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${Token}`,
-          },
-        }
       );
 
       if (response.status >= 200 && response.status < 300) {

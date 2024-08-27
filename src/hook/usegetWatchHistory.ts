@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../config";
-
+import {authApi} from "../api/api"
 interface UserData {
   _id: string;
   username: string;
@@ -35,16 +35,11 @@ export default function useGetWatchHistory() {
         if (!Token) {
           return null;
         }
-        const response = await axios
-          .get(`${import.meta.env.VITE_BACKEND_URL}users/getWatchHistory`, {
-            headers: {
-              Authorization: `Bearer ${Token}`,
-              "Content-Type": "application/json",
-            },
-          })
+        const response = await authApi.get(`users/getWatchHistory`)
           .then((res) => {
             setWatchHistory(res.data.data);
             setIsLoading(false);
+           console.log(res)
           });
       } catch (error) {
         console.log(error);
