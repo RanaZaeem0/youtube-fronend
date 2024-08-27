@@ -8,36 +8,32 @@ import CreateComments from "./comments/CreateComment";
 import { NavLink } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import AllVideoSkeleton from "./skeleton/AllVideoSkeleton";
-import getRefreshToken from "../config"
+import getRefreshToken from "../config";
 import { channel } from "diagnostics_channel";
-import useGetChannalProfile from "../hook/useGetChannalDetails";
 import useAddWatchhistory from "../hook/useAddWatchhistory";
 import { useNavigate } from "react-router-dom";
 import LikeButton from "./helperCompount/LikeButton";
 import SubcriberBtn from "./helperCompount/SubcriberBtn";
-import WatchVideoSkeleton from "./skeleton/WatchVideoSkeleton"
+import WatchVideoSkeleton from "./skeleton/WatchVideoSkeleton";
+import { faShareFromSquare } from "@fortawesome/free-regular-svg-icons";
+import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function WatchVideo() {
-
   const [videoPLay, setVideoPlay] = useState(true);
   const { isLoading, video } = usegetVideobyId();
-  const username   =  video?.channalDetails[0]?.username
-  const { isLoading: isLoadingChannel, channelProfile } = useGetChannalProfile(username);  
-   console.log(channelProfile)
-    const {addWatchHistory} = useAddWatchhistory()
-    const  Navigator = useNavigate()
+  const username = video?.channalDetails[0]?.username;
 
-    
+  const { addWatchHistory } = useAddWatchhistory();
+  const Navigator = useNavigate();
 
-
-  
-    function formatDateRelative(date: string | undefined): string {
-      if (!date) {
-        return 'Date not available';
-      }
-      
-      const createdAt = new Date(date);
-      return formatDistanceToNow(createdAt, { addSuffix: true });
+  function formatDateRelative(date: string | undefined): string {
+    if (!date) {
+      return "Date not available";
     }
+
+    const createdAt = new Date(date);
+    return formatDistanceToNow(createdAt, { addSuffix: true });
+  }
   return (
     <div className="">
       <div className="container mx-auto px-4 py-8">
@@ -45,7 +41,7 @@ export default function WatchVideo() {
           <WatchVideoSkeleton />
         ) : (
           <div className="flex max-lg:flex-col ">
-            <div className="flex items-start justify-start flex-col max-lg:ml-0 ml-16 w-3/5 max-lg:w-full">
+            <div className="flex items-start justify-start flex-col max-lg:ml-0 ml-2 w-3/5 max-lg:w-full">
               <div className="w-full bg-background pb-8 rounded-lg overflow-hidden group cursor-pointer">
                 <div className=" aspect-video">
                   {!videoPLay && (
@@ -67,52 +63,78 @@ export default function WatchVideo() {
                   )}
                 </div>
                 <h2 className="font-medium text-2xl py-4">{video?.title}</h2>
-                
-                
-                <div className="flex  items-center w-full justify-between ">
-                    <div className="flex  items-center w-full justify-between ">
-                    <NavLink 
-                    to={`/channal/profile/${video?.channalDetails[0].username}`}>
-                    <div className="flex flex-col p-1">
-                      <div className="flex">
-                      <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
-                        <span className="font-medium text-white dark:text-gray-300">
-                          <img src={video?.channalDetails[0].avatar} alt="" />
-                        </span>
+
+                <div className="flex  items-center w-full justify-between gap-5 ">
+                  <div className="flex max-sm:flex-col max-sm:items-start  items-center  w-full justify-between pr-4 ">
+                    <div className=" flex justify-center items-center gap-3">
+                      <NavLink
+                        to={`/channal/profile/${video?.channalDetails[0].username}`}
+                      >
+                        <div className="flex flex-col p-1">
+                          <div className="flex">
+                            <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-700 text-white rounded-full dark:bg-gray-600">
+                              <span className="font-medium text-white dark:text-gray-300">
+                                <img
+                                  src={video?.channalDetails[0].avatar}
+                                  alt=""
+                                />
+                              </span>
+                            </div>
+                            <div className="flex flex-col items-start">
+                              <h2 className="font-medium text-gray-200 hover:underline text-1xl text-center pl-2 pr-4">
+                                {video?.channalDetails[0]?.username}
+                              </h2>
+                              <h2 className="font-medium text-gray-600 flex hover:underline text-1xl text-start text-nowrap pl-2 pr-4">
+                                {video?.channalDetails[0]?.subscribersCount}{" "}
+                                Subcribers
+                              </h2>
+                            </div>
+                          </div>
+                        </div>
+                      </NavLink>
+                      <div className="flex w-full ">
+                        <SubcriberBtn
+                          channalId={video?.channalDetails[0]._id}
+                          isSubscribed={video?.channalDetails[0]?.isSubscribed}
+                        />
                       </div>
-                      <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
-                        {video?.channalDetails[0]?.username}
-                      </h2>
-                      </div>
-                      <h2 className="font-medium text-gray-600 hover:underline text-1xl text-center pl-2 pr-4">
-                        Subcriber { video?.channalDetails[0]?.subscribersCount}
-                      </h2>
                     </div>
-                    </NavLink>
-                    <div className="flex pr-4">
-                      <SubcriberBtn channalId={video?.channalDetails[0]._id} isSubscribed={video?.channalDetails[0]?.isSubscribed} />
-                      <div className="flex mr-2">
-                        <LikeButton videoId={video?._id} videoLike={video?.videoLikes} />
+
+                    <div className="flex justify-center items-center gap-2">
+                      <div className=" px-4  flex  items-center rounded-full py-2 bg-zinc-800">
+                        <FontAwesomeIcon icon={faShareFromSquare} />
+                        <h2 className="pl-2 font-normal text-sm">Share</h2>
+                      </div>
+
+                      <div className=" px-4  flex  items-center rounded-full py-2 bg-zinc-800">
+                        <LikeButton
+                          videoId={video?._id}
+                          videoLike={video?.videoLikes}
+                        />
+                      </div>
+                      <div className=" px-4  flex  items-center rounded-full py-2 bg-zinc-800">
+                        <FontAwesomeIcon icon={faEllipsis} />
                       </div>
                     </div>
-                    
                   </div>
-                    
-                    
-                  </div>
-                  <div className="flex p-1 ">
-                      <h3 className="text-neutral-500 mr-1">
-                        {video?.views}K views{" "}
-                      </h3>
-                      <h3 className="text-neutral-500">
-                        {formatDateRelative(video?.createdAt)}
-                      </h3>
-                    </div>
-             
+                </div>
+                
+                <div className="bg-zinc-800 h-28 mt-3 rounded-lg p-2  w-full ">
+                <div className="flex p-1  text-base font-semibold">
+                  <h3 className="text-neutral-200 mr-1">
+                    {video?.views} Views{"  "}
+                  </h3>
+                  <h3 className="text-neutral-200">
+                    {formatDateRelative(video?.createdAt)}
+                  </h3>
+                </div>
+                <h2 className="text-sm w-full h-auto overflow-hidden text-ellipsis  ">{video?.description}</h2>
+                 <button className="flex w-full items-baseline justify-end">...more</button>
+                </div>
               </div>
               <CreateComments />
             </div>
-            <div className="w-2/5 max-lg:w-full" >
+            <div className="w-2/5 pr-10 max-lg:w-full">
               <SideBarVideos />
             </div>
           </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-
+import SignImage from "./signin.jpg"
 import Input from "./helperCompount/Input";
 import Button from "./helperCompount/Button";
 import ButtonWarning from "./helperCompount/ButtonWarning";
@@ -69,21 +69,16 @@ export default function Signin() {
   };
 
   return (
-    <div className="bg-slate-800 h-screen flex justify-center ">
-      <div className="flex w-screen justify-center">
-        <div className="w-1/2 flex flex-col items-start p-14 justify-center text-start bg-slate-200 max-lg:hidden">
-          <h2 className="text-black text-2xl font-bold italic">
-            "The product quality exceeded my expectations. The team demonstrated
-            excellent craftsmanship and attention to detail."
-          </h2>
-          <h3 className="text-black font-medium py-2">Mia Wallace</h3>
-          <h2>Director, Marcellus Corp</h2>
+    <div className="bg-[#ffe5e5] h-screen flex justify-center ">
+      <div className="flex w-5/6 justify-center rounded-xl  h-full">
+        <div className="w-3/5 flex flex-col items-start  justify-center text-startmax-lg:hidden">
+         <img src={SignImage} alt="" />
         </div>
-        <div className="bg-white h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
+        <div className=" h-full w-2/5 max-lg:w-full  text-center flex items-center justify-center flex-col ">
           <h2 className="text-black font-semibold">Sign In</h2>
           <h2>Enter your info</h2>
           <form onSubmit={handleSubmit(loginUser)}>
-            <div className="flex flex-col max-lg:w-full items-center justify-center w-96">
+            <div className="flex flex-col max-lg:w-full items-center justify-center w-80">
               <Input
                 {...register("email", {
                   required: true,

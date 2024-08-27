@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
 import AllVideoSkeleton from "./skeleton/AllVideoSkeleton";
@@ -14,8 +13,6 @@ export default function SideBarVideos() {
   const { isLoading, videos } = useAllvideo({ limit, page });
   const Navigator = useNavigate();
 
-
-
   function formatDateRelative(date: string) {
     const createdAt = new Date(date);
     return formatDistanceToNow(createdAt, { addSuffix: true });
@@ -23,7 +20,7 @@ export default function SideBarVideos() {
 
   return (
     <div className="">
-      <div className="container w-full px-4 py-8">
+      <div className="container w-full px-4 py-8 ">
         {isLoading ? (
           <AllVideoSkeleton className="grid-cols-1" />
         ) : (
@@ -32,28 +29,28 @@ export default function SideBarVideos() {
               videos.map((video) => (
                 <div
                   key={video._id}
-                  className="bg-background w-full rounded-lg overflow-hidden group cursor-pointer flex"
+                  className="bg-background w-full rounded-lg   cursor-pointer flex"
                   onClick={() => {
                     Navigator(`/watch/${video._id}`);
                     // Avoid location.reload() here
                   }}
                 >
-                  <div className="h-28 w-48 pb-5">
-                    <img
-                      className="w-full h-full"
-                      src={video.thumbnail}
-                      alt={video.title}
-                    />
+                  <div className="h-28 rounded-xl w-2/5 pb-5">
+                    <div className="flex items-center justify-center  rounded-xl w-full h-full">
+                      <img
+                        className="w-full  rounded-lg h-full"
+                        src={video.thumbnail}
+                        alt={video.title}
+                      />
+                    </div>
                   </div>
-                  <div className="mb-4">
+                  <div className="mb-4 pl-2 w-3/5">
                     <div className="">
                       <NavLink
                         to={`/profile?channal=${video.channalDetails[0]._id}`}
                       >
                         <div className="flex flex-col items-start">
-                          <h2 className="font-normal text-white text-start hover:underline text-sm pl-2 pr-4">
-                            {video.title}
-                          </h2>
+                          <h2 className="text-sm w-full h-auto overflow-hidden text-ellipsis whitespace-nowrap">{video.title}</h2>
                           <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
                             {video.channalDetails[0].username}
                           </h2>

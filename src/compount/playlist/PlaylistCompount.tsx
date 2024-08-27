@@ -22,7 +22,9 @@ export default function PlaylistCompount() {
           {!isPlaylistLoading ? (
             <div className="">
               {getPlaylist.length == 0 ? (
-                <h1 className='pt-10'>There is no playlist</h1>
+               <div className="h-screen bg-zinc-800 flex items-center justify-center">
+                 <h1 className='pt-10 text-white'>There is no playlist</h1>
+               </div>
               ) : (
                <div className=" pl-4">
                  <h2 className="text-white font-semibold py-2 pt-10">Your Playlist </h2>

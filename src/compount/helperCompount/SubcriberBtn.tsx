@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import getRefreshToken from "../../config"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,6 +8,7 @@ export default function SubcriberBtn({channalId,isSubscribed}:{
     channalId?:string,
     isSubscribed?:boolean
 }) {
+  const [isSubscribedCheak,setIsSubcribedCheak]= useState(isSubscribed)
     const Navigator = useNavigate()
     const Token = getRefreshToken()
   const handleSubcribeChannel = async (channelId: string) => {
@@ -29,6 +30,7 @@ export default function SubcriberBtn({channalId,isSubscribed}:{
 
       if (response.status >= 200 && response.status < 300) {
         console.log(response.data.message);
+        setIsSubcribedCheak(!isSubscribedCheak)
       }
     } catch (error: any) {
       if (error.response) {
@@ -49,7 +51,7 @@ export default function SubcriberBtn({channalId,isSubscribed}:{
   return (
     <div>
       <div className="mr-2">
-   {   !isSubscribed ? <button
+   {   !isSubscribedCheak ? <button
           type="button"
           onClick={() => {
             if (channalId) {
@@ -58,7 +60,7 @@ export default function SubcriberBtn({channalId,isSubscribed}:{
               console.error("Channel ID is not defined");
             }
           }}
-          className="text-black bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-100 shadow-lg  dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="text-zinc-200 bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-800  shadow-2xl shadow-slate-100  dark:shadow-lg  font-normal rounded-full text-sm px-5 py-2.5 text-center me-2 "
         >
           Subscribe
         </button>
@@ -72,7 +74,7 @@ export default function SubcriberBtn({channalId,isSubscribed}:{
               console.error("Channel ID is not defined");
             }
           }}
-          className="text-black bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-100 shadow-lg  dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          className="text-zinc-200 bg-gradient-to-r  hover:bg-gradient-to-br focus:ring-4 focus:outline-none bg-zinc-800  shadow-2xl shadow-slate-100  dark:shadow-lg  font-normal rounded-full text-sm px-5 py-2.5 text-center me-2 "
         >
          <FontAwesomeIcon icon={faBell} />  Subscribed
         </button>

@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import signupImage from "./signupImage.jpg";
 
 import Input from "./helperCompount/Input";
 import Button from "./helperCompount/Button";
 import ButtonWarning from "./helperCompount/ButtonWarning";
-import {LoadingButton} from "./helperCompount/index"
+import { LoadingButton } from "./helperCompount/index";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../store/authSlice";
 import { useForm } from "react-hook-form";
@@ -19,25 +20,19 @@ export default function SignupCompount() {
     username: string;
     password: string;
     email: string;
-    avatar?:FileList;
-    coverImage?:FileList
-
   }
-  const { register, handleSubmit, watch ,formState: { errors }} = useForm<CreateuserSchema>();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<CreateuserSchema>();
 
-  const avatar = watch("avatar");
-  const coverImage = watch("coverImage");
   const createUser = async (data: CreateuserSchema) => {
     setLoadingBtn(true);
     try {
       const formData = new FormData();
-      if (data?.avatar && data.avatar.length > 0) {
-        formData.append("avatar", data.avatar[0]);
-      }
-      
-      if (data?.coverImage && data.coverImage.length > 0) {
-        formData.append("coverImage", data.coverImage[0]);
-      }
+
       formData.append("username", data.username);
       formData.append("email", data.email);
       formData.append("password", data.password);
@@ -87,35 +82,41 @@ export default function SignupCompount() {
   };
 
   return (
-    <div className="bg-neutral-900 pt-12 p-2 flex justify-center">
-      <div className="flex w-full justify-center">
-        <div className=" bg-zinc-100 rounded-2xl h-full w-1/2 max-lg:w-full  text-center flex items-center justify-center flex-col ">
+    <div className=" pt-12  bg-neutral-100 p-2 flex justify-center h-screen">
+      <div className="flex w-10/12  rounded-xl ">
+        <div className="w-3/5">
+          <img className="h-full w-full" src={signupImage} alt="" />
+        </div>
+        <div className=" bg-white  h-full w-2/5 max-lg:w-full  text-center flex items-center justify-center flex-col ">
           <h2 className="!text-black p-3 font-semibold text-2xl pb-3">
             Create an account
           </h2>
 
           <form onSubmit={handleSubmit(createUser)}>
-            <div className="flex flex-col w-96 max-lg:w-full justify-center items-center">
-             <div className="flex gap-5">
-        <div className="">
-        <Input
-              {...register("username", {
-                required: "Username is required",
-                minLength: { value: 2, message: "Username must be at least 2 characters long" },
-                pattern: {
-                  value: /^\S*$/,
-                  message: "Username cannot contain spaces"
-                }
-              })}
+            <div className="flex flex-col w-80 max-lg:w-full justify-center items-center">
+              <Input
+                {...register("username", {
+                  required: "Username is required",
+                  minLength: {
+                    value: 2,
+                    message: "Username must be at least 2 characters long",
+                  },
+                  pattern: {
+                    value: /^\S*$/,
+                    message: "Username cannot contain spaces",
+                  },
+                })}
                 type={"text"}
                 placeholder={"Your Name"}
                 label={"username"}
-               
               />
-                 {errors.username && <p className="text-red-500 text-sm">Username is required and must be at least 2 characters And No space.</p>}
-        </div>
-           <div className="">
-           <Input
+              {errors.username && (
+                <p className="text-red-500 text-sm">
+                  Username is required and must be at least 2 characters And No
+                  space.
+                </p>
+              )}
+              <Input
                 {...register("email", {
                   required: true,
                   validate: {
@@ -129,34 +130,24 @@ export default function SignupCompount() {
                 placeholder={"example@gmail.com"}
                 label={"email"}
               />
-                   {errors.email && <p className="text-red-500 text-sm">email is required and must be at least 2 characters And No space.</p>}
-           </div>
-             </div>
+              {errors.email && (
+                <p className="text-red-500 text-sm">
+                  email is required and must be at least 2 characters And No
+                  space.
+                </p>
+              )}
               <Input
                 {...register("password", { required: true, minLength: 6 })}
                 placeholder={"******"}
                 label={"password"}
+                autoComplete="false"
               />
-               {errors.password && <p className="text-red-500 text-sm">password is required and must be at least 6 characters And No space.</p>}
-             
-              <Input
-                {...register("avatar")}
-                type={"file"}
-                placeholder={"Avatar image"}
-                label={"Avatar"}
-                accept="image/*" 
-              />
-                {errors.avatar && <p className="text-red-500 text-sm">avatar Image  is required plz .</p>}
-
-              <Input
-                {...register("coverImage")}
-                placeholder={"Cover Image .."}
-                label={"Cover Image"}
-                type="file"
-                accept="image/*" 
-              />
-                {errors.coverImage && <p className="text-red-500 text-sm"> coverImage  is required plz .</p>}
-
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  password is required and must be at least 6 characters And No
+                  space.
+                </p>
+              )}
             </div>
             {loadingBtn ? (
               <LoadingButton />

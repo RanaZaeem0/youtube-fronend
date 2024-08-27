@@ -44,7 +44,6 @@ export default function useGetVideobyId() {
     const featchVideo = async () => {
       try {
         if (localuserId) {
-          console.log(localuserId)
           const getAllVideo = await axios.get(
             `${import.meta.env.VITE_BACKEND_URL}video/${videoId}`,
             {

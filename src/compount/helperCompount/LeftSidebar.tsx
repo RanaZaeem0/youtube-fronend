@@ -18,45 +18,45 @@ export default function LeftSidebar({ className }: { className: string }) {
   const username = localStorage.getItem("username");
   return (
     <div className={`${className} w-1/6 fixed `}>
-      <ul className="flex flex-col items-start justify-center mr-12">
+      <div className="flex flex-col gap-5 items-start justify-center ">
         <li
           onClick={() => {
             navigate(`/`);
           }}
-          className=" flex items-center cursor-pointer justify-center text-xs py-4  flex-col "
+          className=" flex  text-xs items-center pl-4  flex-col "
         >
-          <FontAwesomeIcon className="text-xl py-2" icon={faHouse} />{" "}
+          <FontAwesomeIcon className="text-lg py-2" icon={faHouse} />{" "}
           <h1 className="text-center ">Home</h1>{" "}
         </li>
         <li
           onClick={() => {
             navigate(`/profile/${username}`);
           }}
-          className=" text-xs flex items-center cursor-pointer justify-center  py-4  flex-col  "
+          className=" text-xs flex items-center    flex-col  "
         >
           {" "}
-          <FontAwesomeIcon className=" text-xl py-2" icon={faUser} />
+          <FontAwesomeIcon className=" text-lg py-2" icon={faUser} />
           <h1>Your Profile</h1>
         </li>
         <li
           onClick={() => {
             navigate(`/`);
           }}
-          className=" text-xs flex items-center cursor-pointer justify-center  py-4  flex-col  "
+          className=" text-xs flex flex-col   "
         >
           {" "}
-          <FontAwesomeIcon className="pl-1 text-xl py-2" icon={faVideo} />{" "}
+          <FontAwesomeIcon className=" text-lg py-2" icon={faVideo} />{" "}
           Subcribers
         </li>
         <li
           onClick={() => {
             navigate(`/playlist`);
           }}
-          className=" text-xs flex items-center cursor-pointer justify-center  py-4  flex-col  "
+          className=" text-xs flex  pl-2  flex-col  "
         >
           {" "}
           <FontAwesomeIcon
-            className="pl-1 text-xl py-2"
+            className="pl-1 text-lg py-2"
             icon={faBarsProgress}
           />
           Playlist
@@ -65,12 +65,12 @@ export default function LeftSidebar({ className }: { className: string }) {
           onClick={() => {
             navigate(`/likeVidoes/`);
           }}
-          className="  text-xs flex items-center cursor-pointer justify-center  py-4  flex-col  "
+          className="  text-xs flex    flex-col  "
         >
-          <FontAwesomeIcon className="  text-xl py-2" icon={faThumbsUp} />
+          <FontAwesomeIcon className="  text-lg py-2" icon={faThumbsUp} />
           Like Videos
         </li>
-      </ul>
+      </div>
     </div>
   );
 }

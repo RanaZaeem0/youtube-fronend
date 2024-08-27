@@ -94,9 +94,9 @@ const {userData} = useSelector((state:RootState) => state.auth)
   
          <h1 className="font-bold text-2xl">Create Tweet</h1>
         <div className="bg-transparent flex items-center justify-center text-black shadow-none">
-          <div className="mx-auto h-80 w-full  ">
-            <div className="flex flex-col gap-4 ">
-              <h2 className="text-center" color="blue-gray">
+          <div className="mx-auto h-80 w-full flex items-center flex-col   ">
+            <div className="flex flex-col gap-4 w-96 border rounded-xl p-3 ">
+              <h2 className="text-center  text-white" >
                 Create Tweet
               </h2>
               <form
@@ -113,7 +113,7 @@ const {userData} = useSelector((state:RootState) => state.auth)
                 />
                 
                 {!loadingBtn ? (
-                  <Button type="submit"  label="Post" />
+                  <Button className="w-12 " type="submit"  label="Post" />
                 ) : (
                   <button
                     disabled
@@ -161,7 +161,7 @@ const {userData} = useSelector((state:RootState) => state.auth)
                    {getTweet.map((tweet)=>{
 
                     return (
-                    <div className="flex border-t-2 mt-5 mb-5 w-full ">
+                    <div className="flex  mt-5 mb-5 w-full ">
                             <div className="flex items-start text-white underline-none gap-4 justify-center p-4 rounded-md bg-background shadow-sm">
                     <img
                       src={userData?.avatar}

@@ -22,10 +22,11 @@ export default function ChannalProfile() {
     const createdAt = new Date(date);
     return formatDistanceToNow(createdAt, { addSuffix: true });
   }
-
+  const totalVideoCount  =  !isLoading && getChannalVideo.length
+ 
   return (
     <div className="flex flex-col min-h-dvh">
-      <ProfileAvatar userProfile={channalProfile} isProfileLoading={!isChannalProfileLoading} />
+      <ProfileAvatar userProfile={channalProfile} isProfileLoading={!isChannalProfileLoading} TotalVideos={totalVideoCount} />
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           {isLoading ? (
@@ -48,9 +49,10 @@ export default function ChannalProfile() {
                             alt={video.thumbnail}
                           />
                         </div>
-                        <h2 className="text-1xl h-12">{video.title}</h2>
+                    
                        <div className="flex justify-between w-full">
                        <Avatar
+                       videoTitle={video.title}
                           avatarImage={channalProfile?.avatar}
                           videoViews={video.views}
                           username={channalProfile?.username}

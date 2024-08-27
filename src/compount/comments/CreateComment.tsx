@@ -84,7 +84,7 @@ export default function CreateComments() {
         <form className="w-full" onSubmit={handleSubmit(CreateComments)}>
           <div className=" flex-col max-lg:w-10/12 flex items-end justify-center w-10/12">
             <Input
-              className="w-full bg-neutral-700 text-white h-3  border p-5 rounded-none   mt-2 "
+              className="w-full bg-transparent border-none text-white h-3   p-5 rounded-none   mt-2 "
               {...register("content", { required: true, minLength: 1 })}
               placeholder={"Write Your comment"}
             />

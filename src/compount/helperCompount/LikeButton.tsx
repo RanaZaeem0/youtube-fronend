@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useState} from "react";
 import getRefreshToken from "../../config";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faThumbsUp,faThumbsDown} from "@fortawesome/free-regular-svg-icons"
 export default function LikeButton({
   videoId,
   videoLike,
@@ -9,6 +11,7 @@ export default function LikeButton({
   videoId: string | undefined;
   videoLike: number | undefined;
 }) {
+  const  [videoLikeCheck,setVideoLikeCheck] = useState(videoLike)
   const Token = getRefreshToken()
   const Navigator = useNavigate();
   const handleLike = async (videoId: string) => {
@@ -31,6 +34,13 @@ export default function LikeButton({
 
       if (response.status >= 200 && response.status < 300) {
         console.log(response.data.message);
+     if(videoLikeCheck){
+      if(response.data.message == "Unlike Sucess"){
+        setVideoLikeCheck(videoLikeCheck - 1)
+      }else if(response.data.message == "addlike  Sucess"){
+        setVideoLikeCheck(videoLikeCheck + 1)
+      }
+     }
       }
     } catch (error: any) {
       if (error.response) {
@@ -48,29 +58,24 @@ export default function LikeButton({
     }
   };
   return (
-    <div>
-      <button onClick={() => {
+    <div className="bg-zinc-800   flex items-center justify-center rounded-full  ">
+      <button className="flex   ">
+        <div  onClick={() => {
           if (videoId) {
             handleLike(videoId);
           } else {
             console.error("Channel ID is not defined");
           }
-      }}>
-        <button
-          type="button"
-          className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500"
+      }}
+          className="flex  text-base items-center"
         >
-          <h2 className="pr-2">{videoLike}</h2>
-          <svg
-            className="w-4 h-4"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 18 18"
-          >
-            <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z" />
-          </svg>
-        </button>
+          
+          <FontAwesomeIcon className="px-2" icon={faThumbsUp} />
+          <h2 className="px-1">{videoLikeCheck} </h2>
+        </div>
+       <button className=" text-base  border-l">
+       <FontAwesomeIcon className="transform px-2  scale-x-[-1]" icon={faThumbsDown} />
+       </button>
       </button>
     </div>
   );
