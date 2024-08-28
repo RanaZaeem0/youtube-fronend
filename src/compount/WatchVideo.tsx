@@ -18,6 +18,8 @@ import WatchVideoSkeleton from "./skeleton/WatchVideoSkeleton";
 import { faShareFromSquare } from "@fortawesome/free-regular-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import VideoDropdown from "../compount/helperCompount/VideoDropdown"
+
 export default function WatchVideo() {
   const [videoPLay, setVideoPlay] = useState(true);
   const { isLoading, video } = usegetVideobyId();
@@ -26,6 +28,9 @@ export default function WatchVideo() {
   const { addWatchHistory } = useAddWatchhistory();
   const Navigator = useNavigate();
 
+    const handleShareClick  =()=>{
+
+    }
   function formatDateRelative(date: string | undefined): string {
     if (!date) {
       return "Date not available";
@@ -42,7 +47,7 @@ export default function WatchVideo() {
         ) : (
           <div className="flex max-lg:flex-col ">
             <div className="flex items-start justify-start flex-col max-lg:ml-0 ml-2 w-3/5 max-lg:w-full">
-              <div className="w-full bg-background pb-8 rounded-lg overflow-hidden group cursor-pointer">
+              <div className="w-full bg-background pb-8 rounded-lg overflow-hidden group ">
                 <div className=" aspect-video">
                   {!videoPLay && (
                     <img
@@ -101,7 +106,7 @@ export default function WatchVideo() {
                     </div>
 
                     <div className="flex justify-center items-center gap-2">
-                      <div className=" px-4  flex  items-center rounded-full py-2 bg-zinc-800">
+                      <div onClick={handleShareClick} className=" px-4  flex  items-center rounded-full py-2 bg-zinc-800">
                         <FontAwesomeIcon icon={faShareFromSquare} />
                         <h2 className="pl-2 font-normal text-sm">Share</h2>
                       </div>
@@ -112,8 +117,8 @@ export default function WatchVideo() {
                           videoLike={video?.videoLikes}
                         />
                       </div>
-                      <div className=" px-4  flex  items-center rounded-full py-2 bg-zinc-800">
-                        <FontAwesomeIcon icon={faEllipsis} />
+                      <div  className="  py-5 flex h-2 items-center rounded-full  bg-zinc-800">
+                        <VideoDropdown videoId={video?._id}/>
                       </div>
                     </div>
                   </div>

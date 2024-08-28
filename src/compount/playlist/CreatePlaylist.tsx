@@ -5,6 +5,8 @@ import Input from "../helperCompount/Input";
 import Button from "../helperCompount/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquareXmark } from "@fortawesome/free-solid-svg-icons";
+import {  faSquareCheck} from "@fortawesome/free-regular-svg-icons";
+
 import useGetPlaylist from "../../hook/useGetUserPlaylist.ts";
 import ButtonWarning from "../helperCompount/ButtonWarning";
 import { LoadingButton } from "../helperCompount/index.ts";
@@ -32,7 +34,7 @@ export default function CreatePlaylist({
   const [addPlaylistLoading, setAddPlaylistLoading] = useState(false);
 
   const { register, handleSubmit } = useForm<CreatePlaylistData>();
-  const { isPlaylistLoading, getPlaylist } = useGetPlaylist();
+  const { isPlaylistLoading, getPlaylist,refetchPlaylist } = useGetPlaylist();
   const Token = getRefreshToken();
   // Ensure that hooks are always called in the same order.
   const createPlaylist = async (data: CreatePlaylistData) => {
@@ -51,6 +53,8 @@ export default function CreatePlaylist({
       if (response.status >= 200 && response.status < 300) {
         navigate("/");
         setAddPlaylistLoading(false);
+        onClose()
+        refetchPlaylist()
       }
     } catch (error: any) {
       setAddPlaylistLoading(false);
@@ -76,12 +80,13 @@ export default function CreatePlaylist({
     try {
       setAddVideoLoading(true);
       const response = await authApi.post(
-        `${import.meta.env.VITE_BACKEND_URL}playlist/${videoId}/${PlaylistId}`,
+        `playlist/${videoId}/${PlaylistId}`,
         {},
       );
 
       if (response.status >= 200 && response.status < 300) {
         navigate("/");
+        onClose()
         setAddVideoLoading(false);
 
         console.log(response);
@@ -121,14 +126,14 @@ export default function CreatePlaylist({
                   {getPlaylist.map((item) => {
                     return (
                       <>
-                        <div className="text-black p-2 rounded-lg flex w-full justify-between border">
-                          <h1>{item.name}</h1>
+                        <div className="text-white p-2 rounded-lg flex w-full justify-between overflow-hidden h-auto">
+                          <h1 className="">{item.name}</h1>
                           {!addVideoLoading ? (
                             <button
                               onClick={() => AddVideo(item._id)}
                               className="bg-zinc-800 "
                             >
-                              Add Video
+                              <FontAwesomeIcon icon={faSquareCheck} />
                             </button>
                           ) : (
                             <LoadingButton />

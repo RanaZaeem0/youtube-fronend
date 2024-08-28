@@ -80,7 +80,7 @@ export default function CoverImagePopUp({ isVisible, onClose }:changeCoverImage)
               </p>
             )}
             <Button
-              label="Create Playlist"
+              label="Edit"
               type="submit"
               className="bg-gray-800"
             />

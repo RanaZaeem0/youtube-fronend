@@ -76,7 +76,7 @@ export default function ProfileComponent() {
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           <div>
-            <h2 className="w-full underline border-b-2 py-4 m-5 items-end justify-center bg-transparent">
+            <h2 className="w-full  border-b-2 py-4 m-5 items-end justify-center bg-transparent">
               <button
                 className="rounded-lg text-zinc-400 bg-zinc-800 mr-2 hover:bg-zinc-100 p-4"
                 onClick={() => Navigator('/publishvideo')}
@@ -119,7 +119,7 @@ export default function ProfileComponent() {
                         <NavLink to={`/profile?channel=${videoItem.UserDetails[0]._id}`}>
                           <div className="flex flex-col items-start">
                             <h2 className="font-normal text-white text-start hover:underline text-1xl pl-2 pr-4">
-                              {videoItem.title} zain
+                              {videoItem.title} 
                             </h2>
                             <h2 className="font-medium text-gray-400 hover:underline text-sm text-center pl-2 pr-4">
                               {videoItem.UserDetails[0].username}

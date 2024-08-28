@@ -46,23 +46,21 @@ export default function ProfileAvatar({
         ? userProfile && (
             <header className=" h-96 overflow-hidden">
               {userProfile?.coverImage.length > 1 && (
-                <div className="flex items-center w-full justify-center">
+                <div className="flex items-center w-full justify-center relative pt-5 ">
                   <img
                     src={userProfile?.coverImage}
                     alt="Cover image"
-                    className="w-5/6  inset-0 h-40  rounded-xl object-cover bg-no-repeat"
+                    className="w-5/6   inset-0 h-40  rounded-xl object-cover bg-no-repeat"
                     style={{ aspectRatio: "1920/480", objectFit: "cover" }}
                   />
-                </div>
-              )}
-              {userProfile?.username == usernameLocal && (
+                {userProfile?.username == usernameLocal && (
                 <>
                   {" "}
                   <button
                     onClick={showCoverImage}
-                    className="flex cursor-pointer  w-full items-center justify-end text-end z-20  p-5  "
+                    className="flex cursor-pointer  w-full items-end justify-center top-2 absolute text-end z-20  p-5  "
                   >
-                    Change Image <FontAwesomeIcon icon={faPenToSquare} />{" "}
+                     <FontAwesomeIcon icon={faPenToSquare} />{" "}
                   </button>
                   <CoverImagePopUp
                     isVisible={isCoverImagePopupVisible}
@@ -70,8 +68,11 @@ export default function ProfileAvatar({
                   />
                 </>
               )}
+                </div>
+              )}
+          
               
-              <div className="  flex items-center gap-4 justify-start pl-20  pt-10 w-full  ">
+              <div className="  flex items-center gap-4 justify-start pl-40  pt-10 w-full  ">
                 <div className="flex relative">
                 {userProfile?.avatar.length > 1 ? 
                     <img

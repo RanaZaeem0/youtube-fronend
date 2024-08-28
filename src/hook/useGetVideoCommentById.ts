@@ -21,6 +21,7 @@ interface GetComments{
 export default function useGetCommentById() {
      const [getComments, setGetComments] = useState<GetCommentsData | null>(null)
       const [isLoading, setIsLoading] = useState(true)
+      const  [refetchComments,setRefetchComments] = useState(true)
       const {videoId} = useParams()
       const [error,setError] = useState('')
       useEffect(() => {
@@ -55,10 +56,16 @@ export default function useGetCommentById() {
             setError(`Error: ${error.message}`);
           }
         }
-      }, []);
+      }, [refetchComments,videoId]);
  
+      const refetchComment =()=>{
+        setRefetchComments(!refetchComments)
+      }
+
+
     return {
         isLoading,
-        getComments
+        getComments,
+        refetchComment
     }
 }

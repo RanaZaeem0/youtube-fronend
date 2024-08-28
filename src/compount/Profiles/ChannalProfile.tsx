@@ -10,6 +10,7 @@ import { log } from "console";
 import ProfileAvatar from "../Profiles/ProfileAvatar.tsx"
 import usegetChannalVideotByusername from "../../hook/useGetChannalVideo.ts";
 import { formatDistanceToNow } from "date-fns";
+import LeftSideBar from "../helperCompount/LeftSidebar.tsx"
 import {VideoDropdown,Avatar} from "../helperCompount/index.ts"
 export default function ChannalProfile() {
   const { getChannalVideo, isLoading } = usegetChannalVideotByusername();
@@ -25,14 +26,17 @@ export default function ChannalProfile() {
   const totalVideoCount  =  !isLoading && getChannalVideo.length
  
   return (
-    <div className="flex flex-col min-h-dvh">
+    <div className="flex flex-col ">
+      <LeftSideBar className="pl-2 pt-10 mr-2"/>
+      <div className="">
       <ProfileAvatar userProfile={channalProfile} isProfileLoading={!isChannalProfileLoading} TotalVideos={totalVideoCount} />
+      </div>
       <main className="container mx-auto px-4 py-8 md:px-6 md:py-12">
         <div className="container mx-auto px-4 py-8">
           {isLoading ? (
             <AllVideoSkeleton className=" grid-cols-3" />
           ) : (
-            <AllVideoWrapper className="grid grid-cols-3 max-lg:grid-cols-1 items-center justify-center  ">
+            <AllVideoWrapper className="grid grid-cols-3 max-lg:grid-cols-1 items-center justify-center ml-10  gap-5" >
               {getChannalVideo && getChannalVideo.length > 0 ? (
                 getChannalVideo.map((video, index) => (
                   <div

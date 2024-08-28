@@ -19,7 +19,7 @@ export default function CreateComments() {
   const [isCreateLoading,setIsCreateLoading] = useState(false)
   const { register, handleSubmit, setValue } = useForm<commentData>();
 
-  const { getComments,isLoading } = useGetCommentById();
+  const { getComments,isLoading,refetchComment } = useGetCommentById();
   if (!isLoading) {
     console.log(getComments);
   }
@@ -40,6 +40,7 @@ export default function CreateComments() {
       if (response.status >= 200 && response.status < 300) {
         console.log(response);
         setIsCreateLoading(false)
+        refetchComment()
 
         console.log(response.data);
       }

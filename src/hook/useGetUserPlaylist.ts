@@ -40,6 +40,9 @@ type emptyArray = Playlistdata[];
 export default function useGetPlaylist() {
   const [getPlaylist, setgetPlaylist] = useState<emptyArray>([]);
   const [isPlaylistLoading, setIsPlaylistLoading] = useState(true);
+  
+  const [shouldRefetch,setShouldRefetch] = useState(true)
+
   const Token = getRefreshToken();
   useEffect(() => {
     const fetchPlaylist = async () => {
@@ -63,10 +66,14 @@ export default function useGetPlaylist() {
     };
 
     fetchPlaylist();
-  }, []);
+  }, [shouldRefetch]);
 
+  const refetchPlaylist = () => {
+    setShouldRefetch(prev => !prev);
+  };
   return {
     getPlaylist,
     isPlaylistLoading,
+    refetchPlaylist
   };
 }

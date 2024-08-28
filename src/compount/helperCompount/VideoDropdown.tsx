@@ -7,7 +7,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Divider from "@mui/material/Divider";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/authSlice";
 import { useNavigate } from "react-router";
 import { ListItemText } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,7 +14,7 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 import CreatePlaylist from "../playlist/CreatePlaylist";
 
-const VideoDropdown = ({videoId}:{videoId:string}) => {
+const VideoDropdown = ({videoId}:{videoId?:string}) => {
   const [avatarEl, setAvatarEl] = useState<HTMLElement | null>(null);
   const [notifyEl, setNotifyEl] = useState<HTMLElement | null>(null);
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -30,10 +29,7 @@ const VideoDropdown = ({videoId}:{videoId:string}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/login'); // Adjust the navigation as needed
-  };
+
 
   const open = Boolean(avatarEl);
   const id = open ? "simple-popover" : undefined;
@@ -59,12 +55,7 @@ const VideoDropdown = ({videoId}:{videoId:string}) => {
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
         <List disablePadding className="bg-slate-800 text-neutral-400">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <h1>{username}</h1>
-            </ListItemButton>
-          </ListItem>
-          <Divider />
+          
           <ListItem disablePadding>
             <ListItemButton>
               <button onClick={() => navigate(`/profile/${username}`)}>Save to WatchLater</button>
@@ -77,18 +68,8 @@ const VideoDropdown = ({videoId}:{videoId:string}) => {
               <CreatePlaylist videoId={videoId} isVisible={isPopupVisible} onClose={hidePopup} />
             </ListItemButton>
           </ListItem>
-          <Divider />
-          <ListItem disablePadding>
-            <ListItemButton>
-              <button onClick={() => navigate('/watchhistory')}>Share</button>
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          <ListItem disablePadding>
-            <ListItemButton>
-              <button onClick={handleLogout}>Logout</button>
-            </ListItemButton>
-          </ListItem>
+          
+          
         </List>
       </Popover>
     </div>

@@ -10,6 +10,7 @@ import { formatDistanceToNow } from "date-fns";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import VideoDropdown from "./helperCompount/VideoDropdown.tsx";
+import CatagoryBtn from "./helperCompount/CatagoryBtn.tsx";
 
 export default function Component() {
   const [limit, setLimit] = useState(9);
@@ -34,44 +35,7 @@ export default function Component() {
             <LeftSidebar className="w-1/6 max-lg:hidden" />
 
             <div className="w-[90%] max-lg:w-full lg:relative left-24 flex flex-col items-end justify-end ">
-              <div className="mb-5 ml-0 w-full flex items-start overflow-hidden  text-nowrap ">
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  All
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Music
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Podcasts{" "}
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Software development
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Universities
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Indian pop music
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Hip hop
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Live
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  New to you
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Watched
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Recently uploaded
-                </button>
-                <button className="bg-neutral-800  hover:bg-neutral-700 border-neutral-800  border px-3 py-1 ml-2 mr-2 rounded-lg font-medium text-sm">
-                  Public speaking
-                </button>
-              </div>
+            <CatagoryBtn/>
               <AllVideoWrapper className="">
                 <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {videos &&
@@ -83,7 +47,7 @@ export default function Component() {
                             className="bg-background  overflow-hidden group cursor-pointer"
                           >
                             <div
-                              className="h-56 w-[22rem] max-md:w-full pb-5 "
+                              className="h-56 w-full max-md:w-full pb-5 "
                               onClick={() => Navigator(`/watch/${video._id}`)}
                             >
                               <div className="flex justify-center items-center w-full h-full ">

@@ -40,7 +40,7 @@ export default function NavBar() {
 
   const username = localStorage.getItem("username");
   return (
-    <div className="flex flex-col  w-full items-center justify-between top-0  pb-1 fixed z-20 px-2 max-lg:px-0 bg-black">
+    <div className="flex flex-col  w-full items-center justify-between top-0  pb-1 fixed z-50 px-2 max-lg:px-0 bg-black">
       <div className="flex  w-full items-center justify-between ">
         <div className="flex gap-2 items-center ">
           <NavSideBar />
