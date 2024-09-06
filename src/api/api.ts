@@ -15,7 +15,7 @@ interface RefreshTokenResponse {
   };
 }
 
-const token: string | null = getRefreshToken();
+const token: string | boolean  = getRefreshToken();
 const baseURL: string = `${import.meta.env.VITE_BACKEND_URL}`;
 
 const api: AxiosInstance = axios.create({
@@ -31,6 +31,7 @@ const authApi: AxiosInstance = axios.create({
 
 authApi.interceptors.request.use(async (req) => {
   if (!token) {
+    const token = getRefreshToken()
     req.headers.Authorization = `Bearer ${token}`;
     return req;
   }

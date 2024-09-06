@@ -7,10 +7,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import LikeVideos from "./page/LikeVideos.tsx"
-import AllVideo from "./compount/AllVideo.tsx"
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
-import NavBar from './compount/NavBar.tsx';
 import WatchVideo from './compount/WatchVideo.tsx';
 import Signup from "./page/Signup.tsx"
 import PublishVideo from './page/PublishVideo.tsx';

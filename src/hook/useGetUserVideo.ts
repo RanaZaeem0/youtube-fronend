@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../../src/config";
 import {authApi } from "../api/api"

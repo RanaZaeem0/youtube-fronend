@@ -1,7 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import getRefreshToken from "../../src/config";
-import { useParams } from "react-router-dom";
 import {authApi } from "../api/api"
 
 // Define the structure for ChannelDetails

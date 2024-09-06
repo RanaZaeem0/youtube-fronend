@@ -104,7 +104,7 @@ export default function CreateComments() {
           getComments &&
           getComments.map((comment, index) => {
             return (
-              <div className="flex items-start gap-4 justify-center p-4 rounded-md bg-background shadow-sm">
+              <div key={index} className="flex items-start gap-4 justify-center p-4 rounded-md bg-background shadow-sm">
                 <img
                   src={comment.commentUser.avatar}
                   className="h-4 w-3"
