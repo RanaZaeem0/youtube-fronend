@@ -15,7 +15,7 @@ interface RefreshTokenResponse {
   };
 }
 
-const token: string | boolean  = getRefreshToken();
+const token: string | null  = getRefreshToken();
 const baseURL: string = `${import.meta.env.VITE_BACKEND_URL}`;
 
 const api: AxiosInstance = axios.create({
@@ -36,7 +36,7 @@ authApi.interceptors.request.use(async (req) => {
     return req;
   }
 
-  const {exp}: JwtPayload = jwtDecode<JwtPayload>(token);
+  const {exp}: JwtPayload = jwtDecode<JwtPayload>( token );
   const isExpired: boolean = dayjs.unix(exp).diff(dayjs()) < 1;
 
   if (!isExpired) {
