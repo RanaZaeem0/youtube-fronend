@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import {Toaster} from "react-hot-toast"
 import LikeVideos from "./page/LikeVideos.tsx"
 import { Provider } from 'react-redux';
 import store from './store/store.ts';
@@ -108,6 +109,7 @@ if(rootElement){
   root.render(
     <React.StrictMode>
       <Provider store={store}>
+    <Toaster position="bottom-center" />
     <RouterProvider router={router} />
       </Provider>
     </React.StrictMode>,
